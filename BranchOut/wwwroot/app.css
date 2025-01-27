@@ -60,3 +60,7 @@ body {
 .sticky-wrapper {
     position: relative;
 }
+
+.dropdown-menu {
+    z-index: 1021;
+}
