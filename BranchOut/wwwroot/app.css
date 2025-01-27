@@ -1,0 +1,62 @@
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
+.nav-link {
+    border-radius: 10px;
+}
+
+.nav-link.active {
+    background-color: #0d6efd !important;
+    text-decoration: none !important;
+    color: #FFF !important;
+}
+
+.bd-placeholder-img {
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border-radius: 25px;
+}
+
+.nav-pills .nav-item:hover {
+    background-color: #e9ecef;
+}
+
+.nav-pills .nav-link {
+    transition: none;
+}
+
+.nav-pills .nav-link:hover {
+    color: #000;
+}
+
+.phone-frame {
+    position: relative;
+    width: 360px;
+    height: 720px;
+    background-color: black;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.phone-screen {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 340px;
+    height: 700px;
+    border: none;
+    border-radius: 15px;
+}
+
+
+.sticky-wrapper {
+    position: relative;
+}
