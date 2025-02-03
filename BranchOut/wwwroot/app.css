@@ -5,6 +5,7 @@ html {
 
 body {
     font-family: "Inter", sans-serif;
+    padding-right: 0px !important;
 }
 
 .nav-link {
@@ -55,9 +56,6 @@ body {
     border: none;
     border-radius: 15px;
 }
-
-
-
 
 .sticky-wrapper {
     position: relative;

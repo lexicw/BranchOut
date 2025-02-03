@@ -1,10 +1,16 @@
 ﻿@page "/links"
+@inject IJSRuntime _JS
 
 
-<button class="btn btn-primary">Add Link</button>
+<button class="btn btn-primary" @onclick="CallAddLinkModal">Add Link</button>
+
+<AddLinkModal></AddLinkModal>
 
 <div class="text-center mt-3">You currently have no links.</div>
 
 @code {
-
+    private void CallAddLinkModal()
+    {
+        _JS.InvokeVoidAsync("ShowAddLinkModal");
+    }
 }
