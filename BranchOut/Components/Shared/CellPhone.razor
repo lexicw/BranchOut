@@ -1,9 +1,19 @@
-﻿<div class="sticky-top py-4">
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<div class="sticky-top py-4">
     <div class="phone-frame mx-auto">
-        <iframe class="phone-screen" src="https://example.com"></iframe>
+        <iframe class="phone-screen" src="profile/@userName"></iframe>
     </div>
 </div>
 
 @code {
+    private string? userName;
 
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        userName = user.Identity?.IsAuthenticated == true ? user.Identity.Name : "Guest";
+    }
 }

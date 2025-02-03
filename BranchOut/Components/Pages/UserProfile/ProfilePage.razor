@@ -1,8 +1,49 @@
 ﻿@layout ProfileLayout
-@page "/Lexi"
+@page "/profile/{username}"
 
-<div class="mx-4">Welcome, Lexi!</div>
+@inject UserManager<ApplicationUser> UserManager
+@inject NavigationManager NavigationManager
+
+@if (UserExists)
+{
+    <div class="mx-4 text-center mt-5">
+        <svg class="bd-placeholder-img" width="100px" height="100px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="lightgray" />
+            <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="40" fill="black">
+                @UserName?.Substring(0, 1).ToUpper()
+            </text>
+        </svg>
+        <div class="fs-3 mt-2">@UserName</div>
+    </div>
+}
+else
+{
+    <div class="text-center mt-4">
+        <h1>User Not Found</h1>
+        <p>The profile you are looking for does not exist.</p>
+        <a href="/" class="btn btn-primary">Go Home</a>
+    </div>
+}
 
 @code {
+    [Parameter]
+    public string? UserName { get; set; }
 
+    private bool UserExists { get; set; } = true; 
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (string.IsNullOrEmpty(UserName))
+        {
+            UserExists = false;
+            return;
+        }
+
+        var user = await UserManager.FindByNameAsync(UserName);
+        if (user == null)
+        {
+            UserExists = false;
+            StateHasChanged();
+        }
+    }
 }
