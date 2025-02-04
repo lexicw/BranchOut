@@ -13,8 +13,10 @@ namespace BranchOut.Repository
             _db = db;
         }
 
-        public async Task<Link> CreateAsync(Link link)
+        public async Task<Link> CreateAsync(Link link, string userId)
         {
+            link.UserID = userId;
+            link.DateAdded = DateTime.Now;
             await _db.Link.AddAsync(link);
             await _db.SaveChangesAsync();
             return link;
@@ -42,9 +44,11 @@ namespace BranchOut.Repository
             return link;
         }
 
-        public async Task<IEnumerable<Link>> GetAllAsync()
+        public async Task<IEnumerable<Link>> GetAllAsync(string userId)
         {
-            return await _db.Link.ToListAsync();
+            return await _db.Link
+                .Where(link => link.UserID == userId)
+                .ToListAsync();
         }
 
         public async Task<Link> UpdateAsync(Link link)

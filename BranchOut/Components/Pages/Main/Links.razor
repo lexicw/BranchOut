@@ -1,16 +1,79 @@
 ﻿@page "/links"
+@using BranchOut.Repository.Interfaces
 @inject IJSRuntime _JS
-
+@inject ILinkRepository _linkRepository
+@inject UserService _userService
 
 <button class="btn btn-primary" @onclick="CallAddLinkModal">Add Link</button>
 
-<AddLinkModal></AddLinkModal>
+<AddLinkModal ModalClose="CloseModal"></AddLinkModal>
 
-<div class="text-center mt-3">You currently have no links.</div>
+@if (UserLinks == null || !UserLinks.Any())
+{
+    <div class="text-center mt-3">You currently have no links.</div>
+}
+else
+{
+    <div class="mt-3">
+        @foreach (var link in UserLinks)
+        {
+            <div class="card mt-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="card-title">@link.Name</h5>
+                            <p class="card-text">@link.URL <a href="@link.URL" target="_blank" class="ms-2"><i class="bi bi-box-arrow-up-right"></i></a></p>
+                        </div>
+                        <div class="col-6 text-end fs-5">
+                            <div>
+                                <button class="border-0 bg-transparent"><i class="bi bi-pencil-square"></i></button>
+                                <button class="border-0 bg-transparent"><i class="bi bi-trash-fill"></i></button>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" checked="@link.Visible" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
 
 @code {
+    private IEnumerable<Link> UserLinks { get; set; } = new List<Link>();
+
     private void CallAddLinkModal()
     {
         _JS.InvokeVoidAsync("ShowAddLinkModal");
+    }
+
+    private async Task CloseModal(bool success)
+    {
+        await _JS.InvokeVoidAsync("HideAddLinkModal");
+
+        if (success)
+        {
+            await LoadUserLinks();
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadUserLinks();
+    }
+
+    private async Task LoadUserLinks()
+    {
+        var currentUser = await _userService.GetCurrentUserAsync();
+        if (currentUser == null)
+        {
+            return;
+        }
+        var userId = currentUser.Id;
+
+        UserLinks = await _linkRepository.GetAllAsync(userId);
     }
 }

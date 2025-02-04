@@ -1,26 +1,42 @@
-﻿<div class="modal fade" id="addLinkModal" tabindex="-1" aria-labelledby="addLinkModalLabel" aria-hidden="true">
+﻿@using BranchOut.Repository.Interfaces
+@inject ILinkRepository _linkRepository
+@inject UserService _userService
+
+<div class="modal fade" id="addLinkModal" tabindex="-1" aria-labelledby="addLinkModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="addLinkModalLabel">Add New Link</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="link-name" class="col-form-label">Link Name:</label>
-                        <input type="text" class="form-control" id="link-name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="url" class="col-form-label">URL:</label>
-                        <input type="text" class="form-control" id="url">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" @onclick="()=>ConfirmationClicked(true)">Add Link</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
+            <EditForm Model="@link" FormName="formAddLink" OnValidSubmit="Submit">
+                <div class="modal-body">
+                    <DataAnnotationsValidator></DataAnnotationsValidator>
+                    <label>Name:</label>
+                    <FieldComponent Label="Name">
+                        <ValidationControl>
+                            <ValidationMessage For="() => link.Name" class="text-danger"></ValidationMessage>
+                        </ValidationControl>
+                        <Control>
+                            <InputText @bind-Value="link.Name" class="form-control"></InputText>
+                        </Control>
+                    </FieldComponent>
+                    <label class="mt-2">URL:</label>
+                    <FieldComponent Label="URL">
+                        <ValidationControl>
+                            <ValidationMessage For="() => link.URL" class="text-danger"></ValidationMessage>
+                        </ValidationControl>
+                        <Control>
+                            <InputText @bind-Value="link.URL" class="form-control"></InputText>
+                        </Control>
+                    </FieldComponent>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add Link</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </EditForm>
         </div>
     </div>
 </div>
@@ -28,16 +44,26 @@
 
 @code {
     [Parameter]
-    public EventCallback<bool> OnModalConfirmation { get; set; }
+    public EventCallback<bool> ModalClose { get; set; }
 
-    [Parameter]
-    public string ButtonText { get; set; } = "Confirm";
+    private Link link = new();
 
-    private async Task ConfirmationClicked(bool value)
+
+    private async Task InsertLink()
     {
-        if (value)
+        var currentUser = await _userService.GetCurrentUserAsync();
+        if (currentUser == null)
         {
-            await OnModalConfirmation.InvokeAsync(true);
+            return;
         }
+        var userId = currentUser.Id;
+
+        await _linkRepository.CreateAsync(link, userId);
+        await ModalClose.InvokeAsync(true);
+    }
+
+    private async void Submit()
+    {
+        await InsertLink();
     }
 }
