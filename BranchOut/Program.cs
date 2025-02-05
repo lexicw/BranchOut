@@ -1,9 +1,9 @@
-using BranchOut;
 using BranchOut.Components;
 using BranchOut.Components.Account;
 using BranchOut.Data;
 using BranchOut.Repository;
 using BranchOut.Repository.Interfaces;
+using BranchOut.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

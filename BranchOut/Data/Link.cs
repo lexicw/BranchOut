@@ -6,6 +6,8 @@ namespace BranchOut.Data
     {
         public int Id { get; set; }
         public string? UserID { get; set; }
+        public int ProfileId { get; set; }
+        public Profile Profile { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

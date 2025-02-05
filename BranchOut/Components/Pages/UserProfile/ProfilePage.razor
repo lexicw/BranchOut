@@ -1,6 +1,5 @@
 ﻿@layout ProfileLayout
 @page "/profile/{username}"
-@using BranchOut.Repository.Interfaces
 
 @inject UserManager<ApplicationUser> UserManager
 @inject NavigationManager NavigationManager
@@ -46,25 +45,30 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        if (string.IsNullOrEmpty(UserName))
-        {
-            UserExists = false;
-            return;
-        }
+        await LoadProfile();
+    }
 
+    private async void RefreshProfile()
+    {
+        await LoadProfile();
+        StateHasChanged();
+    }
+
+    private async Task LoadProfile()
+    {
         var user = await UserManager.FindByNameAsync(UserName);
         if (user == null)
         {
             UserExists = false;
-            StateHasChanged();
             return;
         }
 
         profile = await _profileRepository.GetAsync(user.Id);
-
         if (profile == null)
         {
             UserExists = false;
+            return;
         }
     }
+
 }

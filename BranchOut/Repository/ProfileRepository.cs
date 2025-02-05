@@ -34,7 +34,7 @@ namespace BranchOut.Repository
         public async Task<Profile> GetAsync(string id)
         {
             return await _db.Profile
-                .Include(x => x.Links)
+                .Include(x => x.Links.Where(l => l.Visible).OrderBy(l => l.Sort))
                 .FirstOrDefaultAsync(x => x.UserID == id);
         }
 

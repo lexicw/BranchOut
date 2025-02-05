@@ -3,7 +3,7 @@
 
 <div class="sticky-top py-4">
     <div class="phone-frame mx-auto">
-        <iframe class="phone-screen" src="profile/@userName"></iframe>
+        <iframe id="profileFrame" class="phone-screen" src="profile/@userName"></iframe>
     </div>
 </div>
 
@@ -16,4 +16,6 @@
         var user = authState.User;
         userName = user.Identity?.IsAuthenticated == true ? user.Identity.Name : "Guest";
     }
+
+
 }

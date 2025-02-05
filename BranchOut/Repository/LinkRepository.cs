@@ -15,19 +15,22 @@ namespace BranchOut.Repository
 
         public async Task<Link> CreateAsync(Link link, string userId)
         {
+            var profile = await _db.Profile.FirstOrDefaultAsync(p => p.UserID == userId);
+
+            link.ProfileId = profile.Id;
             link.UserID = userId;
             link.DateAdded = DateTime.Now;
+            link.Visible = true;
 
-            // Getting sort number so new item can be set as the highest (bottom of list)
             var maxSort = await _db.Link
                 .Where(l => l.UserID == userId)
                 .Select(l => (int?)l.Sort)
                 .MaxAsync() ?? 0;
-
             link.Sort = maxSort + 1;
 
             await _db.Link.AddAsync(link);
             await _db.SaveChangesAsync();
+
             return link;
         }
 

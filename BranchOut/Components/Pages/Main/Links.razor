@@ -1,5 +1,4 @@
 ﻿@page "/links"
-@using BranchOut.Repository.Interfaces
 @inject IJSRuntime _JS
 @inject ILinkRepository _linkRepository
 @inject UserService _userService
@@ -7,6 +6,7 @@
 <button class="btn btn-primary" @onclick="CallAddLinkModal">Add Link</button>
 
 <AddLinkModal ModalClose="CloseModal"></AddLinkModal>
+<DeleteLinkModal></DeleteLinkModal>
 
 @if (IsProcessing)
 {
@@ -45,14 +45,15 @@ else
                                     <button class="border-0 bg-transparent">
                                         <i class="bi bi-pencil-square"></i>
                                     </button>
-                                    <button class="border-0 bg-transparent">
+                                    <button class="border-0 bg-transparent" @onclick="CallDeleteLinkModal">
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input"
-                                               checked="@link.Visible"
+                                               @bind="link.Visible"
+                                               @bind:after="() => { SaveVisibility(link); }"
                                                type="checkbox"
                                                role="switch"
                                                id="flexSwitchCheckDefault">
@@ -89,11 +90,17 @@ else
         var links = await _linkRepository.GetAllAsync(userId);
         UserLinks = links.ToList();
         IsProcessing = false;
+        await RefreshPhone();
     }
 
     private void CallAddLinkModal()
     {
         _JS.InvokeVoidAsync("ShowAddLinkModal");
+    }
+
+    private void CallDeleteLinkModal()
+    {
+        _JS.InvokeVoidAsync("ShowDeleteLinkModal");
     }
 
     private async Task CloseModal(bool success)
@@ -122,6 +129,17 @@ else
         await _linkRepository.UpdateLinksOrderAsync(UserLinks);
 
         StateHasChanged();
+        await RefreshPhone();
     }
 
+    private async Task SaveVisibility(Link link)
+    {
+        await _linkRepository.UpdateAsync(link);
+        await LoadUserLinks();
+    }
+
+    private async Task RefreshPhone()
+    {
+        await _JS.InvokeVoidAsync("reloadIframe", "profileFrame");
+    }
 }
