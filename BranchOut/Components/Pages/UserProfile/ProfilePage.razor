@@ -1,8 +1,11 @@
 ﻿@layout ProfileLayout
 @page "/profile/{username}"
+@using BranchOut.Repository.Interfaces
 
 @inject UserManager<ApplicationUser> UserManager
 @inject NavigationManager NavigationManager
+@inject IProfileRepository _profileRepository
+@inject UserService _userService
 
 @if (UserExists)
 {
@@ -13,7 +16,15 @@
                 @UserName?.Substring(0, 1).ToUpper()
             </text>
         </svg>
-        <div class="fs-3 mt-2">@UserName</div>
+        <div class="fs-3 mt-2 fw-bold">@UserName</div>
+        <div class="fs-6">@profile.Message</div>
+
+        @foreach (var link in profile.Links)
+        {
+            <div class="d-grid gap-2">
+                <a href="@link.URL" target="_blank" class="btn btn-primary mt-1" type="button">@link.Name</a>
+            </div>
+        }
     </div>
 }
 else
@@ -29,7 +40,9 @@ else
     [Parameter]
     public string? UserName { get; set; }
 
-    private bool UserExists { get; set; } = true; 
+    public Profile? profile { get; set; } = new Profile();
+
+    private bool UserExists { get; set; } = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -44,6 +57,14 @@ else
         {
             UserExists = false;
             StateHasChanged();
+            return;
+        }
+
+        profile = await _profileRepository.GetAsync(user.Id);
+
+        if (profile == null)
+        {
+            UserExists = false;
         }
     }
 }

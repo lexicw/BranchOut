@@ -31,15 +31,11 @@ namespace BranchOut.Repository
             return false;
         }
 
-        public async Task<Profile> GetAsync(int id)
+        public async Task<Profile> GetAsync(string id)
         {
-            var profile = await _db.Profile.FirstOrDefaultAsync(x => x.Id == id);
-            if (profile != null)
-            {
-                return new Profile();
-            }
-
-            return profile;
+            return await _db.Profile
+                .Include(x => x.Links)
+                .FirstOrDefaultAsync(x => x.UserID == id);
         }
 
         public async Task<IEnumerable<Profile>> GetAllAsync()

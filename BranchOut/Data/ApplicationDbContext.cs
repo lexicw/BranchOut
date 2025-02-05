@@ -7,6 +7,16 @@ namespace BranchOut.Data
     {
         public DbSet<Link> Link { get; set; }
         public DbSet<Profile> Profile { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Profile>()
+                .HasOne(p => p.ApplicationUser)
+                .WithOne(a => a.Profile)
+                .HasForeignKey<Profile>(p => p.UserID);
+        }
     }
 
 }

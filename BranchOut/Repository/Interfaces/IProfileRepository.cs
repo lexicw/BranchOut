@@ -7,7 +7,7 @@ namespace BranchOut.Repository.Interfaces
         Task<Profile> CreateAsync(Profile profile);
         Task<bool> DeleteAsync(int id);
         Task<IEnumerable<Profile>> GetAllAsync();
-        Task<Profile> GetAsync(int id);
+        Task<Profile> GetAsync(string id);
         Task<Profile> UpdateAsync(Profile profile);
     }
 }
