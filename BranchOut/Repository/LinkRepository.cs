@@ -17,6 +17,15 @@ namespace BranchOut.Repository
         {
             link.UserID = userId;
             link.DateAdded = DateTime.Now;
+
+            // Getting sort number so new item can be set as the highest (bottom of list)
+            var maxSort = await _db.Link
+                .Where(l => l.UserID == userId)
+                .Select(l => (int?)l.Sort)
+                .MaxAsync() ?? 0;
+
+            link.Sort = maxSort + 1;
+
             await _db.Link.AddAsync(link);
             await _db.SaveChangesAsync();
             return link;
@@ -48,6 +57,7 @@ namespace BranchOut.Repository
         {
             return await _db.Link
                 .Where(link => link.UserID == userId)
+                .OrderBy(x => x.Sort)
                 .ToListAsync();
         }
 
@@ -62,6 +72,18 @@ namespace BranchOut.Repository
                 return linkFromDb;
             }
             return link;
+        }
+
+        public async Task UpdateLinksOrderAsync(IEnumerable<Link> links)
+        {
+            foreach (var link in links)
+            {
+                _db.Link.Attach(link);
+
+                _db.Entry(link).Property(x => x.Sort).IsModified = true;
+            }
+
+            await _db.SaveChangesAsync();
         }
     }
 }
