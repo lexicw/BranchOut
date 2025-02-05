@@ -3,10 +3,12 @@
 @inject ILinkRepository _linkRepository
 @inject UserService _userService
 
-<button class="btn btn-primary" @onclick="CallAddLinkModal">Add Link</button>
+<button class="btn btn-primary" @onclick='() => OpenModal("addLinkModal")'>Add Link</button>
 
-<AddLinkModal ModalClose="CloseModal"></AddLinkModal>
-<DeleteLinkModal></DeleteLinkModal>
+<AddLinkModal ModalClose='(bool success) => CloseModal("addLinkModal", success)' />
+
+<DeleteLinkModal LinkToDelete="@SelectedLink"
+                 ModalClose='(bool success) => CloseModal("deleteLinkModal", success)' />
 
 @if (IsProcessing)
 {
@@ -45,7 +47,7 @@ else
                                     <button class="border-0 bg-transparent">
                                         <i class="bi bi-pencil-square"></i>
                                     </button>
-                                    <button class="border-0 bg-transparent" @onclick="CallDeleteLinkModal">
+                                    <button class="border-0 bg-transparent" @onclick='() => OpenModal("deleteLinkModal", link.Id)'>
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                                 </div>
@@ -74,6 +76,8 @@ else
     private List<Link> UserLinks { get; set; } = new();
     private bool IsProcessing { get; set; } = true;
 
+    private int SelectedLink { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         await LoadUserLinks();
@@ -90,25 +94,23 @@ else
         var links = await _linkRepository.GetAllAsync(userId);
         UserLinks = links.ToList();
         IsProcessing = false;
-        await RefreshPhone();
     }
 
-    private void CallAddLinkModal()
+    private void OpenModal(string modalId, int? linkId = null)
     {
-        _JS.InvokeVoidAsync("ShowAddLinkModal");
+        if (linkId.HasValue)
+            SelectedLink = linkId.Value;
+
+        _JS.InvokeVoidAsync("showModal", modalId);
     }
 
-    private void CallDeleteLinkModal()
+    private async Task CloseModal(string modalId, bool success)
     {
-        _JS.InvokeVoidAsync("ShowDeleteLinkModal");
-    }
-
-    private async Task CloseModal(bool success)
-    {
-        await _JS.InvokeVoidAsync("HideAddLinkModal");
+        await _JS.InvokeVoidAsync("hideModal", modalId);
         if (success)
         {
             await LoadUserLinks();
+            await RefreshPhone();
         }
     }
 
@@ -136,6 +138,7 @@ else
     {
         await _linkRepository.UpdateAsync(link);
         await LoadUserLinks();
+        await RefreshPhone();
     }
 
     private async Task RefreshPhone()
