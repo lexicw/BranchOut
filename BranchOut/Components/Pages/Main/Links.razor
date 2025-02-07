@@ -3,7 +3,7 @@
 @inject ILinkRepository _linkRepository
 @inject UserService _userService
 
-<button class="btn btn-primary" @onclick='() => OpenModal("addLinkModal")'>Add Link</button>
+<button class="btn btn-primary mt-3" @onclick='() => OpenModal("addLinkModal")'>Add Link</button>
 
 <AddLinkModal ModalClose='(bool success) => CloseModal("addLinkModal", success)' />
 
@@ -66,7 +66,6 @@ else
                     </div>
                 </div>
             </SortableItemTemplate>
-
         </SortableList>
 
     }

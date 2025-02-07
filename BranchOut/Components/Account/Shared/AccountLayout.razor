@@ -2,14 +2,16 @@
 @layout BranchOut.Components.Layout.MainLayout
 @inject NavigationManager NavigationManager
 
-@if (HttpContext is null)
-{
-    <p class="mx-4">Loading...</p>
-}
-else
-{
-    @Body
-}
+<div class="bg-white pt-3">
+    @if (HttpContext is null)
+    {
+        <p class="mx-4">Loading...</p>
+    }
+    else
+    {
+        @Body
+    }
+</div>
 
 @code {
     [CascadingParameter]
