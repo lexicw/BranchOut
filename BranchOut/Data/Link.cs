@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BranchOut.Data
 {
@@ -7,6 +8,7 @@ namespace BranchOut.Data
         public int Id { get; set; }
         public string? UserID { get; set; }
         public int ProfileId { get; set; }
+        [ForeignKey("ProfileId")]
         public Profile Profile { get; set; }
         [Required]
         public string Name { get; set; }

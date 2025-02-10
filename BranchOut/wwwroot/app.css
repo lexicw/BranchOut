@@ -84,3 +84,86 @@ body {
     user-select: none;
     border-radius: 100px;
 }
+
+.radio-cards {
+    display: grid;
+    grid-gap: 1em;
+    margin: 0 auto;
+    max-width: 60em;
+    padding: 0;
+}
+
+@media (min-width: 42em) {
+    .radio-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.radio-card {
+    background-color: #fff;
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+    .radio-card:hover {
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+.radio {
+    font-size: inherit;
+    margin: 0;
+    position: absolute;
+    right: calc(1em + 2px);
+    top: calc(1em + 2px);
+    appearance: none;
+    background: #fff;
+    border: 2px solid #e2ebf6;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 1.5em;
+    outline: none;
+    transition: all 0.2s ease-out;
+    width: 24px;
+}
+
+    .radio::after {
+        border: 2px solid #fff;
+        border-top: 0;
+        border-left: 0;
+        content: '';
+        display: block;
+        height: 10px;
+        width: 5px;
+        left: 25%;
+        position: absolute;
+        top: 50%;
+        transform: rotate(45deg) translate(-50%, -50%);
+    }
+
+    .radio:checked {
+        background: #39f;
+        border-color: #39f;
+    }
+
+.radio-card:hover .radio {
+    border-color: #c4d1e1;
+}
+
+    .radio-card:hover .radio:checked {
+        border-color: #39f;
+    }
+
+.radio-card-body {
+    border: 2px solid #e2ebf6;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    transition: border-color 0.2s ease-out;
+}
+
+.radio:checked ~ .radio-card-body {
+    border: 2px solid #39f;
+}
