@@ -27,8 +27,8 @@
         <div class="mt-5">
             <div class="fs-6">Message:</div>
             <div class="mx-auto">
-            <textarea class="form-control" id="txtMessage" style="height: 100px"
-                      @onchange="UpdateProfile">@profile.Message</textarea>
+                <textarea class="form-control" id="txtMessage" style="height: 100px"
+                          @onchange="UpdateProfile">@profile.Message</textarea>
 
             </div>
         </div>
@@ -36,65 +36,69 @@
 
 
     <h1 class="fs-4 mt-5">Background</h1>
-
     <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
-        <div class="radio-cards">
-            <label class="radio-card text-center">
-                <input name="plan" class="radio" type="radio" checked>
-                <span class="radio-card-body">
-                    <br />
-                    <span class="border border-1 bg-square mx-auto"></span>
-                    <br />
-                    None
-                </span>
-            </label>
-            <label class="radio-card text-center">
-                <input name="plan" class="radio" type="radio">
-                <span class="radio-card-body" aria-hidden="true">
-                    <br />
-                    <span class="border border-1 bg-square mx-auto bg-cherry-blossom"></span>
-                    <br />
-                    Cherry Blossom
-                </span>
-            </label>
-            <label class="radio-card text-center">
-                <input name="plan" class="radio" type="radio">
-                <span class="radio-card-body" aria-hidden="true">
-                    <br />
-                    <span class="border border-1 bg-square mx-auto bg-tropical"></span>
-                    <br />
-                    Tropical
-                </span>
-            </label>
-            <label class="radio-card text-center">
-                <input name="plan" class="radio" type="radio">
-                <span class="radio-card-body">
-                    <br />
-                    <span class="border border-1 bg-square mx-auto bg-northern-lights"></span>
-                    <br />
-                    Northern Lights
-                </span>
-            </label>
-            <label class="radio-card text-center">
-                <input name="plan" class="radio" type="radio">
-                <span class="radio-card-body">
-                    <br />
-                    <span class="border border-1 bg-square mx-auto bg-vibrant"></span>
-                    <br />
-                    Vibrant
-                </span>
-            </label>
-            <label class="radio-card text-center">
-                <input name="plan" class="radio" type="radio">
-                <span class="radio-card-body">
-                    <br />
-                    <span class="border border-1 bg-square mx-auto bg-lime"></span>
-                    <br />
-                    Lime
-                </span>
-            </label>
-        </div>
+        <InputRadioGroup @bind-Value="Theme">
+            <div class="radio-cards">
+                <label class="radio-card text-center">
+                    <InputRadio class="radio" Value=@("none") />
+                    <span class="radio-card-body">
+                        <br />
+                        <span class="border border-1 bg-square mx-auto"></span>
+                        <br />None
+                    </span>
+                </label>
+
+                <label class="radio-card text-center">
+                    <InputRadio class="radio" Value=@("cherry-blossom") />
+                    <span class="radio-card-body">
+                        <br />
+                        <span class="border border-1 bg-square mx-auto bg-cherry-blossom"></span>
+                        <br />Cherry Blossom
+                    </span>
+                </label>
+
+                <label class="radio-card text-center">
+                    <InputRadio class="radio" Value=@("tropical") />
+                    <span class="radio-card-body">
+                        <br />
+                        <span class="border border-1 bg-square mx-auto bg-tropical"></span>
+                        <br />Tropical
+                    </span>
+                </label>
+
+                <label class="radio-card text-center">
+                    <InputRadio class="radio" Value=@("northern-lights") />
+                    <span class="radio-card-body">
+                        <br />
+                        <span class="border border-1 bg-square mx-auto bg-northern-lights"></span>
+                        <br />Northern Lights
+                    </span>
+                </label>
+
+                <label class="radio-card text-center">
+                    <InputRadio class="radio" Value=@("vibrant") />
+                    <span class="radio-card-body">
+                        <br />
+                        <span class="border border-1 bg-square mx-auto bg-vibrant"></span>
+                        <br />Vibrant
+                    </span>
+                </label>
+
+                <label class="radio-card text-center">
+                    <InputRadio class="radio" Value=@("lime") />
+                    <span class="radio-card-body">
+                        <br />
+                        <span class="border border-1 bg-square mx-auto bg-lime"></span>
+                        <br />Lime
+                    </span>
+                </label>
+            </div>
+        </InputRadioGroup>
+
+
+
     </div>
+
 
 
 </div>
@@ -105,6 +109,19 @@
     public string? UserName { get; set; }
 
     public BranchOut.Data.Profile? profile { get; set; } = new BranchOut.Data.Profile();
+
+    private string Theme
+    {
+        get => profile.Theme;
+        set
+        {
+            if (profile.Theme != value)
+            {
+                profile.Theme = value;
+                UpdateTheme();
+            }
+        }
+    }
 
     private bool UserExists { get; set; } = true;
 
@@ -142,5 +159,13 @@
     private async Task RefreshPhone()
     {
         await _JS.InvokeVoidAsync("reloadIframe", "profileFrame");
+    }
+
+    private async Task UpdateTheme()
+    {
+
+        await _profileRepository.UpdateAsync(profile);
+        StateHasChanged();
+        RefreshPhone();
     }
 }
