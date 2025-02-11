@@ -8,22 +8,24 @@
 
 @if (UserExists)
 {
-    <div class="mx-4 text-center mt-5">
-        <svg class="bd-placeholder-img" width="100px" height="100px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="lightgray" />
-            <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="40" fill="black">
-                @UserName?.Substring(0, 1).ToUpper()
-            </text>
-        </svg>
-        <div class="fs-3 mt-2 fw-bold">@UserName</div>
-        <div class="fs-6">@profile.Message</div>
+    <div class="text-center pt-5 bg-@profile.Theme h-100">
+        <div class="px-4">
+            <svg class="bd-placeholder-img" width="100px" height="100px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <rect width="100%" height="100%" fill="lightgray" />
+                <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="40" fill="black">
+                    @UserName?.Substring(0, 1).ToUpper()
+                </text>
+            </svg>
+            <div class="fs-3 mt-2 fw-bold">@UserName</div>
+            <div class="fs-6">@profile.Message</div>
 
-        @foreach (var link in profile.Links)
-        {
-            <div class="d-grid gap-2">
-                <a href="@link.URL" target="_blank" class="btn btn-primary mt-1" type="button">@link.Name</a>
-            </div>
-        }
+            @foreach (var link in profile.Links)
+            {
+                <div class="d-grid gap-2">
+                    <a href="@link.URL" target="_blank" class="btn btn-primary mt-1" type="button">@link.Name</a>
+                </div>
+            }
+        </div>
     </div>
 }
 else

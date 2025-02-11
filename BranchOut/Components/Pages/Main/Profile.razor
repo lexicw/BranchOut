@@ -4,6 +4,7 @@
 @inject NavigationManager NavigationManager
 @inject IProfileRepository _profileRepository
 @inject UserService _userService
+@inject IJSRuntime _JS
 
 
 <div class="mt-5 w-75 mx-auto">
@@ -26,56 +27,70 @@
         <div class="mt-5">
             <div class="fs-6">Message:</div>
             <div class="mx-auto">
-                <textarea class="form-control" placeholder="Leave a comment here" id="txtMessage" style="height: 100px">@profile.Message</textarea>
+            <textarea class="form-control" id="txtMessage" style="height: 100px"
+                      @onchange="UpdateProfile">@profile.Message</textarea>
+
             </div>
         </div>
     </div>
 
 
-    <h1 class="fs-4 mt-5">Theme</h1>
+    <h1 class="fs-4 mt-5">Background</h1>
 
     <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
         <div class="radio-cards">
-            <label class="radio-card">
+            <label class="radio-card text-center">
                 <input name="plan" class="radio" type="radio" checked>
                 <span class="radio-card-body">
-                    <br/>
-                    Choice 1
+                    <br />
+                    <span class="border border-1 bg-square mx-auto"></span>
+                    <br />
+                    None
                 </span>
             </label>
-            <label class="radio-card">
+            <label class="radio-card text-center">
                 <input name="plan" class="radio" type="radio">
                 <span class="radio-card-body" aria-hidden="true">
                     <br />
-                    Choice 2
+                    <span class="border border-1 bg-square mx-auto bg-cherry-blossom"></span>
+                    <br />
+                    Cherry Blossom
                 </span>
             </label>
-            <label class="radio-card">
+            <label class="radio-card text-center">
                 <input name="plan" class="radio" type="radio">
                 <span class="radio-card-body" aria-hidden="true">
                     <br />
-                    Choice 3
+                    <span class="border border-1 bg-square mx-auto bg-tropical"></span>
+                    <br />
+                    Tropical
                 </span>
             </label>
-            <label class="radio-card">
-                <input name="plan" class="radio" type="radio" checked>
+            <label class="radio-card text-center">
+                <input name="plan" class="radio" type="radio">
                 <span class="radio-card-body">
                     <br />
-                    Choice 4
+                    <span class="border border-1 bg-square mx-auto bg-northern-lights"></span>
+                    <br />
+                    Northern Lights
                 </span>
             </label>
-            <label class="radio-card">
-                <input name="plan" class="radio" type="radio" checked>
+            <label class="radio-card text-center">
+                <input name="plan" class="radio" type="radio">
                 <span class="radio-card-body">
                     <br />
-                    Choice 5
+                    <span class="border border-1 bg-square mx-auto bg-vibrant"></span>
+                    <br />
+                    Vibrant
                 </span>
             </label>
-            <label class="radio-card">
-                <input name="plan" class="radio" type="radio" checked>
+            <label class="radio-card text-center">
+                <input name="plan" class="radio" type="radio">
                 <span class="radio-card-body">
                     <br />
-                    Choice 6
+                    <span class="border border-1 bg-square mx-auto bg-lime"></span>
+                    <br />
+                    Lime
                 </span>
             </label>
         </div>
@@ -98,7 +113,7 @@
         await LoadProfile();
     }
 
-    private async void RefreshProfile()
+    private async Task RefreshProfile()
     {
         await LoadProfile();
         StateHasChanged();
@@ -113,5 +128,19 @@
 
         var userId = currentUser.Id.ToString();
         profile = await _profileRepository.GetAsync(userId);
+    }
+
+    private async Task UpdateProfile(ChangeEventArgs e)
+    {
+        profile.Message = e.Value?.ToString();
+
+        await _profileRepository.UpdateAsync(profile);
+        StateHasChanged();
+        RefreshPhone();
+    }
+
+    private async Task RefreshPhone()
+    {
+        await _JS.InvokeVoidAsync("reloadIframe", "profileFrame");
     }
 }
