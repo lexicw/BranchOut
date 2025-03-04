@@ -3,19 +3,10 @@
 
 <div class="sticky-top py-4">
     <div class="phone-frame mx-auto">
-        <iframe id="profileFrame" class="phone-screen" src="profile/@userName"></iframe>
+        <ProfilePage></ProfilePage>
     </div>
 </div>
 
 @code {
-    private string? userName;
-
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        userName = user.Identity?.IsAuthenticated == true ? user.Identity.Name : "Guest";
-    }
-
 
 }

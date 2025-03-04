@@ -1,17 +1,32 @@
 ﻿@inherits LayoutComponentBase
 @layout BranchOut.Components.Layout.MainLayout
 
+@inject IProfileRepository _profileRepository
+
 <div class="px-4">
     <div class="row">
         <div class="col-8">
             @Body
         </div>
         <div class="col-12 col-md-4">
-            <CellPhone />
+            <CascadingValue Name="UserId" Value="@userId">
+                <CascadingValue Name="UserName" Value="@userName">
+                    <CascadingValue Name="Profile" Value="@profile">
+                        <CellPhone />
+                    </CascadingValue>
+                </CascadingValue>
+            </CascadingValue>
         </div>
     </div>
 </div>
 
 @code {
+    public string userName = "Lexi";
+    public string userId = "6fe4e315-cdb8-4405-a009-f128fd1e3d80";
+    public Profile profile = new Profile();
 
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     profile = await _profileRepository.GetAsync(userId);
+    // }
 }
