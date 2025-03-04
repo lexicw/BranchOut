@@ -19,12 +19,16 @@
             <div class="fs-3 mt-2 fw-bold">@UserName</div>
             <div class="fs-6">@profile.Message</div>
 
-            @foreach (var link in profile.Links)
-            {
-                <div class="d-grid gap-2">
-                    <a href="@link.URL" target="_blank" class="btn btn-primary mt-1" type="button">@link.Name</a>
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-4 mx-auto">
+                    @foreach (var link in profile.Links)
+                    {
+                        <div class="d-grid gap-2">
+                            <a href="@link.URL" target="_blank" class="btn btn-primary mt-1" type="button">@link.Name</a>
+                        </div>
+                    }
                 </div>
-            }
+            </div>
         </div>
     </div>
 }
@@ -72,5 +76,4 @@ else
             return;
         }
     }
-
 }
