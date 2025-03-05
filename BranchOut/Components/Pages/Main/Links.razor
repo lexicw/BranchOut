@@ -71,11 +71,13 @@ else
 }
 
 @code {
-    private List<Link> UserLinks { get; set; } = new();
     private bool IsProcessing { get; set; } = true;
 
     [CascadingParameter(Name = "User")]
     public ApplicationUser User { get; set; }
+
+    [CascadingParameter(Name = "Links")]
+    public List<Link> UserLinks { get; set; }
 
     private int SelectedLink { get; set; }
 
@@ -86,12 +88,6 @@ else
 
     private async Task LoadUserLinks()
     {
-        IsProcessing = true;
-        var currentUser = User;
-
-        var userId = currentUser.Id;
-        var links = await _linkRepository.GetAllAsync(userId);
-        UserLinks = links.ToList();
         IsProcessing = false;
     }
 

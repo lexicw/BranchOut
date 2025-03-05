@@ -1,9 +1,7 @@
 ﻿@page "/profile"
 
-@inject UserManager<ApplicationUser> UserManager
 @inject NavigationManager NavigationManager
 @inject IProfileRepository _profileRepository
-@inject UserService _userService
 @inject IJSRuntime _JS
 
 
@@ -20,7 +18,7 @@
             <svg class="bd-placeholder-img" width="150px" height="150px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <rect width="100%" height="100%" fill="lightgray" />
                 <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="50" fill="black">
-                    @UserName?.Substring(0, 1).ToUpper()
+                    @User.UserName?.Substring(0, 1).ToUpper()
                 </text>
             </svg>
         </div>
@@ -110,11 +108,13 @@
 
 
 @code {
-    [Parameter]
-    public string? UserName { get; set; }
+    [CascadingParameter(Name = "User")]
+    public ApplicationUser User { get; set; }
 
-    public BranchOut.Data.Profile? profile { get; set; } = new BranchOut.Data.Profile();
+    [CascadingParameter(Name = "Profile")]
+    public Profile profile { get; set; }
 
+ 
     private string Theme
     {
         get => profile.Theme;
@@ -143,13 +143,9 @@
 
     private async Task LoadProfile()
     {
-        var currentUser = await _userService.GetCurrentUserAsync();
-        UserName = currentUser.UserName;
-        if (currentUser == null)
-            return;
+        var currentUser = User;
 
         var userId = currentUser.Id.ToString();
-        profile = await _profileRepository.GetAsync(userId);
     }
 
     private async Task UpdateProfile(ChangeEventArgs e)

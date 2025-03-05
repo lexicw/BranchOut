@@ -2,35 +2,36 @@
 @layout BranchOut.Components.Layout.MainLayout
 
 @inject IProfileRepository _profileRepository
+@inject ILinkRepository _linkRepository
 @inject UserService _userService
 
 <CascadingValue Name="User" Value="@User">
     <CascadingValue Name="Profile" Value="@profile">
-        <div class="px-4">
-            <div class="row">
-                <div class="col-8">
-                    @Body
-                </div>
-                <div class="col-12 col-md-4">
+        <CascadingValue Name="Links" Value="@UserLinks">
+            <div class="px-4">
+                <div class="row">
+                    <div class="col-8">
+                        @Body
+                    </div>
+                    <div class="col-12 col-md-4">
 
-                    <CellPhone />
+                        <CellPhone />
+                    </div>
                 </div>
             </div>
-        </div>
+        </CascadingValue>
     </CascadingValue>
 </CascadingValue>
 
 @code {
     public ApplicationUser User = new ApplicationUser();
     public Profile profile = new Profile();
-
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     profile = await _profileRepository.GetAsync(userId);
-    // }
+    private List<Link> UserLinks { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         User = await _userService.GetCurrentUserAsync();
+        profile = await _profileRepository.GetAsync(User.Id);
+        UserLinks = await _linkRepository.GetAllAsync(User.Id);
     }
 }

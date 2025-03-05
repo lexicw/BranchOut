@@ -56,7 +56,7 @@ namespace BranchOut.Repository
             return link;
         }
 
-        public async Task<IEnumerable<Link>> GetAllAsync(string userId)
+        public async Task<List<Link>> GetAllAsync(string userId)
         {
             return await _db.Link
                 .Where(link => link.UserID == userId)

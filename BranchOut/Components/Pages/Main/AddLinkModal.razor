@@ -1,5 +1,4 @@
 ﻿@inject ILinkRepository _linkRepository
-@inject UserService _userService
 
 <div class="modal fade" id="addLinkModal" tabindex="-1" aria-labelledby="addLinkModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -45,16 +44,15 @@
     [Parameter]
     public EventCallback<bool> ModalClose { get; set; }
 
+    [CascadingParameter(Name = "User")]
+    public ApplicationUser User { get; set; }
+
     private Link link = new();
 
 
     private async Task InsertLink()
     {
-        var currentUser = await _userService.GetCurrentUserAsync();
-        if (currentUser == null)
-        {
-            return;
-        }
+        var currentUser = User;
         var userId = currentUser.Id;
 
         await _linkRepository.CreateAsync(link, userId);
