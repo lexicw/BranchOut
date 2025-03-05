@@ -1,10 +1,9 @@
 ﻿@layout ProfileLayout
-@page "/profile/{username}"
+@* @page "/profile/{username}" *@
 
 @inject UserManager<ApplicationUser> UserManager
 @inject NavigationManager NavigationManager
 @inject IProfileRepository _profileRepository
-@inject UserService _userService
 
 @if (UserExists)
 {
@@ -13,10 +12,10 @@
             <svg class="bd-placeholder-img" width="100px" height="100px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <rect width="100%" height="100%" fill="lightgray" />
                 <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="40" fill="black">
-                    @userName?.Substring(0, 1).ToUpper()
+                    @User.UserName?.Substring(0, 1).ToUpper()
                 </text>
             </svg>
-            <div class="fs-3 mt-2 fw-bold">@userName</div>
+            <div class="fs-3 mt-2 fw-bold">@User.UserName</div>
             <div class="fs-6">@profile.Message</div>
 
             <div class="row">
@@ -42,11 +41,8 @@ else
 }
 
 @code {
-    [CascadingParameter(Name = "UserName")]
-    public string? userName { get; set; }
-
-    [CascadingParameter(Name = "UserId")]
-    public string? userId { get; set; }
+    [CascadingParameter(Name = "User")]
+    public ApplicationUser User { get; set; }
 
     [CascadingParameter(Name = "Profile")]
     public Profile profile { get; set; }
