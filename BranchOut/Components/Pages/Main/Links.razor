@@ -105,7 +105,6 @@ else
         if (success)
         {
             await LoadUserLinks();
-            await RefreshPhone();
         }
     }
 
@@ -126,18 +125,12 @@ else
         await _linkRepository.UpdateLinksOrderAsync(UserLinks);
 
         StateHasChanged();
-        await RefreshPhone();
     }
 
     private async Task SaveVisibility(Link link)
     {
         await _linkRepository.UpdateAsync(link);
         await LoadUserLinks();
-        await RefreshPhone();
     }
 
-    private async Task RefreshPhone()
-    {
-        await _JS.InvokeVoidAsync("reloadIframe", "profileFrame");
-    }
 }

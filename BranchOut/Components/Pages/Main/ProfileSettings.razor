@@ -154,12 +154,6 @@
 
         await _profileRepository.UpdateAsync(profile);
         StateHasChanged();
-        RefreshPhone();
-    }
-
-    private async Task RefreshPhone()
-    {
-        await _JS.InvokeVoidAsync("reloadIframe", "profileFrame");
     }
 
     private async Task UpdateTheme()
@@ -167,6 +161,5 @@
 
         await _profileRepository.UpdateAsync(profile);
         StateHasChanged();
-        RefreshPhone();
     }
 }
