@@ -42,7 +42,8 @@ body {
     position: relative;
     width: 360px;
     height: 720px;
-    background-color: black;
+    background-color: white;
+    border: 8px solid #000;
     border-radius: 20px;
     overflow: hidden;
 }
