@@ -9,7 +9,11 @@
 
 @if (UserExists)
 {
-    <div class="text-center pt-5 bg-@profile.Theme h-100">
+    <HeadContent>
+        <link rel="stylesheet"
+              href="@($"https://fonts.googleapis.com/css?family=Sofia|Inter|Merriweather|Miniver|Oswald|Raleway|Yomogi|Silkscreen|Fresca")" />
+    </HeadContent>
+    <div class="text-center pt-5 bg-@profile.Theme font-@profile.Font h-100">
         <div class="px-4">
             <svg class="bd-placeholder-img" width="100px" height="100px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <rect width="100%" height="100%" fill="lightgray" />

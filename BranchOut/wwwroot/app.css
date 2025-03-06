@@ -180,7 +180,6 @@ body {
     background: -webkit-linear-gradient(top, #FFB7C5 0%, #F0A8B6 100%);
     background: -moz-linear-gradient(top, #FFB7C5 0%, #F0A8B6 100%);
     background: -o-linear-gradient(top, #FFB7C5 0%, #F0A8B6 100%);
-    border: 1px solid #E199A7;
     box-shadow: inset 0 1px 0 #FFC6D4;
     -webkit-box-shadow: inset 0 1px 0 #FFC6D4;
     -moz-box-shadow: inset 0 1px 0 #FFC6D4;
@@ -217,4 +216,45 @@ body {
 .bg-square {
     width: 75px;
     height: 75px;
+}
+
+.font-container {
+    width: 125px;
+    height: 50px;
+}
+
+.font-sofia {
+    font-family: "Sofia", sans-serif;
+}
+
+.font-inter {
+    font-family: "Inter", sans-serif;
+}
+
+.font-merriweather {
+    font-family: "Merriweather", sans-serif;
+}
+
+.font-miniver {
+    font-family: "Miniver", sans-serif;
+}
+
+.font-oswald {
+    font-family: "Oswald", sans-serif;
+}
+
+.font-raleway {
+    font-family: "Raleway", sans-serif;
+}
+
+.font-yomogi {
+    font-family: "Yomogi", sans-serif;
+}
+
+.font-silkscreen {
+    font-family: "Silkscreen", sans-serif;
+}
+
+.font-fresca {
+    font-family: "Fresca", sans-serif;
 }
