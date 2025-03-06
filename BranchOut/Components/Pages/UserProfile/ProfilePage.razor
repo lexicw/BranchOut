@@ -4,6 +4,8 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject NavigationManager NavigationManager
 @inject IProfileRepository _profileRepository
+@inject ProfileState ProfileState
+@inject LinksState LinksState
 
 @if (UserExists)
 {
@@ -20,11 +22,15 @@
 
             <div class="row">
                 <div class="col-12 col-md-8 mx-auto">
-                    @foreach (var link in profile.Links)
+                    @foreach (var link in UserLinks.OrderBy(x => x.Sort))
                     {
-                        <div class="d-grid gap-2">
-                            <a href="@link.URL" target="_blank" class="btn btn-primary mt-1" type="button">@link.Name</a>
-                        </div>
+                        if (link.Visible == true)
+                        {
+                            <div class="d-grid gap-2">
+                                <a href="@link.URL" target="_blank" class="btn btn-primary mt-1" type="button">@link.Name</a>
+                            </div>
+                        }
+
                     }
                 </div>
             </div>
@@ -47,6 +53,21 @@ else
     [CascadingParameter(Name = "Profile")]
     public Profile profile { get; set; }
 
+    [CascadingParameter(Name = "Links")]
+    public List<Link> UserLinks { get; set; }
+
 
     private bool UserExists { get; set; } = true;
+
+    protected override void OnInitialized()
+    {
+        ProfileState.OnChange += StateHasChanged;
+        LinksState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ProfileState.OnChange -= StateHasChanged;
+        LinksState.OnChange -= StateHasChanged;
+    }
 }

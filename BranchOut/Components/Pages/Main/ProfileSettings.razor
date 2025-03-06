@@ -3,6 +3,7 @@
 @inject NavigationManager NavigationManager
 @inject IProfileRepository _profileRepository
 @inject IJSRuntime _JS
+@inject ProfileState ProfileState
 
 
 <div class="mt-5 w-75 mx-auto">
@@ -135,12 +136,6 @@
         await LoadProfile();
     }
 
-    private async Task RefreshProfile()
-    {
-        await LoadProfile();
-        StateHasChanged();
-    }
-
     private async Task LoadProfile()
     {
         var currentUser = User;
@@ -153,13 +148,13 @@
         profile.Message = e.Value?.ToString();
 
         await _profileRepository.UpdateAsync(profile);
-        StateHasChanged();
+        await ProfileState.UpdateProfileAsync(profile, _profileRepository);
     }
 
     private async Task UpdateTheme()
     {
 
         await _profileRepository.UpdateAsync(profile);
-        StateHasChanged();
+        await ProfileState.UpdateProfileAsync(profile, _profileRepository);
     }
 }

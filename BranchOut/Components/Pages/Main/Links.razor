@@ -1,6 +1,7 @@
 ﻿@page "/links"
 @inject IJSRuntime _JS
 @inject ILinkRepository _linkRepository
+@inject LinksState LinksState
 
 <button class="btn btn-primary mt-3" @onclick='() => OpenModal("addLinkModal")'>Add Link</button>
 
@@ -83,13 +84,15 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadUserLinks();
+        IsProcessing = false;
     }
 
     private async Task LoadUserLinks()
     {
+        UserLinks = await _linkRepository.GetAllAsync(User.Id);
         IsProcessing = false;
     }
+
 
     private void OpenModal(string modalId, int? linkId = null)
     {
@@ -124,12 +127,13 @@ else
 
         await _linkRepository.UpdateLinksOrderAsync(UserLinks);
 
-        StateHasChanged();
+        await LinksState.UpdateLinkOrderAsync(UserLinks, _linkRepository);
     }
 
     private async Task SaveVisibility(Link link)
     {
         await _linkRepository.UpdateAsync(link);
+        await LinksState.UpdateLinkAsync(link, _linkRepository);
         await LoadUserLinks();
     }
 

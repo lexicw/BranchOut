@@ -1,32 +1,21 @@
 ﻿using BranchOut.Data;
+using BranchOut.Repository.Interfaces;
 
 namespace BranchOut.Services
 {
     public class ProfileState
     {
-        public event Action OnChange;
+        public Profile CurrentProfile { get; private set; } = new Profile();
 
-        private Profile _profile { get; set; } = new Profile();
-        private List<Link> _links { get; set; } = new();
+        public event Action? OnChange;
 
-        public Profile Profile
+        public async Task UpdateProfileAsync(Profile newProfile, IProfileRepository repository)
         {
-            get => _profile;
-            set
-            {
-                _profile = value;
-                NotifyStateChanged();
-            }
-        }
+            await repository.UpdateAsync(newProfile);
 
-        public List<Link> Links
-        {
-            get => _links;
-            set
-            {
-                _links = value;
-                NotifyStateChanged();
-            }
+            CurrentProfile = newProfile;
+
+            NotifyStateChanged();
         }
 
         private void NotifyStateChanged() => OnChange?.Invoke();
