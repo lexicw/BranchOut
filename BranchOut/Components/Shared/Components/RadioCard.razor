@@ -1,0 +1,30 @@
+﻿<label class="radio-card text-center">
+    <InputRadio class="radio" Value=@(ValueLower) />
+    <span class="radio-card-body">
+        <br />
+        <span class="@(Type == "Background"
+    ? $"border border-1 bg-square bg-{ValueLower}"
+    : Type == "Font"
+        ? $"font-container font-{ValueLower}"
+        : "") mx-auto @FontSize">
+            @if (Type == "Font")
+            {
+                @Value
+            }
+        </span>
+        <br />@Value
+    </span>
+</label>
+
+@code {
+    [Parameter]
+    public string Type { get; set; } = "";
+
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public string FontSize { get; set; } = "";
+
+    public string ValueLower => Value.ToLower().Replace(" ", "-");
+}

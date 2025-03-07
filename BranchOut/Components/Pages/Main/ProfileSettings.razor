@@ -38,59 +38,12 @@
     <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
         <InputRadioGroup @bind-Value="Theme">
             <div class="radio-cards">
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("none") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="border border-1 bg-square mx-auto"></span>
-                        <br />None
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("cherry-blossom") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="border border-1 bg-square mx-auto bg-cherry-blossom"></span>
-                        <br />Cherry Blossom
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("tropical") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="border border-1 bg-square mx-auto bg-tropical"></span>
-                        <br />Tropical
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("northern-lights") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="border border-1 bg-square mx-auto bg-northern-lights"></span>
-                        <br />Northern Lights
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("vibrant") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="border border-1 bg-square mx-auto bg-vibrant"></span>
-                        <br />Vibrant
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("lime") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="border border-1 bg-square mx-auto bg-lime"></span>
-                        <br />Lime
-                    </span>
-                </label>
+                <RadioCard Type="Background" Value="None"></RadioCard>
+                <RadioCard Type="Background" Value="Cherry Blossom"></RadioCard>
+                <RadioCard Type="Background" Value="Tropical"></RadioCard>
+                <RadioCard Type="Background" Value="Northern Lights"></RadioCard>
+                <RadioCard Type="Background" Value="Vibrant"></RadioCard>
+                <RadioCard Type="Background" Value="Lime"></RadioCard>
             </div>
         </InputRadioGroup>
     </div>
@@ -100,86 +53,15 @@
     <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
         <InputRadioGroup @bind-Value="Font">
             <div class="radio-cards">
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("inter") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="font-container mx-auto font-inter fs-1">Inter</span>
-                        <br />Inter
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("sofia") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="font-container mx-auto font-sofia fs-1">Sofia</span>
-                        <br />Sofia
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("merriweather") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="font-container mx-auto font-merriweather fs-5 mt-2">Merriweather</span>
-                        <br />Merriweather
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("miniver") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="font-container mx-auto font-miniver fs-3 mt-2">Miniver</span>
-                        <br />Miniver
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("oswald") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="font-container mx-auto font-oswald fs-1">Oswald</span>
-                        <br />Oswald
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("raleway") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="font-container mx-auto font-raleway fs-3">Raleway</span>
-                        <br />Raleway
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("yomogi") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="font-container mx-auto font-yomogi fs-3">Yomogi</span>
-                        <br />Yomogi
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("silkscreen") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="font-container mx-auto font-silkscreen fs-5">Silkscreen</span>
-                        <br />Silkscreen
-                    </span>
-                </label>
-
-                <label class="radio-card text-center">
-                    <InputRadio class="radio" Value=@("fresca") />
-                    <span class="radio-card-body">
-                        <br />
-                        <span class="font-container mx-auto font-fresca fs-3">Fresca</span>
-                        <br />Fresca
-                    </span>
-                </label>
+                <RadioCard Type="Font" Value="Inter" FontSize="fs-1"></RadioCard>
+                <RadioCard Type="Font" Value="Sofia" FontSize="fs-1"></RadioCard>
+                <RadioCard Type="Font" Value="Merriweather" FontSize="fs-5"></RadioCard>
+                <RadioCard Type="Font" Value="Miniver" FontSize="fs-3"></RadioCard>
+                <RadioCard Type="Font" Value="Oswald" FontSize="fs-1"></RadioCard>
+                <RadioCard Type="Font" Value="Raleway" FontSize="fs-3"></RadioCard>
+                <RadioCard Type="Font" Value="Yomogi" FontSize="fs-3"></RadioCard>
+                <RadioCard Type="Font" Value="Silkscreen" FontSize="fs-5"></RadioCard>
+                <RadioCard Type="Font" Value="Fresca" FontSize="fs-3"></RadioCard>
             </div>
         </InputRadioGroup>
     </div>
