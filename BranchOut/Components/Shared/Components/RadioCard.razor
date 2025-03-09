@@ -2,7 +2,7 @@
     <InputRadio class="radio" Value=@(ValueLower) />
     <span class="radio-card-body">
         <br />
-        <span class="@(Type == "Background"
+        <span class="@(Type == "Background" || Type == "Color"
     ? $"border border-1 bg-square bg-{ValueLower}"
     : Type == "Font"
         ? $"font-container font-{ValueLower}"

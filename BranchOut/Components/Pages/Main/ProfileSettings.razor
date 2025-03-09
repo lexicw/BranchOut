@@ -49,8 +49,18 @@
     </div>
 
 
-    <h1 class="fs-4 mt-5">Font</h1>
+    <h1 class="fs-4 mt-5">Text</h1>
     <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
+        <h2 class="fs-5">Color:</h2>
+        <InputRadioGroup @bind-Value="TextColor">
+            <div class="radio-cards">
+                <RadioCard Type="Color" Value="Black" FontSize="fs-1"></RadioCard>
+                <RadioCard Type="Color" Value="White" FontSize="fs-1"></RadioCard>
+            </div>
+        </InputRadioGroup>
+
+
+        <h2 class="fs-5 mt-5">Font:</h2>
         <InputRadioGroup @bind-Value="Font">
             <div class="radio-cards">
                 <RadioCard Type="Font" Value="Inter" FontSize="fs-1"></RadioCard>
@@ -104,6 +114,19 @@
             if (profile.Font != value)
             {
                 profile.Font = value;
+                Update();
+            }
+        }
+    }
+
+    private string TextColor
+    {
+        get => profile.TextColor;
+        set
+        {
+            if (profile.TextColor != value)
+            {
+                profile.TextColor = value;
                 Update();
             }
         }
