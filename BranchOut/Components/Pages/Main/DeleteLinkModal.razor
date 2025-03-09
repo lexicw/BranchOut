@@ -1,4 +1,5 @@
 ﻿@inject ILinkRepository _linkRepository
+@inject LinksState LinksState
 
 <div class="modal fade" id="deleteLinkModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -15,6 +16,9 @@
 </div>
 
 @code {
+    [CascadingParameter(Name = "Links")]
+    public List<Link> UserLinks { get; set; }
+
     [Parameter]
     public EventCallback<bool> ModalClose { get; set; }
 
@@ -24,6 +28,12 @@
     private async Task DeleteLink()
     {
         await _linkRepository.DeleteAsync(LinkToDelete);
+        var link = UserLinks.FirstOrDefault(l => l.Id == LinkToDelete);
+        if (link != null)
+        {
+            UserLinks.Remove(link);
+        }
+        await LinksState.UpdateLinkOrderAsync(UserLinks, _linkRepository);
         await ModalClose.InvokeAsync(true);
     }
 }

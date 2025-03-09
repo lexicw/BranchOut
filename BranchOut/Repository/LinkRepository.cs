@@ -48,7 +48,7 @@ namespace BranchOut.Repository
         public async Task<Link> GetAsync(int id)
         {
             var link = await _db.Link.FirstOrDefaultAsync(x => x.Id == id);
-            if (link != null)
+            if (link == null)
             {
                 return new Link();
             }

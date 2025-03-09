@@ -15,27 +15,30 @@
     <div class="col-12 col-lg-auto">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <ul class="nav my-2 justify-content-center text-center my-md-0 text-small">
-                    <li>
-                        <NavLink href="" class="nav-link px-4" Match="NavLinkMatch.All">
-                            <i class="bi bi-house-door fs-4"></i>
-                            <div>Home</div>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink href="links" class="nav-link px-4" Match="NavLinkMatch.All">
-                            <i class="bi bi-link-45deg fs-4"></i>
-                            <div>Links</div>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink href="profile" class="nav-link px-4" Match="NavLinkMatch.All">
-                            <i class="bi bi-person-circle fs-4"></i>
-                            <div>Profile</div>
-                        </NavLink>
-                    </li>
-                </ul>
-
+                <AuthorizeView>
+                    <Authorized>
+                        <ul class="nav my-2 justify-content-center text-center my-md-0 text-small">
+                            <li>
+                                <NavLink href="" class="nav-link px-4" Match="NavLinkMatch.All">
+                                    <i class="bi bi-house-door fs-4"></i>
+                                    <div>Home</div>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink href="links" class="nav-link px-4" Match="NavLinkMatch.All">
+                                    <i class="bi bi-link-45deg fs-4"></i>
+                                    <div>Links</div>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink href="profile" class="nav-link px-4" Match="NavLinkMatch.All">
+                                    <i class="bi bi-person-circle fs-4"></i>
+                                    <div>Profile</div>
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </Authorized>
+                </AuthorizeView>
             </div>
         </div>
     </div>
