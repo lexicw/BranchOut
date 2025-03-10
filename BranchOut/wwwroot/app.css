@@ -258,3 +258,50 @@ body {
 .font-fresca {
     font-family: "Fresca", sans-serif;
 }
+
+.btn-square {
+    border-radius: 0;
+}
+
+.btn-round {
+    border-radius: 0.375rem;
+}
+
+.btn-rounder {
+    border-radius: .75rem;
+}
+
+.btn-pill {
+    border-radius: 50rem;
+}
+
+.border-dark {
+    border: 1px solid darkgray;
+}
+
+.rectangle {
+    width: 85px;
+    height: 45px;
+}
+
+.border-none {
+    border: none !important;
+}
+
+.border-thin {
+    border: 1px solid #000 !important;
+}
+
+.border-thick {
+    border: 2px solid #000 !important;
+}
+
+.btn-3d {
+    border: 2px solid #422800;
+    box-shadow: #422800 4px 4px 0 0;
+}
+
+    .btn-3d:hover {
+        box-shadow: #422800 1px 1px 0 0;
+        transform: translate(2px, 2px);
+    }
