@@ -52,12 +52,8 @@
     <h1 class="fs-4 mt-5">Text</h1>
     <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
         <h2 class="fs-5">Color:</h2>
-        <InputRadioGroup @bind-Value="TextColor">
-            <div class="radio-cards">
-                <RadioCard Type="Color" Value="Black"></RadioCard>
-                <RadioCard Type="Color" Value="White"></RadioCard>
-            </div>
-        </InputRadioGroup>
+        <ColorSelector InColor="@TextColor" ReturnedColor="ColorChange"></ColorSelector>
+
 
 
         <h2 class="fs-5 mt-5">Font:</h2>
@@ -158,5 +154,11 @@
 
         await _profileRepository.UpdateAsync(profile);
         await ProfileState.UpdateProfileAsync(profile, _profileRepository);
+    }
+
+    private void ColorChange(string e)
+    {
+        TextColor = e;
+        StateHasChanged();
     }
 }

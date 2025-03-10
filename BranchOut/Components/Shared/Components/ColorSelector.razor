@@ -1,0 +1,16 @@
+﻿<input type="color" id="colorPicker" class="color-picker" value="@InColor" @onchange="@UpdateIt">
+<div style="width:100px;"><input class="form-control mt-1" for="colorPicker" value="@InColor" @onchange="@UpdateIt"></div>
+
+@code {
+    [Parameter]
+    public string InColor { get; set; }
+    [Parameter]
+    public EventCallback<string> ReturnedColor { get; set; }
+
+    private void UpdateIt(ChangeEventArgs e)
+    {
+        InColor = e.Value.ToString();
+        ReturnedColor.InvokeAsync(InColor);
+    }
+
+}
