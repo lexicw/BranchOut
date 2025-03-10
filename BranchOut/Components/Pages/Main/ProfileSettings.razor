@@ -49,14 +49,14 @@
     </div>
 
 
-    <h1 class="fs-4 mt-5">Text</h1>
+    <h2 class="fs-4 mt-5">Text</h2>
     <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
         <h2 class="fs-5">Color:</h2>
         <ColorSelector InColor="@TextColor" ReturnedColor="ColorChange"></ColorSelector>
 
 
 
-        <h2 class="fs-5 mt-5">Font:</h2>
+        <h3 class="fs-5 mt-5">Font:</h3>
         <InputRadioGroup @bind-Value="Font">
             <div class="radio-cards">
                 <RadioCard Type="Font" Value="Inter" FontSize="fs-1"></RadioCard>
@@ -70,6 +70,35 @@
                 <RadioCard Type="Font" Value="Fresca" FontSize="fs-3"></RadioCard>
             </div>
         </InputRadioGroup>
+    </div>
+
+    <h2 class="fs-4 mt-5">Buttons</h2>
+    <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
+        <h3 class="fs-5">Shape:</h3>
+        <InputRadioGroup @bind-Value="ButtonShape">
+            <div class="radio-cards">
+                <RadioCard Type="Shape" Value="Square"></RadioCard>
+                <RadioCard Type="Shape" Value="Rounded"></RadioCard>
+                <RadioCard Type="Shape" Value="Rounder"></RadioCard>
+                <RadioCard Type="Shape" Value="Pill"></RadioCard>
+            </div>
+        </InputRadioGroup>
+
+
+        <h3 class="fs-5 mt-5">Border:</h3>
+        <InputRadioGroup @bind-Value="ButtonBorder">
+            <div class="radio-cards">
+                <RadioCard Type="Border" Value="None"></RadioCard>
+                <RadioCard Type="Border" Value="Thin"></RadioCard>
+                <RadioCard Type="Border" Value="Thick"></RadioCard>
+            </div>
+        </InputRadioGroup>
+
+        <h3 class="fs-5 mt-5">Color:</h3>
+
+        <h3 class="fs-5 mt-5">Text Color:</h3>
+
+        <h3 class="fs-5 mt-5">Effects:</h3>
     </div>
 
 
@@ -123,6 +152,32 @@
             if (profile.TextColor != value)
             {
                 profile.TextColor = value;
+                Update();
+            }
+        }
+    }
+
+    private string ButtonShape
+    {
+        get => profile.ButtonShape;
+        set
+        {
+            if (profile.ButtonShape != value)
+            {
+                profile.ButtonShape = value;
+                Update();
+            }
+        }
+    }
+
+    private string ButtonBorder
+    {
+        get => profile.ButtonBorder;
+        set
+        {
+            if (profile.ButtonBorder != value)
+            {
+                profile.ButtonBorder = value;
                 Update();
             }
         }

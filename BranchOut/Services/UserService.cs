@@ -25,6 +25,12 @@ namespace BranchOut.Services
 
             return await _userManager.GetUserAsync(userPrincipal);
         }
+
+        public async Task<ApplicationUser?> GetUserByUsernameAsync(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username)) return null;
+            return await _userManager.FindByNameAsync(username);
+        }
     }
 
 }

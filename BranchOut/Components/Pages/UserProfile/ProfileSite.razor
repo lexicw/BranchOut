@@ -1,0 +1,35 @@
+﻿@page "/profile/{username}"
+@layout ProfileLayout
+
+
+@inject IProfileRepository _profileRepository
+@inject ILinkRepository _linkRepository
+@inject UserService _userService
+
+<CascadingValue Name="User" Value="@AppUser">
+    <CascadingValue Name="Profile" Value="@profile">
+        <CascadingValue Name="Links" Value="@UserLinks">
+            <ProfilePage />
+        </CascadingValue>
+    </CascadingValue>
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public string username { get; set; }
+
+    public ApplicationUser AppUser { get; set; } = new ApplicationUser();
+    public Profile profile { get; set; } = new Profile();
+    private List<Link> UserLinks { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        AppUser = await _userService.GetUserByUsernameAsync(username);
+
+        if (AppUser is not null)
+        {
+            profile = await _profileRepository.GetAsync(AppUser.Id);
+            UserLinks = await _linkRepository.GetAllAsync(AppUser.Id);
+        }
+    }
+}

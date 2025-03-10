@@ -1,7 +1,4 @@
-﻿@layout ProfileLayout
-@* @page "/profile/{username}" *@
-
-@inject UserManager<ApplicationUser> UserManager
+﻿@inject UserManager<ApplicationUser> UserManager
 @inject NavigationManager NavigationManager
 @inject IProfileRepository _profileRepository
 @inject ProfileState ProfileState
@@ -37,7 +34,7 @@
                         if (link.Visible == true)
                         {
                             <div class="d-grid gap-2">
-                                <a href="@link.URL" target="_blank" class="btn btn-primary mt-1" type="button">@link.Name</a>
+                                <a href="@link.URL" target="_blank" class="btn btn-primary btn-@profile.ButtonShape border-@profile.ButtonBorder mt-2" type="button">@link.Name</a>
                             </div>
                         }
 

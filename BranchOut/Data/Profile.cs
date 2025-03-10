@@ -11,6 +11,9 @@
         public ApplicationUser? ApplicationUser { get; set; }
         public string? Font { get; set; }
         public string? TextColor { get; set; }
-        public string? ButtonStyle { get; set; }
+        public string? ButtonShape { get; set; }
+        public string? ButtonBorder { get; set; }
+        public string? ButtonColor { get; set; }
+        public string? ButtonTextColor { get; set; }
     }
 }

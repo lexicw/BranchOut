@@ -1,12 +1,21 @@
-﻿<label class="radio-card text-center">
-    <InputRadio class="radio" Value=@(ValueLower) />
+﻿@{
+    var baseClasses = $"mx-auto {FontSize}";
+    var classes = Type switch
+    {
+        "Background" => $"border border-1 bg-square bg-{ValueLower} {baseClasses}",
+        "Color" => $"border border-1 bg-square bg-{ValueLower} {baseClasses}",
+        "Font" => $"font-container font-{ValueLower} {baseClasses}",
+        "Shape" => $"border-dark rectangle btn-{ValueLower} {baseClasses}",
+        "Border" => $"bg-square border-{ValueLower} {baseClasses}",
+        _ => baseClasses
+    };
+}
+
+<label class="radio-card text-center">
+    <InputRadio class="radio" Value="@ValueLower" />
     <span class="radio-card-body">
         <br />
-        <span class="@(Type == "Background" || Type == "Color"
-    ? $"border border-1 bg-square bg-{ValueLower}"
-    : Type == "Font"
-        ? $"font-container font-{ValueLower}"
-        : "") mx-auto @FontSize">
+        <span class="@classes">
             @if (Type == "Font")
             {
                 @Value
@@ -15,6 +24,7 @@
         <br />@Value
     </span>
 </label>
+
 
 @code {
     [Parameter]

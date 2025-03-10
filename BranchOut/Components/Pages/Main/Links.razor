@@ -3,7 +3,14 @@
 @inject ILinkRepository _linkRepository
 @inject LinksState LinksState
 
-<button class="btn btn-primary mt-3" @onclick='() => OpenModal("addLinkModal")'>Add Link</button>
+
+<div class="w-75 mx-auto mt-5">
+<div class="row align-items-end">
+    <div class="col-6">
+        <h1 class="fs-4 m-0">Your Links</h1>
+    </div>
+    <div class="col-6 text-end"><button class="btn btn-primary mt-3" @onclick='() => OpenModal("addLinkModal")'>Add Link</button></div>
+</div>
 
 <AddLinkModal ModalClose='(bool success) => CloseModal("addLinkModal", success)' />
 
@@ -70,6 +77,13 @@ else
 
     }
 }
+
+    <h2 class="fs-4 mt-5">Social Icons</h2>
+    <div class="shadow-sm rounded-3 bg-white w-100 p-5">
+
+    </div>
+
+</div>
 
 @code {
     private bool IsProcessing { get; set; } = true;
