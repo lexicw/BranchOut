@@ -12,7 +12,8 @@ namespace BranchOut.Data
         public Profile Profile { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The URL is required")]
+        [Url(ErrorMessage = "Please enter a valid URL")]
         public string? URL { get; set; }
         public int Sort { get; set; }
         public DateTime DateAdded { get; set; }

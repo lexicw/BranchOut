@@ -34,7 +34,7 @@ else
         else
         {
             <SortableList Items="UserLinks" Context="link"
-                          OnUpdate="HandleUpdate"
+                          OnUpdate="UpdateLinkSortIndexes"
                           Sort="true"
                           ForceFallback="true"
                           Group="linksGroup"
@@ -130,7 +130,7 @@ else
         }
     }
 
-    private async Task HandleUpdate((int oldIndex, int newIndex) indexes)
+    private async Task UpdateLinkSortIndexes((int oldIndex, int newIndex) indexes)
     {
         var (oldIndex, newIndex) = indexes;
         if (oldIndex == newIndex) return;

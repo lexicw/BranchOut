@@ -63,6 +63,7 @@
         await _linkRepository.CreateAsync(link, userId);
         UserLinks.Add(link);
         await LinksState.UpdateLinkOrderAsync(UserLinks, _linkRepository);
+        link = new Link();
         await ModalClose.InvokeAsync(true);
     }
 

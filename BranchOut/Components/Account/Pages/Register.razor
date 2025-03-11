@@ -91,7 +91,15 @@
 
         var profile = new Profile
             {
-                UserID = user.Id 
+                UserID = user.Id,
+                Theme = "none",
+                ButtonTextColor = "#FFFFFF",
+                Font = "inter",
+                TextColor = "#000000",
+                ButtonBorder = "none",
+                ButtonColor = "#00a6f4",
+                ButtonRoundness = "0"
+
             };
 
         await _profileRepository.CreateAsync(profile);
