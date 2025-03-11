@@ -52,7 +52,7 @@
     <h2 class="fs-4 mt-5">Text</h2>
     <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
         <h2 class="fs-5">Color:</h2>
-        <ColorSelector InColor="@TextColor" ReturnedColor="ColorChange"></ColorSelector>
+        <ColorSelector InColor="@TextColor" ReturnedColor="@(color => TextColor = color)"></ColorSelector>
 
 
 
@@ -74,15 +74,8 @@
 
     <h2 class="fs-4 mt-5">Buttons</h2>
     <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
-        <h3 class="fs-5">Shape:</h3>
-        <InputRadioGroup @bind-Value="ButtonShape">
-            <div class="radio-cards">
-                <RadioCard Type="Shape" Value="Square"></RadioCard>
-                <RadioCard Type="Shape" Value="Rounded"></RadioCard>
-                <RadioCard Type="Shape" Value="Rounder"></RadioCard>
-                <RadioCard Type="Shape" Value="Pill"></RadioCard>
-            </div>
-        </InputRadioGroup>
+        <h3 class="fs-5">Roundness:</h3>
+        <input type="range" @bind="ButtonRoundness" min="0" max="18" step="1" class="slider" />
 
 
         <h3 class="fs-5 mt-5">Border:</h3>
@@ -94,9 +87,11 @@
             </div>
         </InputRadioGroup>
 
-        <h3 class="fs-5 mt-5">Color:</h3>
+        <h3 class="fs-5 mt-5">Button Color:</h3>
+        <ColorSelector InColor="@ButtonColor" ReturnedColor="@(color => ButtonColor = color)"></ColorSelector>
 
         <h3 class="fs-5 mt-5">Text Color:</h3>
+        <ColorSelector InColor="@ButtonTextColor" ReturnedColor="@(color => ButtonTextColor = color)"></ColorSelector>
 
         <h3 class="fs-5 mt-5">Effects:</h3>
     </div>
@@ -157,14 +152,14 @@
         }
     }
 
-    private string ButtonShape
+    private string ButtonRoundness
     {
-        get => profile.ButtonShape;
+        get => profile.ButtonRoundness;
         set
         {
-            if (profile.ButtonShape != value)
+            if (profile.ButtonRoundness != value)
             {
-                profile.ButtonShape = value;
+                profile.ButtonRoundness = value;
                 Update();
             }
         }
@@ -178,6 +173,32 @@
             if (profile.ButtonBorder != value)
             {
                 profile.ButtonBorder = value;
+                Update();
+            }
+        }
+    }
+
+    private string ButtonColor
+    {
+        get => profile.ButtonColor;
+        set
+        {
+            if (profile.ButtonColor != value)
+            {
+                profile.ButtonColor = value;
+                Update();
+            }
+        }
+    }
+
+    private string ButtonTextColor
+    {
+        get => profile.ButtonTextColor;
+        set
+        {
+            if (profile.ButtonTextColor != value)
+            {
+                profile.ButtonTextColor = value;
                 Update();
             }
         }

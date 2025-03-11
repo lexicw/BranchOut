@@ -8,6 +8,26 @@
     .text-color {
         color: @(profile?.TextColor);
     }
+
+    .btn-roundness {
+        border-radius: @(profile?.ButtonRoundness + "px");
+    }
+
+    .btn-color {
+        background-color: @(profile?.ButtonColor);
+        color: @(profile?.ButtonTextColor);
+    }
+
+        .btn-color:hover {
+            background-color: @(ButtonColorLight);
+            color: @(profile?.ButtonTextColor);
+        }
+
+        .btn-color:focus {
+            background-color: @(ButtonColorLight);
+            box-shadow: 0 0 0 .25rem @(ButtonColorLight);
+            color: @(profile?.ButtonTextColor);
+        }
 </style>
 
 @if (UserExists)
@@ -34,7 +54,7 @@
                         if (link.Visible == true)
                         {
                             <div class="d-grid gap-2">
-                                <a href="@link.URL" target="_blank" class="btn btn-primary btn-@profile.ButtonShape border-@profile.ButtonBorder mt-2" type="button">@link.Name</a>
+                                <a href="@link.URL" target="_blank" class="btn btn-primary btn-roundness border-@profile.ButtonBorder mt-2 btn-color" type="button">@link.Name</a>
                             </div>
                         }
 
@@ -63,6 +83,7 @@ else
     [CascadingParameter(Name = "Links")]
     public List<Link> UserLinks { get; set; }
 
+    public string ButtonColorLight;
 
     private bool UserExists { get; set; } = true;
 
@@ -70,6 +91,24 @@ else
     {
         ProfileState.OnChange += StateHasChanged;
         LinksState.OnChange += StateHasChanged;
+
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine("Re-render happened");
+
+        if (profile != null && !string.IsNullOrEmpty(profile.ButtonColor))
+        {
+            
+            var newButtonColorLight = ColorUtils.LightenColor(profile.ButtonColor, 0.1);
+
+            if (ButtonColorLight != newButtonColorLight)
+            {
+                ButtonColorLight = newButtonColorLight;
+                StateHasChanged();
+            }
+        }
     }
 
     public void Dispose()
