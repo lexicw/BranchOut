@@ -4,7 +4,7 @@ namespace BranchOut.Data
 {
     public class ColorUtils
     {
-        public static string LightenColor(string hexColor, double factor = 0.2)
+        public static (int r, int g, int b) HexToRgb(string hexColor)
         {
             if (hexColor.StartsWith("#"))
                 hexColor = hexColor.Substring(1);
@@ -12,21 +12,38 @@ namespace BranchOut.Data
             if (hexColor.Length != 6)
                 throw new ArgumentException("Invalid hex color format.");
 
-            // Convert hex to RGB
             int r = int.Parse(hexColor.Substring(0, 2), NumberStyles.HexNumber);
             int g = int.Parse(hexColor.Substring(2, 2), NumberStyles.HexNumber);
             int b = int.Parse(hexColor.Substring(4, 2), NumberStyles.HexNumber);
 
-            // Convert to HSL
-            double h, s, l;
-            RgbToHsl(r, g, b, out h, out s, out l);
+            return (r, g, b);
+        }
 
-            l = Math.Min(1, l + factor); 
+        public static string HexToRgbString(string hexColor)
+        {
+            if (hexColor.StartsWith("#"))
+                hexColor = hexColor.Substring(1);
 
-            // Convert back to RGB
+            if (hexColor.Length != 6)
+                throw new ArgumentException("Invalid hex color format.");
+
+            int r = int.Parse(hexColor.Substring(0, 2), NumberStyles.HexNumber);
+            int g = int.Parse(hexColor.Substring(2, 2), NumberStyles.HexNumber);
+            int b = int.Parse(hexColor.Substring(4, 2), NumberStyles.HexNumber);
+
+            return $"{r},{g},{b}";
+        }
+
+        public static string LightenColor(string hexColor, double factor = 0.2)
+        {
+            var (r, g, b) = HexToRgb(hexColor);
+
+            RgbToHsl(r, g, b, out double h, out double s, out double l);
+
+            l = Math.Min(1, l + factor);
+
             HslToRgb(h, s, l, out r, out g, out b);
 
-            // Convert back to hex
             return $"#{r:X2}{g:X2}{b:X2}";
         }
 

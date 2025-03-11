@@ -23,9 +23,9 @@
             color: @(profile?.ButtonTextColor);
         }
 
-        .btn-color:focus {
+        .btn-color:focus, .btn-color:active {
             background-color: @(ButtonColorLight);
-            box-shadow: 0 0 0 .25rem @(ButtonColorLight);
+            box-shadow: 0 0 0 .25rem rgba(@(ButtonColorLightRGB),.40) !important;
             color: @(profile?.ButtonTextColor);
         }
 </style>
@@ -85,6 +85,8 @@ else
 
     public string ButtonColorLight;
 
+    public string ButtonColorLightRGB { get; set; }
+
     private bool UserExists { get; set; } = true;
 
     protected override void OnInitialized()
@@ -96,8 +98,6 @@ else
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        Console.WriteLine("Re-render happened");
-
         if (profile != null && !string.IsNullOrEmpty(profile.ButtonColor))
         {
             
@@ -106,6 +106,7 @@ else
             if (ButtonColorLight != newButtonColorLight)
             {
                 ButtonColorLight = newButtonColorLight;
+                ButtonColorLightRGB = ColorUtils.HexToRgbString(ButtonColorLight);
                 StateHasChanged();
             }
         }

@@ -87,16 +87,25 @@
             </div>
         </InputRadioGroup>
 
-        <h3 class="fs-5 mt-5">Button Color:</h3>
-        <ColorSelector InColor="@ButtonColor" ReturnedColor="@(color => ButtonColor = color)"></ColorSelector>
+        <div class="row">
+            <div class="col-6 text-center align-content-center">
+                <div>
+                    <h3 class="fs-5 mt-5">Button Color:</h3>
+                    <ColorSelector InColor="@ButtonColor" ReturnedColor="@(color => ButtonColor = color)"></ColorSelector>
+                </div>
+            </div>
+            <div class="col-6 text-center align-content-center">
+                <div>
+                    <h3 class="fs-5 mt-5">Button Text Color:</h3>
+                    <ColorSelector InColor="@ButtonTextColor" ReturnedColor="@(color => ButtonTextColor = color)"></ColorSelector>
+                </div>
+            </div>
 
-        <h3 class="fs-5 mt-5">Text Color:</h3>
-        <ColorSelector InColor="@ButtonTextColor" ReturnedColor="@(color => ButtonTextColor = color)"></ColorSelector>
+            <h3 class="fs-5 mt-5">Effects:</h3>
+        </div>
 
-        <h3 class="fs-5 mt-5">Effects:</h3>
+
     </div>
-
-
 </div>
 <br />
 <br />
