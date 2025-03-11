@@ -8,22 +8,34 @@
 <CascadingValue Name="User" Value="@User">
     <CascadingValue Name="Profile" Value="@profile">
         <CascadingValue Name="Links" Value="@UserLinks">
-            <div class="px-4">
-                <div class="row">
-                    <div class="col-8">
-                        @Body
-                    </div>
-                    <div class="col-12 col-md-4">
-
-                        <CellPhone />
-                    </div>
+            @if (IsProcessing)
+            {
+                <div class="mt-5 mx-auto w-100 bg-white">
+                    <div class="spinner mx-auto"></div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <div class="px-4">
+                    <div class="row">
+                        <div class="col-8">
+                            @Body
+                        </div>
+                        <div class="col-12 col-md-4">
+
+                            <CellPhone />
+                        </div>
+                    </div>
+
+                </div>
+            }
         </CascadingValue>
     </CascadingValue>
 </CascadingValue>
 
 @code {
+    private bool IsProcessing { get; set; } = true;
+
     public ApplicationUser User = new ApplicationUser();
     public Profile profile = new Profile();
     private List<Link> UserLinks { get; set; } = new();
@@ -33,5 +45,6 @@
         User = await _userService.GetCurrentUserAsync();
         profile = await _profileRepository.GetAsync(User.Id);
         UserLinks = await _linkRepository.GetAllAsync(User.Id);
+        IsProcessing = false;
     }
 }
