@@ -5,7 +5,9 @@
 <div class="bg-white pt-3">
     @if (HttpContext is null)
     {
-        <p class="mx-4">Loading...</p>
+        <div class="mt-5 mx-auto">
+            <div class="spinner mx-auto"></div>
+        </div>
     }
     else
     {

@@ -8,7 +8,11 @@
                 <h5 class="my-2">Are you sure you want to delete this link?</h5>
             </div>
             <div class="modal-footer flex-nowrap p-0">
-                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end link-danger" @onclick="DeleteLink">Delete</button>
+                <button type="button" class="btn btn-lg btn-link text-decoration-none col-6 py-3 m-0 rounded-0 border-end link-danger" @onclick="DeleteLink">
+                    <i class="bi bi-trash-fill fs-6"></i>
+                    &nbsp;
+                    <span class="fs-6">Delete</span>
+                </button>
                 <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 link-dark" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
