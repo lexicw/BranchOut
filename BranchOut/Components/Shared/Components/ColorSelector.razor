@@ -1,16 +1,55 @@
-﻿<input type="color" id="colorPicker" class="color-picker" value="@InColor" @onchange="@UpdateIt">
-<div class="w-100"><input class="form-control mt-1" for="colorPicker" value="@InColor" @onchange="@UpdateIt"></div>
+﻿<div class="row g-1 w-100">
+    <div class="col-auto">
+        <input class="form-control"
+               style="width:135px;"
+               value="@(IsTransparent ? "transparent" : InColor)"
+               @onchange="UpdateColor" />
+    </div>
+    <div class="col-auto">
+        <input type="color"
+               class="form-control form-control-color"
+               value="@InColor"
+               @onchange="UpdateColor" />
+    </div>
+
+    @if (Type == "ButtonColor")
+    {
+        <div class="col-12 form-check text-start">
+            <input class="form-check-input" type="checkbox" id="cbTransparent" @bind="IsTransparent" @bind:after="ChangeValueToTransparent" />
+            <label class="form-check-label" for="cbTransparent">
+                Transparent
+            </label>
+        </div>
+    }
+</div>
 
 @code {
     [Parameter]
     public string InColor { get; set; }
+
+    [Parameter]
+    public string Type { get; set; }
+
     [Parameter]
     public EventCallback<string> ReturnedColor { get; set; }
 
-    private void UpdateIt(ChangeEventArgs e)
+    private bool IsTransparent { get; set; }
+
+    private void UpdateColor(ChangeEventArgs e)
     {
-        InColor = e.Value.ToString();
+        InColor = e.Value?.ToString() ?? string.Empty;
         ReturnedColor.InvokeAsync(InColor);
     }
 
+    private void ChangeValueToTransparent()
+    {
+        if (IsTransparent)
+        {
+            UpdateColor(new ChangeEventArgs { Value = "transparent" });
+        }
+        else
+        {
+            UpdateColor(new ChangeEventArgs { Value = "#FFFFFF" });
+        }
+    }
 }

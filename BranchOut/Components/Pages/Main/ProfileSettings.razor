@@ -5,111 +5,117 @@
 @inject IJSRuntime _JS
 @inject ProfileState ProfileState
 
-
-<div class="mt-5 w-75 mx-auto">
-    <h1 class="fs-4">Profile</h1>
-    <div class="shadow-sm rounded-3 bg-white w-100 p-5">
-        <h2 class="fs-6">Image:</h2>
-        <div class="position-relative mx-auto" style="width:150px;height:150px;">
-            <div class="position-absolute" style="right:0;bottom:0;">
-                <button class="btn btn-primary">
-                    <i class="bi bi-image"></i>
-                </button>
+<div class="row">
+    <div class="mt-5 col-12 col-lg-9 mx-auto">
+        <h1 class="fs-4">Profile</h1>
+        <div class="shadow-sm rounded-3 bg-white w-100 p-5">
+            <h2 class="fs-6">Image:</h2>
+            <div class="position-relative mx-auto" style="width:150px;height:150px;">
+                <div class="position-absolute" style="right:0;bottom:0;">
+                    <button class="btn btn-primary">
+                        <i class="bi bi-image"></i>
+                    </button>
+                </div>
+                <svg class="bd-placeholder-img" width="150px" height="150px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="lightgray" />
+                    <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="50" fill="black">
+                        @User.UserName?.Substring(0, 1).ToUpper()
+                    </text>
+                </svg>
             </div>
-            <svg class="bd-placeholder-img" width="150px" height="150px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="lightgray" />
-                <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="50" fill="black">
-                    @User.UserName?.Substring(0, 1).ToUpper()
-                </text>
-            </svg>
-        </div>
-        <div class="mt-5">
-            <div class="fs-6">Message:</div>
-            <div class="mx-auto">
-                <textarea class="form-control" id="txtMessage" style="height: 100px"
-                          @onchange="UpdateProfile">@profile.Message</textarea>
+            <div class="mt-5">
+                <div class="fs-6">Message:</div>
+                <div class="mx-auto">
+                    <textarea class="form-control" id="txtMessage" style="height: 100px"
+                              @onchange="UpdateProfile">@profile.Message</textarea>
 
-            </div>
-        </div>
-    </div>
-
-
-    <h1 class="fs-4 mt-5">Background</h1>
-    <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
-        <InputRadioGroup @bind-Value="Theme">
-            <div class="radio-cards">
-                <RadioCard Type="Background" Value="None"></RadioCard>
-                <RadioCard Type="Background" Value="Cherry Blossom"></RadioCard>
-                <RadioCard Type="Background" Value="Tropical"></RadioCard>
-                <RadioCard Type="Background" Value="Northern Lights"></RadioCard>
-                <RadioCard Type="Background" Value="Vibrant"></RadioCard>
-                <RadioCard Type="Background" Value="Lime"></RadioCard>
-            </div>
-        </InputRadioGroup>
-    </div>
-
-
-    <h2 class="fs-4 mt-5">Text</h2>
-    <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
-        <h2 class="fs-5">Color:</h2>
-        <ColorSelector InColor="@TextColor" ReturnedColor="@(color => TextColor = color)"></ColorSelector>
-
-
-
-        <h3 class="fs-5 mt-5">Font:</h3>
-        <InputRadioGroup @bind-Value="Font">
-            <div class="radio-cards">
-                <RadioCard Type="Font" Value="Inter" FontSize="fs-1"></RadioCard>
-                <RadioCard Type="Font" Value="Sofia" FontSize="fs-1"></RadioCard>
-                <RadioCard Type="Font" Value="Merriweather" FontSize="fs-5"></RadioCard>
-                <RadioCard Type="Font" Value="Miniver" FontSize="fs-3"></RadioCard>
-                <RadioCard Type="Font" Value="Oswald" FontSize="fs-1"></RadioCard>
-                <RadioCard Type="Font" Value="Raleway" FontSize="fs-3"></RadioCard>
-                <RadioCard Type="Font" Value="Yomogi" FontSize="fs-3"></RadioCard>
-                <RadioCard Type="Font" Value="Silkscreen" FontSize="fs-5"></RadioCard>
-                <RadioCard Type="Font" Value="Fresca" FontSize="fs-3"></RadioCard>
-            </div>
-        </InputRadioGroup>
-    </div>
-
-    <h2 class="fs-4 mt-5">Buttons</h2>
-    <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
-        <h3 class="fs-5">Roundness:</h3>
-        <input type="range" @bind="ButtonRoundness" min="0" max="20" step="1" class="slider" />
-
-
-        <h3 class="fs-5 mt-5">Border:</h3>
-        <InputRadioGroup @bind-Value="ButtonBorder">
-            <div class="radio-cards">
-                <RadioCard Type="Border" Value="None"></RadioCard>
-                <RadioCard Type="Border" Value="Thin"></RadioCard>
-                <RadioCard Type="Border" Value="Thick"></RadioCard>
-            </div>
-        </InputRadioGroup>
-
-        <div class="row">
-            <div class="col-6 text-center align-content-center">
-                <div>
-                    <h3 class="fs-5 mt-5">Button Color:</h3>
-                    <ColorSelector InColor="@ButtonColor" ReturnedColor="@(color => ButtonColor = color)"></ColorSelector>
                 </div>
             </div>
-            <div class="col-6 text-center align-content-center">
-                <div>
-                    <h3 class="fs-5 mt-5">Button Text Color:</h3>
-                    <ColorSelector InColor="@ButtonTextColor" ReturnedColor="@(color => ButtonTextColor = color)"></ColorSelector>
-                </div>
-            </div>
-
-            <h3 class="fs-5 mt-5">Effects:</h3>
         </div>
 
 
+        <h1 class="fs-4 mt-5">Background</h1>
+        <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
+            <InputRadioGroup @bind-Value="Theme">
+                <div class="radio-cards">
+                    <RadioCard Type="Background" Value="None"></RadioCard>
+                    <RadioCard Type="Background" Value="Cherry Blossom"></RadioCard>
+                    <RadioCard Type="Background" Value="Tropical"></RadioCard>
+                    <RadioCard Type="Background" Value="Northern Lights"></RadioCard>
+                    <RadioCard Type="Background" Value="Vibrant"></RadioCard>
+                    <RadioCard Type="Background" Value="Lime"></RadioCard>
+                </div>
+            </InputRadioGroup>
+        </div>
+
+
+        <h2 class="fs-4 mt-5">Text</h2>
+        <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
+            <h2 class="fs-5">Color:</h2>
+            <ColorSelector InColor="@TextColor" ReturnedColor="@(color => TextColor = color)"></ColorSelector>
+
+
+
+            <h3 class="fs-5 mt-5">Font:</h3>
+            <InputRadioGroup @bind-Value="Font">
+                <div class="radio-cards">
+                    <RadioCard Type="Font" Value="Inter" FontSize="fs-1"></RadioCard>
+                    <RadioCard Type="Font" Value="Sofia" FontSize="fs-1"></RadioCard>
+                    <RadioCard Type="Font" Value="Merriweather" FontSize="fs-5"></RadioCard>
+                    <RadioCard Type="Font" Value="Miniver" FontSize="fs-3"></RadioCard>
+                    <RadioCard Type="Font" Value="Oswald" FontSize="fs-1"></RadioCard>
+                    <RadioCard Type="Font" Value="Raleway" FontSize="fs-3"></RadioCard>
+                    <RadioCard Type="Font" Value="Yomogi" FontSize="fs-3"></RadioCard>
+                    <RadioCard Type="Font" Value="Silkscreen" FontSize="fs-5"></RadioCard>
+                    <RadioCard Type="Font" Value="Fresca" FontSize="fs-3"></RadioCard>
+                </div>
+            </InputRadioGroup>
+        </div>
+
+        <h2 class="fs-4 mt-5">Buttons</h2>
+        <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
+            <h3 class="fs-5">Roundness:</h3>
+            <input type="range" @bind="ButtonRoundness" min="0" max="20" step="1" class="slider" />
+
+
+            <h3 class="fs-5 mt-5">Border:</h3>
+            <InputRadioGroup @bind-Value="ButtonBorder">
+                <div class="radio-cards">
+                    <RadioCard Type="Border" Value="0"></RadioCard>
+                    <RadioCard Type="Border" Value="1"></RadioCard>
+                    <RadioCard Type="Border" Value="2"></RadioCard>
+                </div>
+            </InputRadioGroup>
+
+            <div class="row">
+                <div class="col-12 col-lg-4 text-center align-content-center">
+                    <div>
+                        <h3 class="fs-5 mt-5">Button Color:</h3>
+                        <ColorSelector InColor="@ButtonColor" ReturnedColor="@(color => ButtonColor = color)" Type="ButtonColor"></ColorSelector>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 text-center align-content-center">
+                    <div>
+                        <h3 class="fs-5 mt-5">Button Text Color:</h3>
+                        <ColorSelector InColor="@ButtonTextColor" ReturnedColor="@(color => ButtonTextColor = color)"></ColorSelector>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 text-center align-content-center">
+                    <div>
+                        <h3 class="fs-5 mt-5">Button Border Color:</h3>
+                        <ColorSelector InColor="@ButtonBorderColor" ReturnedColor="@(color => ButtonBorderColor = color)"></ColorSelector>
+                    </div>
+                </div>
+
+                <h3 class="fs-5 mt-5">Effects:</h3>
+            </div>
+
+
+        </div>
     </div>
 </div>
-<br />
-<br />
-<br />
+
 <br />
 <br />
 
@@ -208,6 +214,19 @@
             if (profile.ButtonTextColor != value)
             {
                 profile.ButtonTextColor = value;
+                Update();
+            }
+        }
+    }
+
+    private string ButtonBorderColor
+    {
+        get => profile.ButtonBorderColor;
+        set
+        {
+            if (profile.ButtonBorderColor != value)
+            {
+                profile.ButtonBorderColor = value;
                 Update();
             }
         }

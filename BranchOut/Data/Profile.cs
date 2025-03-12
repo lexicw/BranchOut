@@ -15,5 +15,7 @@
         public string? ButtonBorder { get; set; }
         public string? ButtonColor { get; set; }
         public string? ButtonTextColor { get; set; }
+        public string? ButtonBorderColor { get; set; }
+        public string? ButtonEffect { get; set; }
     }
 }
