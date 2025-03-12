@@ -1,4 +1,4 @@
-﻿using BranchOut.Data;
+﻿using BranchOut.Data.Models;
 using BranchOut.Repository.Interfaces;
 
 namespace BranchOut.Services

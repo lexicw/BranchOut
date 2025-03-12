@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BranchOut.Data
+namespace BranchOut.Data.Models
 {
     public class Link
     {

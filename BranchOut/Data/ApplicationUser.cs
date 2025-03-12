@@ -1,3 +1,4 @@
+using BranchOut.Data.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace BranchOut.Data

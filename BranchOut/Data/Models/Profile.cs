@@ -1,4 +1,4 @@
-﻿namespace BranchOut.Data
+﻿namespace BranchOut.Data.Models
 {
     public class Profile
     {
