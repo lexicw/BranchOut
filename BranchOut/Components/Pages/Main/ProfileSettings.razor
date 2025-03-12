@@ -51,8 +51,6 @@
     [CascadingParameter(Name = "Profile")]
     public Profile profile { get; set; }
 
- 
-
     private bool UserExists { get; set; } = true;
 
     protected override async Task OnInitializedAsync()
@@ -80,10 +78,4 @@
         await _profileRepository.UpdateAsync(profile);
         await ProfileState.UpdateProfileAsync(profile, _profileRepository);
     }
-
-    // private void ColorChange(string e)
-    // {
-    //     TextColor = e;
-    //     StateHasChanged();
-    // }
 }
