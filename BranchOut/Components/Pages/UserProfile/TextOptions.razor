@@ -1,0 +1,54 @@
+﻿<h2 class="fs-4 mt-5">Text</h2>
+<div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
+    <h2 class="fs-5">Color:</h2>
+    <ColorSelector InColor="@TextColor" ReturnedColor="@(color => TextColor = color)"></ColorSelector>
+
+    <h3 class="fs-5 mt-5">Font:</h3>
+    <InputRadioGroup @bind-Value="Font">
+        <div class="radio-cards">
+            <RadioCard Type="Font" Value="Inter" FontSize="fs-1"></RadioCard>
+            <RadioCard Type="Font" Value="Sofia" FontSize="fs-1"></RadioCard>
+            <RadioCard Type="Font" Value="Merriweather" FontSize="fs-5"></RadioCard>
+            <RadioCard Type="Font" Value="Miniver" FontSize="fs-3"></RadioCard>
+            <RadioCard Type="Font" Value="Oswald" FontSize="fs-1"></RadioCard>
+            <RadioCard Type="Font" Value="Raleway" FontSize="fs-3"></RadioCard>
+            <RadioCard Type="Font" Value="Yomogi" FontSize="fs-3"></RadioCard>
+            <RadioCard Type="Font" Value="Silkscreen" FontSize="fs-5"></RadioCard>
+            <RadioCard Type="Font" Value="Fresca" FontSize="fs-3"></RadioCard>
+        </div>
+    </InputRadioGroup>
+</div>
+
+@code {
+    [CascadingParameter(Name = "Profile")]
+    public Profile profile { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChange { get; set; }
+
+    private string Font
+    {
+        get => profile.Font;
+        set
+        {
+            if (profile.Font != value)
+            {
+                profile.Font = value;
+                ValueChange.InvokeAsync(true);
+            }
+        }
+    }
+
+    private string TextColor
+    {
+        get => profile.TextColor;
+        set
+        {
+            if (profile.TextColor != value)
+            {
+                profile.TextColor = value;
+                ValueChange.InvokeAsync(true);
+            }
+        }
+    }
+}

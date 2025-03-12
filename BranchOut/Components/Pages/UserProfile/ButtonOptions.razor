@@ -1,0 +1,132 @@
+﻿<h2 class="fs-4 mt-5">Buttons</h2>
+<div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
+    <h3 class="fs-5">Roundness:</h3>
+    <input type="range" @bind="ButtonRoundness" min="0" max="20" step="1" class="slider" />
+
+
+    <h3 class="fs-5 mt-5">Border:</h3>
+    <InputRadioGroup @bind-Value="ButtonBorder">
+        <div class="radio-cards">
+            <RadioCard Type="Border" Value="0"></RadioCard>
+            <RadioCard Type="Border" Value="1"></RadioCard>
+            <RadioCard Type="Border" Value="2"></RadioCard>
+        </div>
+    </InputRadioGroup>
+
+    <div class="row">
+        <div class="col-12 col-lg-4 text-center align-content-center">
+            <div>
+                <h3 class="fs-5 mt-5">Button Color:</h3>
+                <ColorSelector InColor="@ButtonColor" ReturnedColor="@(color => ButtonColor = color)" Type="ButtonColor"></ColorSelector>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 text-center align-content-center">
+            <div>
+                <h3 class="fs-5 mt-5">Button Text Color:</h3>
+                <ColorSelector InColor="@ButtonTextColor" ReturnedColor="@(color => ButtonTextColor = color)"></ColorSelector>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-4 text-center align-content-center">
+            <div>
+                <h3 class="fs-5 mt-5">Button Border Color:</h3>
+                <ColorSelector InColor="@ButtonBorderColor" ReturnedColor="@(color => ButtonBorderColor = color)"></ColorSelector>
+            </div>
+        </div>
+
+        <h3 class="fs-5 mt-5">Effects:</h3>
+        <InputRadioGroup @bind-Value="ButtonEffect">
+            <div class="radio-cards">
+                <RadioCard Type="Effect" Value="None"></RadioCard>
+                <RadioCard Type="Effect" Value="3D"></RadioCard>
+                <RadioCard Type="Effect" Value="Shadow"></RadioCard>
+            </div>
+        </InputRadioGroup>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter(Name = "Profile")]
+    public Profile profile { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChange { get; set; }
+
+    private string ButtonRoundness
+    {
+        get => profile.ButtonRoundness;
+        set
+        {
+            if (profile.ButtonRoundness != value)
+            {
+                profile.ButtonRoundness = value;
+                ValueChange.InvokeAsync(true);
+            }
+        }
+    }
+
+    private string ButtonBorder
+    {
+        get => profile.ButtonBorder;
+        set
+        {
+            if (profile.ButtonBorder != value)
+            {
+                profile.ButtonBorder = value;
+                ValueChange.InvokeAsync(true);
+            }
+        }
+    }
+
+    private string ButtonColor
+    {
+        get => profile.ButtonColor;
+        set
+        {
+            if (profile.ButtonColor != value)
+            {
+                profile.ButtonColor = value;
+                ValueChange.InvokeAsync(true);
+            }
+        }
+    }
+
+    private string ButtonTextColor
+    {
+        get => profile.ButtonTextColor;
+        set
+        {
+            if (profile.ButtonTextColor != value)
+            {
+                profile.ButtonTextColor = value;
+                ValueChange.InvokeAsync(true);
+            }
+        }
+    }
+
+    private string ButtonBorderColor
+    {
+        get => profile.ButtonBorderColor;
+        set
+        {
+            if (profile.ButtonBorderColor != value)
+            {
+                profile.ButtonBorderColor = value;
+                ValueChange.InvokeAsync(true);
+            }
+        }
+    }
+
+    private string ButtonEffect
+    {
+        get => profile.ButtonEffect;
+        set
+        {
+            if (profile.ButtonEffect != value)
+            {
+                profile.ButtonEffect = value;
+                ValueChange.InvokeAsync(true);
+            }
+        }
+    }
+}
