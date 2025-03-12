@@ -2,10 +2,11 @@
     var baseClasses = $"mx-auto {FontSize}";
     var classes = Type switch
     {
-        "Background" => $"border border-1 bg-square bg-{ValueLower} {baseClasses}",
+        "Gradient" => $"border border-1 bg-square gradient-{ValueLower} {baseClasses}",
         "Color" => $"border border-1 bg-square bg-{ValueLower} {baseClasses}",
         "Font" => $"font-container font-{ValueLower} {baseClasses}",
         "Border" => $"bg-square border-{ValueLower} {baseClasses}",
+        "Effect" => $"bg-square btn-effect-{ValueLower} {baseClasses}",
         _ => baseClasses
     };
 }

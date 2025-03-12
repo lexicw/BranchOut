@@ -5,6 +5,9 @@
 @inject LinksState LinksState
 
 <style>
+    .bg-color {
+        background-color: @(profile?.BackgroundColor);
+    }
     .text-color {
         color: @(profile?.TextColor);
     }
@@ -40,11 +43,11 @@
         <link rel="stylesheet"
               href="@($"https://fonts.googleapis.com/css?family=Sofia|Inter|Merriweather|Miniver|Oswald|Raleway|Yomogi|Silkscreen|Fresca")" />
     </HeadContent>
-    <div class="text-center pt-5 bg-@profile.Theme font-@profile.Font h-100 text-color">
+    <div class="text-center pt-5 bg-color gradient-@profile.Gradient font-@profile.Font h-100 text-color">
         <div class="px-4">
-            <svg class="bd-placeholder-img" width="100px" height="100px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="lightgray" />
-                <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="40" fill="black">
+            <svg class="bd-placeholder-img font-inter" width="100px" height="100px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <rect width="100%" height="100%" fill="#333333" />
+                <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="40" fill="#FFFFFF">
                     @User.UserName?.Substring(0, 1).ToUpper()
                 </text>
             </svg>
@@ -58,7 +61,7 @@
                         if (link.Visible == true)
                         {
                             <div class="d-grid gap-2">
-                                <a href="@link.URL" target="_blank" class="btn btn-primary btn-roundness border-settings mt-2 btn-color" type="button">@link.Name</a>
+                                <a href="@link.URL" target="_blank" class="btn btn-primary btn-roundness border-settings mt-2 btn-color btn-effect-@profile.ButtonEffect" type="button">@link.Name</a>
                             </div>
                         }
 
@@ -102,10 +105,10 @@ else
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        SetButtonEffectColors();
+        SetButtonColors();
     }
 
-    private void SetButtonEffectColors()
+    private void SetButtonColors()
     {
         if (profile is null || string.IsNullOrEmpty(profile.ButtonColor))
             return;

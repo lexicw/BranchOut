@@ -17,8 +17,8 @@
                     </button>
                 </div>
                 <svg class="bd-placeholder-img" width="150px" height="150px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="lightgray" />
-                    <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="50" fill="black">
+                    <rect width="100%" height="100%" fill="#333333" />
+                    <text x="50%" y="50%" dy=".4em" text-anchor="middle" font-size="50" fill="#FFFFFF">
                         @User.UserName?.Substring(0, 1).ToUpper()
                     </text>
                 </svg>
@@ -36,14 +36,18 @@
 
         <h1 class="fs-4 mt-5">Background</h1>
         <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
-            <InputRadioGroup @bind-Value="Theme">
+            <h2 class="fs-5">Color:</h2>
+            <ColorSelector InColor="@BackgroundColor" ReturnedColor="@(color => BackgroundColor = color)"></ColorSelector>
+
+            <h2 class="fs-5 mt-5">Gradient:</h2>
+            <InputRadioGroup @bind-Value="Gradient">
                 <div class="radio-cards">
-                    <RadioCard Type="Background" Value="None"></RadioCard>
-                    <RadioCard Type="Background" Value="Cherry Blossom"></RadioCard>
-                    <RadioCard Type="Background" Value="Tropical"></RadioCard>
-                    <RadioCard Type="Background" Value="Northern Lights"></RadioCard>
-                    <RadioCard Type="Background" Value="Vibrant"></RadioCard>
-                    <RadioCard Type="Background" Value="Lime"></RadioCard>
+                    <RadioCard Type="Gradient" Value="None"></RadioCard>
+                    <RadioCard Type="Gradient" Value="Cherry Blossom"></RadioCard>
+                    <RadioCard Type="Gradient" Value="Tropical"></RadioCard>
+                    <RadioCard Type="Gradient" Value="Northern Lights"></RadioCard>
+                    <RadioCard Type="Gradient" Value="Vibrant"></RadioCard>
+                    <RadioCard Type="Gradient" Value="Lime"></RadioCard>
                 </div>
             </InputRadioGroup>
         </div>
@@ -109,6 +113,13 @@
                 </div>
 
                 <h3 class="fs-5 mt-5">Effects:</h3>
+                <InputRadioGroup @bind-Value="ButtonEffect">
+                    <div class="radio-cards">
+                        <RadioCard Type="Effect" Value="None"></RadioCard>
+                        <RadioCard Type="Effect" Value="3D"></RadioCard>
+                        <RadioCard Type="Effect" Value="Shadow"></RadioCard>
+                    </div>
+                </InputRadioGroup>
             </div>
 
 
@@ -128,14 +139,27 @@
     public Profile profile { get; set; }
 
 
-    private string Theme
+    private string BackgroundColor
     {
-        get => profile.Theme;
+        get => profile.BackgroundColor;
         set
         {
-            if (profile.Theme != value)
+            if (profile.BackgroundColor != value)
             {
-                profile.Theme = value;
+                profile.BackgroundColor = value;
+                Update();
+            }
+        }
+    }
+
+    private string Gradient
+    {
+        get => profile.Gradient;
+        set
+        {
+            if (profile.Gradient != value)
+            {
+                profile.Gradient = value;
                 Update();
             }
         }
@@ -227,6 +251,19 @@
             if (profile.ButtonBorderColor != value)
             {
                 profile.ButtonBorderColor = value;
+                Update();
+            }
+        }
+    }
+
+    private string ButtonEffect
+    {
+        get => profile.ButtonEffect;
+        set
+        {
+            if (profile.ButtonEffect != value)
+            {
+                profile.ButtonEffect = value;
                 Update();
             }
         }

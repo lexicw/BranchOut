@@ -169,11 +169,8 @@ body {
     border: 2px solid #00a6f4;
 }
 
-.bg-none {
-    background: none;
-}
 
-.bg-cherry-blossom {
+.gradient-cherry-blossom {
     background: #FFB7C5;
     background: linear-gradient(to bottom, #FFB7C5 0%, #F0A8B6 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFB7C5), color-stop(100%, #F0A8B6));
@@ -185,30 +182,30 @@ body {
     -moz-box-shadow: inset 0 1px 0 #FFC6D4;
 }
 
-.bg-tropical {
+.gradient-tropical {
     background-image: linear-gradient( 109.6deg, rgba(254,253,205,1) 11.2%, rgba(163,230,255,1) 91.1% );
 }
 
-.bg-northern-lights {
+.gradient-northern-lights {
     background-image: linear-gradient(to right, #00dbde 0%, #fc00ff 100%);
 }
 
-.bg-pastel {
+.gradient-pastel {
     background-color: #FFDEE9;
     background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
 }
 
-.bg-vibrant {
+.gradient-vibrant {
     background-color: #4158D0;
     background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 }
 
-.bg-lime {
+.gradient-lime {
     background-color: #85FFBD;
     background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
 }
 
-.bg-ocean {
+.gradient-ocean {
     background-color: #0093E9;
     background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
 }
@@ -338,12 +335,24 @@ body {
     border: 2px solid #000 !important;
 }
 
-.btn-3d {
+.btn-effect-none {
+
+}
+
+.btn-effect-3d {
     border: 2px solid #422800;
     box-shadow: #422800 4px 4px 0 0;
 }
 
-    .btn-3d:hover {
+    .btn-effect-3d:hover {
         box-shadow: #422800 1px 1px 0 0;
         transform: translate(2px, 2px);
     }
+
+.btn-effect-shadow {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.btn-effect-shadow:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 8px;
+}
