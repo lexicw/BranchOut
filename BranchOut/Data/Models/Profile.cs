@@ -19,6 +19,6 @@
         public string? ButtonTextColor { get; set; }
         public string? ButtonBorderColor { get; set; }
         public string? ButtonEffect { get; set; }
-        public ICollection<SocialMedia> SocialMedia { get; set; } = new List<SocialMedia>();
+        public ICollection<SocialMedia> SocialMediaLinks { get; set; } = new List<SocialMedia>();
     }
 }
