@@ -33,9 +33,9 @@
             </div>
         </div>
 
-        <BackgroundOptions ValueChange="Update"></BackgroundOptions>
-        <TextOptions ValueChange="Update"></TextOptions>
-        <ButtonOptions ValueChange="Update"></ButtonOptions>
+        <BackgroundOptions ValueChange="UpdateProfilePage"></BackgroundOptions>
+        <TextOptions ValueChange="UpdateProfilePage"></TextOptions>
+        <ButtonOptions ValueChange="UpdateProfilePage"></ButtonOptions>
  
     </div>
 </div>
@@ -69,10 +69,10 @@
     {
         profile.Message = e.Value?.ToString();
 
-        await Update();
+        await UpdateProfilePage();
     }
 
-    private async Task Update()
+    private async Task UpdateProfilePage()
     {
 
         await _profileRepository.UpdateAsync(profile);
