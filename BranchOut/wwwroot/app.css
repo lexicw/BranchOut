@@ -171,15 +171,7 @@ body {
 
 
 .gradient-cherry-blossom {
-    background: #FFB7C5;
-    background: linear-gradient(to bottom, #FFB7C5 0%, #F0A8B6 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFB7C5), color-stop(100%, #F0A8B6));
-    background: -webkit-linear-gradient(top, #FFB7C5 0%, #F0A8B6 100%);
-    background: -moz-linear-gradient(top, #FFB7C5 0%, #F0A8B6 100%);
-    background: -o-linear-gradient(top, #FFB7C5 0%, #F0A8B6 100%);
-    box-shadow: inset 0 1px 0 #FFC6D4;
-    -webkit-box-shadow: inset 0 1px 0 #FFC6D4;
-    -moz-box-shadow: inset 0 1px 0 #FFC6D4;
+    background-image: linear-gradient(to bottom, #FFB7C5 0%, #F0A8B6 100%);
 }
 
 .gradient-tropical {
@@ -191,22 +183,18 @@ body {
 }
 
 .gradient-pastel {
-    background-color: #FFDEE9;
     background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
 }
 
 .gradient-vibrant {
-    background-color: #4158D0;
     background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 }
 
 .gradient-lime {
-    background-color: #85FFBD;
     background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
 }
 
 .gradient-ocean {
-    background-color: #0093E9;
     background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
 }
 

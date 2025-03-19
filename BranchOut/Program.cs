@@ -17,12 +17,14 @@ builder.Services.AddRazorComponents()
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<ILinkRepository, LinkRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
+builder.Services.AddScoped<IGradientRepository, GradientRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ProfileState>();
 builder.Services.AddScoped<LinksState>();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
+builder.Services.AddQuickGridEntityFrameworkAdapter();
 
 builder.Services.AddAuthentication(options =>
     {

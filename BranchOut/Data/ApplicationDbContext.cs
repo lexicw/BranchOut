@@ -9,6 +9,7 @@ namespace BranchOut.Data
         public DbSet<Link> Link { get; set; }
         public DbSet<Profile> Profile { get; set; }
         public DbSet<SocialMedia> SocialMedia { get; set; }
+        public DbSet<Gradient> Gradient { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

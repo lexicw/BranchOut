@@ -1,0 +1,22 @@
+﻿@page "/management/gradients"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter
+
+@inject IGradientRepository _gradientRepository
+
+<h3>Gradients</h3>
+
+<QuickGrid Items="gradients">
+    <PropertyColumn Property="@(p => p.Id)" Sortable="true" />
+    <PropertyColumn Property="@(p => p.Value)" Sortable="true" />
+    <PropertyColumn Property="@(p => p.CssClass)" Sortable="true" />
+</QuickGrid>
+
+@code {
+    private IQueryable<Gradient>? gradients;
+
+    protected override async Task OnInitializedAsync()
+    {
+        gradients = _gradientRepository.GetAll();
+    }
+}
