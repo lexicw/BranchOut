@@ -4,13 +4,9 @@
 @inject LinksState LinksState
 
 
-
-
 @if (IsProcessing)
 {
-    <div class="mt-5 mx-auto">
-        <div class="spinner mx-auto"></div>
-    </div>
+    <Spinner/>
 }
 else
 {

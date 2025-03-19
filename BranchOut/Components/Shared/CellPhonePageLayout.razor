@@ -10,9 +10,7 @@
         <CascadingValue Name="Links" Value="@UserLinks">
             @if (IsProcessing)
             {
-                <div class="mt-5 mx-auto w-100 bg-white">
-                    <div class="spinner mx-auto"></div>
-                </div>
+                <Spinner />
             }
             else
             {
