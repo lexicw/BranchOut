@@ -344,3 +344,13 @@ body {
 .btn-effect-shadow:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 8px;
 }
+
+.table-border {
+    padding: 1rem;
+    border: 1px solid lightgray;
+    border-radius: 0.375rem;
+}
+
+.quickgrid-align td {
+    vertical-align: middle;
+}

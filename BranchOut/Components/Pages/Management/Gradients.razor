@@ -1,22 +1,48 @@
-﻿@page "/management/gradients"
+﻿@page "/manage/gradients"
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter
 
 @inject IGradientRepository _gradientRepository
 
-<h3>Gradients</h3>
+@if (IsProcessing)
+{
+    <Spinner />
+}
+else
+{
+    <div class="container py-5">
+        <h3 class="text-center pt-4">Gradients</h3>
 
-<QuickGrid Items="gradients">
-    <PropertyColumn Property="@(p => p.Id)" Sortable="true" />
-    <PropertyColumn Property="@(p => p.Value)" Sortable="true" />
-    <PropertyColumn Property="@(p => p.CssClass)" Sortable="true" />
-</QuickGrid>
+        <div class="table-border bg-white mb-5">
+            <QuickGrid Items="gradients" Class="table mx-auto quickgrid-align" Pagination="pagination">
+                <PropertyColumn Property="@(p => p.Id)" Sortable="true" />
+                <PropertyColumn Property="@(p => p.Value)" Sortable="true" />
+                <PropertyColumn Property="@(p => p.CssClass)" Sortable="true" />
+
+                <TemplateColumn Title="Preview" Context="gradient" Class="text-center">
+                    <div class="border border-1 @(gradient.CssClass)" alt="Gradient preview" style="width:60px; height:60px;" />
+                </TemplateColumn>
+
+                <TemplateColumn Context="gradient">
+                    <a class="btn btn-primary" href="@($"gradients/edit?id={gradient.Id}")">Edit</a> &nbsp;
+                    <a class="btn btn-secondary" href="@($"gradients/delete?id={gradient.Id}")">Delete</a>
+                </TemplateColumn>
+            </QuickGrid>
+            <Paginator State="pagination" />
+        </div>
+    </div>
+}
+
 
 @code {
     private IQueryable<Gradient>? gradients;
+    private bool IsProcessing { get; set; } = true;
+
+    PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
 
     protected override async Task OnInitializedAsync()
     {
-        gradients = _gradientRepository.GetAll();
+        gradients = await _gradientRepository.GetAllAsync();
+        IsProcessing = false;
     }
 }

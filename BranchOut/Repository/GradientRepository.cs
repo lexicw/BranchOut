@@ -14,9 +14,10 @@ namespace BranchOut.Repository
             _db = db;
         }
 
-        public IQueryable<Gradient> GetAll()
+        public async Task<IQueryable<Gradient>> GetAllAsync()
         {
-            return _db.Gradient;
+            var gradients = await _db.Gradient.ToListAsync();
+            return gradients.AsQueryable();
         }
     }
 }
