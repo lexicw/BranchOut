@@ -11,9 +11,17 @@
 else
 {
     <div class="container py-5">
-        <h3 class="text-center pt-4">Gradients</h3>
-
         <div class="table-border bg-white mb-5">
+            <div class="row mx-2">
+                <div class="col-6">
+                    <h3 class="pt-2 fs-5 fw-bold">Gradients</h3>
+                    <p class="text-muted fs-6 pb-3">Manage gradients that will be used on profile pages here.</p>
+                </div>
+                <div class="col-6 align-content-center">
+                    <button class="btn btn-primary float-end">Add New</button>
+                </div>
+            </div>
+
             <QuickGrid Items="gradients" Class="table mx-auto quickgrid-align" Pagination="pagination">
                 <PropertyColumn Property="@(p => p.Id)" Sortable="true" />
                 <TemplateColumn Title="Preview" Context="gradient" Class="text-center">
@@ -23,8 +31,8 @@ else
                 <PropertyColumn Property="@(p => p.CssClass)" Sortable="true" />
 
                 <TemplateColumn Context="gradient">
-                    <a class="btn btn-primary" href="@($"gradients/edit?id={gradient.Id}")">Edit</a> &nbsp;
-                    <a class="btn btn-secondary" href="@($"gradients/delete?id={gradient.Id}")">Delete</a>
+                    <a class="btn btn-light" href="@($"gradients/edit?id={gradient.Id}")">Edit</a> &nbsp;
+                    <a class="btn btn-light" href="@($"gradients/delete?id={gradient.Id}")">Delete</a>
                 </TemplateColumn>
             </QuickGrid>
             <Paginator State="pagination" />
