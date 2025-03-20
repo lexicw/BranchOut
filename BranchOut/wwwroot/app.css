@@ -165,6 +165,12 @@ body {
     transition: border-color 0.2s ease-out;
 }
 
+@-moz-document url-prefix() {
+    .radio-card-body {
+        padding: 2.2em;
+    }
+}
+
 .radio:checked ~ .radio-card-body {
     border: 2px solid #00a6f4;
 }
