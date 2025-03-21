@@ -22,7 +22,20 @@ else
                 </div>
             </div>
 
-            <QuickGrid Items="gradients" Class="table mx-auto quickgrid-align" Pagination="pagination">
+            <QuickGrid Items="gradients" Class="table mx-auto quickgrid-align" RowClass="@( (Gradient gradient) => gradient.IsSelected ? "bg-light" : "" )" Pagination="pagination">
+                <TemplateColumn>
+                    <HeaderTemplate>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" @onclick="ToggleSelectAll" checked="@isAllSelected" />
+                        </div>
+                    </HeaderTemplate>
+                    <ChildContent>
+                    <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" @bind="@(context.IsSelected)">
+                    </div>
+                    </ChildContent>
+                </TemplateColumn>
+                
                 <PropertyColumn Property="@(p => p.Id)" Sortable="true" />
                 <TemplateColumn Title="Preview" Context="gradient" Class="text-center">
                     <div class="border border-1 @(gradient.CssClass)" alt="Gradient preview" style="width:60px; height:60px;" />
@@ -44,6 +57,7 @@ else
 @code {
     private IQueryable<Gradient>? gradients;
     private bool IsProcessing { get; set; } = true;
+    private bool isAllSelected = false;
 
     PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
 
@@ -51,5 +65,15 @@ else
     {
         gradients = await _gradientRepository.GetAllAsync();
         IsProcessing = false;
+    }
+
+    private void ToggleSelectAll()
+    {
+        isAllSelected = !isAllSelected;
+
+        foreach (var gradient in gradients)
+        {
+            gradient.IsSelected = isAllSelected;
+        }
     }
 }

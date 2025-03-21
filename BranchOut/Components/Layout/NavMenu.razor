@@ -49,17 +49,26 @@
                 <ul class="nav my-3 justify-content-end">
                     <li class="nav-item me-4 d-inline">
                         <div class="dropdown">
+                            <button class="border-0 bg-transparent me-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-lock fs-4"></i>
+                            </button>
+
+                            <ul class="dropdown-menu" style="width:200px;">
+                                <li>
+                                    <NavLink href="manage/gradients" class="dropdown-item rounded-2" Match="NavLinkMatch.All">
+                                        Gradients
+                                    </NavLink>
+                                </li>
+                            </ul>
+
                             <button class="border-0 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <ProfileImage Width="50px" Height="50px" Username="@context?.User?.Identity?.Name" FontSize="26" ImagePath="" />
+                                <ProfileImage Width="40px" Height="40px" Username="@context?.User?.Identity?.Name" FontSize="20" ImagePath="" />
                             </button>
 
                             <ul class="dropdown-menu" style="width:200px;">
                                 <li>
                                     <NavLink href="account/manage" class="dropdown-item rounded-2" Match="NavLinkMatch.All">
                                         Settings
-                                    </NavLink>
-                                    <NavLink href="manage/gradients" class="dropdown-item rounded-2" Match="NavLinkMatch.All">
-                                        Gradients
                                     </NavLink>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
