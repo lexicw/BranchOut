@@ -22,7 +22,7 @@ else
                 </div>
             </div>
 
-            <QuickGrid Items="gradients" Class="table mx-auto quickgrid-align" RowClass="@( (Gradient gradient) => gradient.IsSelected ? "bg-light" : "" )" Pagination="pagination">
+            <QuickGrid Items="gradients" Class="table mx-auto quickgrid-align" Pagination="pagination">
                 <TemplateColumn>
                     <HeaderTemplate>
                         <div class="form-check">
