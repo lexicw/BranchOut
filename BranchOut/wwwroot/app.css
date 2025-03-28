@@ -177,7 +177,7 @@ body {
 
 
 .gradient-cherry-blossom {
-    background-image: linear-gradient(to bottom, #FFB7C5 0%, #F0A8B6 100%);
+    background-image: linear-gradient(179.4deg, rgb(253, 240, 233) 2.2%, rgb(255, 194, 203) 96.2%);
 }
 
 .gradient-tropical {
@@ -202,6 +202,15 @@ body {
 
 .gradient-ocean {
     background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.gradient-fire {
+    background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
+}
+
+.gradient-solar {
+    background-image: linear-gradient(121.28deg, #0E5432 0%, #D6AD96 100%), linear-gradient(121.28deg, #FF0000 0%, #FFBABA 100%), linear-gradient(140.54deg, #7000FF 0%, #0015D1 72.37%), linear-gradient(307.43deg, #FFE927 0%, #00114D 100%), radial-gradient(107% 142.8% at 15.71% 104.5%, #FFFFFF 0%, #A7AA00 100%);
+    background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 }
 
 .bg-square {
@@ -360,3 +369,82 @@ body {
 .quickgrid-align td {
     vertical-align: middle;
 }
+
+.go-previous,
+.go-next,
+.go-first,
+.go-last {
+    background-image: none !important;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+    /* Single arrow for previous */
+    .go-previous::before {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid black;
+        border-bottom: 2px solid black;
+        transform: rotate(135deg);
+    }
+
+    /* Single arrow for next */
+    .go-next::before {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid black;
+        border-bottom: 2px solid black;
+        transform: rotate(135deg);
+    }
+
+    /* Double arrow for first */
+    .go-first::before,
+    .go-first::after {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid black;
+        border-bottom: 2px solid black;
+        position: absolute;
+        transform: rotate(135deg);
+    }
+
+    .go-first::before {
+        left: 6px;
+    }
+
+    .go-first::after {
+        left: 14px;
+    }
+
+    .go-last::before,
+    .go-last::after {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-left: 2px solid black;
+        border-top: 2px solid black;
+        position: absolute;
+        transform: rotate(-45deg); /* this makes them point right */
+    }
+
+    .go-last::after {
+        right: 6px;
+    }
+
+    .go-last::before {
+        right: 14px;
+    }
+
+
+

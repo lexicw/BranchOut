@@ -25,9 +25,7 @@ else
             <QuickGrid Items="gradients" Class="table mx-auto quickgrid-align" Pagination="pagination">
                 <TemplateColumn>
                     <HeaderTemplate>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" @onclick="ToggleSelectAll" checked="@isAllSelected" />
-                        </div>
+                        <SelectAllCheckbox Items="gradients" IsAllSelected="@isAllSelected" SetIsSelected="SetGradientSelected" IsAllSelectedChanged="@((value) => isAllSelected = value)" />
                     </HeaderTemplate>
                     <ChildContent>
                     <div class="form-check">
@@ -41,7 +39,7 @@ else
                     <div class="border border-1 @(gradient.CssClass)" alt="Gradient preview" style="width:60px; height:60px;" />
                 </TemplateColumn>
                 <PropertyColumn Property="@(p => p.Value)" Sortable="true" />
-                <PropertyColumn Property="@(p => p.CssClass)" Sortable="true" />
+                <PropertyColumn Property="@(p => p.CssClass)" />
 
                 <TemplateColumn Context="gradient">
                     <a class="btn btn-light" href="@($"gradients/edit?id={gradient.Id}")">Edit</a> &nbsp;
@@ -76,4 +74,10 @@ else
             gradient.IsSelected = isAllSelected;
         }
     }
+
+    private void SetGradientSelected(Gradient gradient, bool selected)
+    {
+        gradient.IsSelected = selected;
+    }
+
 }

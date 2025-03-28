@@ -1,22 +1,36 @@
-﻿<h1 class="fs-4 mt-5">Background</h1>
+﻿@inject IGradientRepository _gradientRepository
+
+<h1 class="fs-4 mt-5">Background</h1>
 <div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
     <h2 class="fs-5">Color:</h2>
     <ColorSelector InColor="@BackgroundColor" ReturnedColor="@(color => BackgroundColor = color)"></ColorSelector>
 
     <h2 class="fs-5 mt-5">Gradient:</h2>
-    <InputRadioGroup @bind-Value="Gradient">
-        <div class="radio-cards">
-            <RadioCard Type="Gradient" Value="None"></RadioCard>
-            <RadioCard Type="Gradient" Value="Cherry Blossom"></RadioCard>
-            <RadioCard Type="Gradient" Value="Tropical"></RadioCard>
-            <RadioCard Type="Gradient" Value="Northern Lights"></RadioCard>
-            <RadioCard Type="Gradient" Value="Vibrant"></RadioCard>
-            <RadioCard Type="Gradient" Value="Lime"></RadioCard>
-        </div>
-    </InputRadioGroup>
+    @if (gradients != null)
+    {
+        <InputRadioGroup @bind-Value="Gradient">
+            <div class="radio-cards">
+                @foreach (var gradient in gradients)
+                {
+                    <RadioCard Type="Gradient" Value="@gradient.Value"></RadioCard>
+                }
+            </div>
+        </InputRadioGroup>
+    }
+    else
+    {
+        <Spinner />
+    }
 </div>
 
 @code {
+    private IEnumerable<Gradient>? gradients;
+
+    protected override async Task OnInitializedAsync()
+    {
+        gradients = await _gradientRepository.GetAllAsync();
+    }
+
     [CascadingParameter(Name = "Profile")]
     public Profile profile { get; set; }
 
