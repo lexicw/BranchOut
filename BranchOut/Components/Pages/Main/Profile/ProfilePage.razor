@@ -51,7 +51,7 @@
             <div class="fs-6">@profile.Message</div>
 
             <div class="row">
-                <div class="col-12 col-md-8 mx-auto">
+                <div class="mx-auto @LayoutClass">
                     @foreach (var link in UserLinks.OrderBy(x => x.Sort))
                     {
                         if (link.Visible == true)
@@ -85,6 +85,10 @@ else
 
     [CascadingParameter(Name = "Links")]
     public List<Link> UserLinks { get; set; }
+
+    [Parameter] public bool PhoneMode { get; set; } = false;
+
+    private string LayoutClass => PhoneMode ? "col-8" : "col-8 col-lg-4";
 
     public string ButtonColorLight = "transparent";
 
