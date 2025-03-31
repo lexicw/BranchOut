@@ -6,27 +6,6 @@
 @inject ILinkRepository _linkRepository
 @inject UserService _userService
 
-<style>
-    .profile-container {
-        container-type: inline-size;
-        container-name: profile;
-    }
-
-    @@container profile (min-width: 1025px) {
-        .col-8 {
-            flex: 0 0 66.6667%;
-            max-width: 66.6667%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .col-lg-5 {
-            flex: 0 0 41.6667%;
-            max-width: 41.6667%;
-        }
-    }
-</style>
-
 <CascadingValue Name="User" Value="@AppUser">
     <CascadingValue Name="Profile" Value="@profile">
         <CascadingValue Name="Links" Value="@UserLinks">
