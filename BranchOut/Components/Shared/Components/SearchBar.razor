@@ -1,5 +1,14 @@
 ﻿<div class="form-floating mb-3 mt-2">
     <input type="search" class="form-control form-search" id="floatingInput" placeholder="Search..." @bind="searchFilter" @oninput="HandleSearch">
+
+    @if (!string.IsNullOrEmpty(searchFilter))
+    {
+        <button @onclick="ClearFilter" class="clear-search">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    }
+
+
     <label for="floatingInput">Search</label>
     <i class="bi bi-search"></i>
 </div>
@@ -19,6 +28,7 @@
     public void ClearFilter()
     {
         searchFilter = string.Empty;
+        SearchItemCallback.InvokeAsync(searchFilter);
     }
 }
 
