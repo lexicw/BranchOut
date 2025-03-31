@@ -141,7 +141,7 @@ else
         {
             foreach (var gradient in selectedGradients)
             {
-                _gradientRepository.DeleteAsync(gradient.Id);
+                await _gradientRepository.DeleteAsync(gradient.Id);
             }
         }
         gradients = await _gradientRepository.GetAllAsync();
