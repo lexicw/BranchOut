@@ -145,6 +145,7 @@ else
             }
         }
         gradients = await _gradientRepository.GetAllAsync();
+        isAnyGradientSelected = false;
     }
 
     private void OpenModal(string modalId)
