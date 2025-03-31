@@ -14,9 +14,16 @@ namespace BranchOut.Repository
             _db = db;
         }
 
-        public async Task<IQueryable<Gradient>> GetAllAsync()
+        public async Task<IQueryable<Gradient>> GetAllAsync(string searchKeyword = null)
         {
-            var gradients = await _db.Gradient.ToListAsync();
+            var gradientsQuery = _db.Gradient.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchKeyword))
+            {
+                gradientsQuery = gradientsQuery.Where(g => g.Value.Contains(searchKeyword));
+            }
+
+            var gradients = await gradientsQuery.ToListAsync();
             return gradients.AsQueryable();
         }
 

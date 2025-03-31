@@ -6,7 +6,7 @@ namespace BranchOut.Repository.Interfaces
     {
         Task<Gradient> CreateAsync(Gradient gradient);
         Task<bool> DeleteAsync(int id);
-        Task<IQueryable<Gradient>> GetAllAsync();
+        Task<IQueryable<Gradient>> GetAllAsync(string searchKeyword = null);
         Task<Gradient?> GetByIdAsync(int id);
         Task<bool> UpdateAsync(Gradient gradient);
     }

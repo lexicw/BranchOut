@@ -1,0 +1,24 @@
+﻿<div class="form-floating mb-3 mt-2">
+    <input type="search" class="form-control form-search" id="floatingInput" placeholder="Search..." @bind="searchFilter" @oninput="HandleSearch">
+    <label for="floatingInput">Search</label>
+    <i class="bi bi-search"></i>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<string> SearchItemCallback { get; set; }
+
+    private string searchFilter = "";
+
+    private void HandleSearch(ChangeEventArgs e)
+    {
+        searchFilter = e.Value?.ToString() ?? string.Empty;
+        SearchItemCallback.InvokeAsync(searchFilter);
+    }
+
+    public void ClearFilter()
+    {
+        searchFilter = string.Empty;
+    }
+}
+

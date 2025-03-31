@@ -13,12 +13,15 @@ else
     <div class="container py-5">
         <div class="table-border bg-white mb-5">
             <div class="row mx-2">
-                <div class="col-6">
+                <div class="col-5">
                     <h3 class="pt-2 fs-5 fw-bold">Gradients</h3>
                     <p class="text-muted fs-6 pb-3">Manage gradients that will be used on profile pages here.</p>
                 </div>
-                <div class="col-6 align-content-center">
-                    <button class="btn btn-primary float-end">Add New</button>
+                <div class="col-5">
+                    <SearchBar SearchItemCallback="SearchGradients" />
+                </div>
+                <div class="col-2 align-content-start">
+                    <button class="btn btn-primary float-end mt-2">Add New</button>
                 </div>
             </div>
 
@@ -34,6 +37,7 @@ else
                     </ChildContent>
                 </TemplateColumn>
                 
+
                 <PropertyColumn Property="@(p => p.Id)" Sortable="true" />
                 <TemplateColumn Title="Preview" Context="gradient" Class="text-center">
                     <div class="border border-1 @(gradient.CssClass)" alt="Gradient preview" style="width:60px; height:60px;" />
@@ -78,6 +82,12 @@ else
     private void SetGradientSelected(Gradient gradient, bool selected)
     {
         gradient.IsSelected = selected;
+    }
+
+    private async Task SearchGradients(string searchFilter)
+    {
+        var searchResults = await _gradientRepository.GetAllAsync(searchFilter);
+        gradients = searchResults;
     }
 
 }

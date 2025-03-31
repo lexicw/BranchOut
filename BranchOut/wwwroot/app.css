@@ -268,38 +268,6 @@ body {
     border: 1px solid #000;
 }
 
-.slidecontainer {
-    width: 100%;
-}
-
-.slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 4px;
-    background-color: #00bcff;
-    border-radius: 10px;
-    outline: none;
-}
-
-
-    .slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 50px;
-        height: 15px;
-        cursor: pointer;
-        background: #FFF;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 3px, rgba(0, 0, 0, 0.48) 0px 1px 2px;
-    }
-
-
-
-    .slider::-moz-range-thumb {
-        height: 5px;
-        cursor: pointer;
-    }
-
-
 
 .spinner {
     width: 11.2px;
@@ -446,5 +414,22 @@ body {
         right: 14px;
     }
 
+.form-search {
+    position: relative;
+    padding-right: 2.5rem;
+    padding-left: 1.5rem !important;
+    border-radius: 25rem;
+}
 
+    .form-floating .bi-search {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d; 
+        pointer-events: none;
+    }
 
+    .form-floating label {
+        padding-left: 1.5rem;
+    }
