@@ -17,11 +17,11 @@ else
                 <h3 class="pt-2 fs-4 fw-bold">Gradients</h3>
                 <div class="row">
                     <div class="col-7">
-                        <button class="btn btn-outline-primary mt-2" @onclick='() => OpenModal("addModal")'>
+                        <button class="btn btn-outline-primary mt-2" @onclick='() => OpenModal("upsertModal")'>
                             <i class="bi bi-folder-plus"></i>
                             Add New
                         </button>
-                        <button class="btn btn-outline-danger mt-2" disabled="@(!isAnyGradientSelected)" @onclick="DeleteGradients">
+                        <button class="btn btn-outline-danger mt-2" disabled="@(!isAnyGradientSelected)" @onclick='() => OpenModal("deleteModal")'>
                             <i class="bi bi-trash-fill"></i>
                             Delete
                         </button>
@@ -62,7 +62,7 @@ else
         </div>
     </div>
 
-    <AddModal Item="Gradient" ModalClose='(bool success) => CloseModal("addModal", success)'>
+    <UpsertModal Item="Gradient" ModalClose='(bool success) => CloseModal("upsertModal", success)' OnConfirm="UpsertGradient">
         <ModalFieldsTemplate>
             <div class="modal-fields">
                 <DataAnnotationsValidator />
@@ -84,7 +84,9 @@ else
                 </FieldComponent>
             </div>
         </ModalFieldsTemplate>
-    </AddModal>
+    </UpsertModal>
+
+    <DeleteModal Item="Gradient" ModalClose='(bool success) => CloseModal("deleteModal", success)' OnConfirm="DeleteGradients" />
 }
 
 
@@ -148,6 +150,20 @@ else
         isAnyGradientSelected = false;
     }
 
+    private async Task UpsertGradient()
+    {
+        if (Gradient.Id == 0)
+        {
+            await _gradientRepository.CreateAsync(Gradient);
+            gradients = await _gradientRepository.GetAllAsync();
+        }
+        else
+        {
+            
+        }
+        Gradient = new Gradient();
+    }
+
     private void OpenModal(string modalId)
     {
         _JS.InvokeVoidAsync("showModal", modalId);
@@ -155,10 +171,7 @@ else
 
     private async Task CloseModal(string modalId, bool success)
     {
-        await _gradientRepository.CreateAsync(Gradient);
         await _JS.InvokeVoidAsync("hideModal", modalId);
-        gradients = await _gradientRepository.GetAllAsync();
-        Gradient = new Gradient();
     }
 
 

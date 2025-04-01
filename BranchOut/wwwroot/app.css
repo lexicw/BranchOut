@@ -430,9 +430,9 @@ body {
         pointer-events: none;
     }
 
-    .form-floating label {
-        padding-left: 1.5rem;
-    }
+.label-search {
+    padding-left: 1.5rem !important;
+}
 
 input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none;
