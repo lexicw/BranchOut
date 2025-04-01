@@ -10,6 +10,7 @@ namespace BranchOut.Data.Models
         public int ProfileId { get; set; }
         [ForeignKey("ProfileId")]
         public SocialMediaPlatform Platform { get; set; }
+        public string URL { get; set; }
     }
 
     public enum SocialMediaPlatform

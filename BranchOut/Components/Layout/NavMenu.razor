@@ -5,10 +5,11 @@
 @inject NavigationManager NavigationManager
 @inject UserManager<ApplicationUser> UserManager
 
+
 <nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0">
         <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none px-4">
-            <img src="/Images/branchout-logo.svg" class="img-fluid" style="width:75px;"/>
+            <img src="/Images/branchout-logo.svg" class="img-fluid" style="width:75px;" />
         </a>
     </div>
 
@@ -66,6 +67,11 @@
                             </button>
 
                             <ul class="dropdown-menu" style="width:200px;">
+                                <li>
+                                    <NavLink href="@($"profile/{context?.User?.Identity?.Name}")" target="_blank" class="dropdown-item rounded-2" Match="NavLinkMatch.All">
+                                        Your Profile Page
+                                    </NavLink>
+                                </li>
                                 <li>
                                     <NavLink href="account/manage" class="dropdown-item rounded-2" Match="NavLinkMatch.All">
                                         Settings

@@ -1,0 +1,19 @@
+﻿.form-search {
+    position: relative;
+    padding-right: 2.5rem;
+    padding-left: 1.5rem !important;
+    border-radius: 25rem;
+}
+
+.form-floating .bi-search {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none;
+}
+
+.label-search {
+    padding-left: 1.5rem !important;
+}
