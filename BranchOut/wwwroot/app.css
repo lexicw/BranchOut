@@ -481,3 +481,19 @@ input[type="search"]::-webkit-search-cancel-button {
         background-position: 300% 50%;
     }
 }
+
+
+.gradient-border {
+    border-top: 2px solid transparent;
+    background-image: linear-gradient(white, white),
+    linear-gradient(135deg, #00a6f4 0%, #4f39f6 35%, #00d5be 70%, #00a6f4 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.bg-grad {
+    background-color: white;
+    background-image: radial-gradient(circle at 30% 40%, rgba(0, 166, 244, 0.3) 150px, transparent 300px), radial-gradient(circle at 70% 40%, rgba(79, 57, 246, 0.3) 150px, transparent 300px), radial-gradient(circle at 50% 80%, rgba(0, 213, 190, 0.3) 150px, transparent 300px);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -18,6 +18,7 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<ILinkRepository, LinkRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 builder.Services.AddScoped<IGradientRepository, GradientRepository>();
+builder.Services.AddScoped<IFontRepository, FontRepository>();
 builder.Services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ProfileState>();
