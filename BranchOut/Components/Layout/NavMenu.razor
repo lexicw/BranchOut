@@ -57,7 +57,7 @@
                             <ul class="dropdown-menu" style="width:200px;">
                                 <li>
                                     <NavLink href="manage/gradients" class="dropdown-item rounded-2" Match="NavLinkMatch.All">
-                                        Gradients
+                                        <i class="bi bi-folder"></i>&nbsp; Gradients
                                     </NavLink>
                                 </li>
                             </ul>
@@ -69,22 +69,21 @@
                             <ul class="dropdown-menu" style="width:200px;">
                                 <li>
                                     <NavLink href="@($"profile/{context?.User?.Identity?.Name}")" target="_blank" class="dropdown-item rounded-2" Match="NavLinkMatch.All">
-                                        Your Profile Page
+                                        <i class="bi bi-box-arrow-up-right"></i>&nbsp; Your Profile Page
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink href="account/manage" class="dropdown-item rounded-2" Match="NavLinkMatch.All">
-                                        Settings
+                                        <i class="bi bi-gear"></i>&nbsp; Settings
                                     </NavLink>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-
                                     <form action="Account/Logout" method="post">
                                         <AntiforgeryToken />
                                         <input type="hidden" name="ReturnUrl" value="" />
                                         <button type="submit" class="dropdown-item rounded-2">
-                                            Log out
+                                            <i class="bi bi-box-arrow-right"></i>&nbsp; Log out
                                         </button>
                                     </form>
                                 </li>

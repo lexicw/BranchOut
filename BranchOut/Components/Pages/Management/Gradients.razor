@@ -17,7 +17,7 @@ else
                 <h3 class="pt-2 fs-4 fw-bold">Gradients</h3>
                 <div class="row">
                     <div class="col-7">
-                        <button class="btn btn-outline-primary mt-2" @onclick='() => OpenModal("upsertModal")'>
+                        <button class="btn btn-outline-primary mt-2" @onclick='AddGradient'>
                             <i class="bi bi-folder-plus"></i>
                             Add New
                         </button>
@@ -55,14 +55,14 @@ else
                 <PropertyColumn Property="@(p => p.CssClass)" />
 
                 <TemplateColumn Context="gradient">
-                    <a class="btn btn-light" href="@($"gradients/edit?id={gradient.Id}")">Edit</a> &nbsp;
+                    <button class="btn btn-light" @onclick="() => EditGradient(gradient.Id)">Edit</button> &nbsp;
                 </TemplateColumn>
             </QuickGrid>
             <Paginator State="pagination" />
         </div>
     </div>
 
-    <UpsertModal Item="Gradient" ModalClose='(bool success) => CloseModal("upsertModal", success)' OnConfirm="UpsertGradient">
+    <UpsertModal Item="Gradient" ModalClose='(bool success) => CloseModal("upsertModal", success)' OnConfirm="UpsertGradient" Id="Gradient.Id">
         <ModalFieldsTemplate>
             <div class="modal-fields">
                 <DataAnnotationsValidator />
@@ -150,6 +150,21 @@ else
         isAnyGradientSelected = false;
     }
 
+    private async Task AddGradient()
+    {
+        Gradient = new Gradient();
+        OpenModal("upsertModal");
+    }
+
+    private async Task EditGradient(int Id)
+    {
+        if (Id > 0)
+        {
+            Gradient = await _gradientRepository.GetByIdAsync(Id);
+            OpenModal("upsertModal");
+        }
+    }
+
     private async Task UpsertGradient()
     {
         if (Gradient.Id == 0)
@@ -159,9 +174,8 @@ else
         }
         else
         {
-            
+            await _gradientRepository.UpdateAsync(Gradient);
         }
-        Gradient = new Gradient();
     }
 
     private void OpenModal(string modalId)

@@ -436,3 +436,48 @@ input[type="search"]::-webkit-search-cancel-button {
 .form-check-input {
     border: 1px solid rgba(0, 0, 0, .75);
 }
+
+.gradient-text {
+    background: linear-gradient(135deg, #00a6f4 0%, #4f39f6 35%, #00d5be 70%, #00a6f4 100%);
+    background-size: 25%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+    .nav-link:hover,
+    .nav-link:focus {
+        color: #4f39f6;
+    }
+
+
+    .nav-link.active:hover {
+        /*color: #fff !important;
+        background: linear-gradient( 90deg, #00bba7 0%, #4f39f6 33%, #00a6f4 66%, #00bba7 100% );
+        background-size: 300% 100%;
+        background-position: 0% 50%;
+        animation: gradient-flash-bg 3s linear infinite;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        background-clip: unset;
+        -webkit-text-fill-color: #FFF;*/
+        background-color: #4f39f6 !important;
+    }
+
+.form-control:focus {
+    border-color: #00a6f4;
+    box-shadow: 0 0 0 .1rem rgba(0, 166, 244, 1);
+}
+
+
+@keyframes gradient-flash-bg {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 300% 50%;
+    }
+}
