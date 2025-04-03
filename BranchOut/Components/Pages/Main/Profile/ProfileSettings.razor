@@ -5,6 +5,8 @@
 @inject IProfileRepository _profileRepository
 @inject IJSRuntime _JS
 @inject ProfileState ProfileState
+@inject IGradientRepository _gradientRepository
+@inject IFontRepository _fontRepository
 
 <div class="row">
     <div class="mt-5 col-12 col-lg-9 mx-auto">
@@ -29,8 +31,8 @@
             </div>
         </div>
 
-        <BackgroundOptions ValueChange="UpdateProfilePage"></BackgroundOptions>
-        <TextOptions ValueChange="UpdateProfilePage"></TextOptions>
+        <BackgroundOptions ValueChange="UpdateProfilePage" Gradients="Gradients"></BackgroundOptions>
+        <TextOptions ValueChange="UpdateProfilePage" Fonts="Fonts"></TextOptions>
         <ButtonOptions ValueChange="UpdateProfilePage"></ButtonOptions>
  
     </div>
@@ -49,9 +51,14 @@
 
     private bool UserExists { get; set; } = true;
 
+    private IEnumerable<Gradient>? Gradients;
+    private IEnumerable<Font>? Fonts;
+
     protected override async Task OnInitializedAsync()
     {
         await LoadProfile();
+        Gradients = await _gradientRepository.GetAllAsync();
+        Fonts = await _fontRepository.GetAllAsync();
     }
 
     private async Task LoadProfile()

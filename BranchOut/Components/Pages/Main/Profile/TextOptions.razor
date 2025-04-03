@@ -4,22 +4,30 @@
     <ColorSelector InColor="@TextColor" ReturnedColor="@(color => TextColor = color)"></ColorSelector>
 
     <h3 class="fs-5 mt-5">Font:</h3>
-    <InputRadioGroup @bind-Value="Font">
-        <div class="radio-cards">
-            <RadioCard Type="Font" Value="Inter" FontSize="fs-1"></RadioCard>
-            <RadioCard Type="Font" Value="Sofia" FontSize="fs-1"></RadioCard>
-            <RadioCard Type="Font" Value="Merriweather" FontSize="fs-5"></RadioCard>
-            <RadioCard Type="Font" Value="Miniver" FontSize="fs-3"></RadioCard>
-            <RadioCard Type="Font" Value="Oswald" FontSize="fs-1"></RadioCard>
-            <RadioCard Type="Font" Value="Raleway" FontSize="fs-3"></RadioCard>
-            <RadioCard Type="Font" Value="Yomogi" FontSize="fs-3"></RadioCard>
-            <RadioCard Type="Font" Value="Silkscreen" FontSize="fs-5"></RadioCard>
-            <RadioCard Type="Font" Value="Fresca" FontSize="fs-3"></RadioCard>
-        </div>
-    </InputRadioGroup>
+    @if (Fonts != null)
+    {
+        <InputRadioGroup @bind-Value="Font">
+            <div class="radio-cards">
+                @foreach (var font in Fonts)
+                {
+                    <RadioCard Type="Font" Value="@font.Name" FontSize="fs-1"></RadioCard>
+                }
+            </div>
+        </InputRadioGroup>
+    }
+    else
+    {
+        <Spinner />
+    }
+
+
+
 </div>
 
 @code {
+    [Parameter]
+    public IEnumerable<Font>? Fonts { get; set; }
+
     [CascadingParameter(Name = "Profile")]
     public Profile profile { get; set; }
 
