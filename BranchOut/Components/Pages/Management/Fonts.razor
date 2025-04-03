@@ -25,7 +25,7 @@ else
                             <i class="bi bi-folder-plus"></i>
                             Add New
                         </button>
-                        <button class="btn btn-outline-danger mt-2 px-4 rounded-pill" disabled="@(!isAnyFontSelected)" @onclick='() => OpenModal("deleteModal")'>
+                        <button class="btn btn-outline-danger mt-2 px-4 rounded-pill" disabled="@(!isAnyFontSelected)" @onclick='() => OpenModal("deleteFontModal")'>
                             <i class="bi bi-trash-fill"></i>
                             Delete
                         </button>
@@ -97,7 +97,7 @@ else
         </ModalFieldsTemplate>
     </UpsertModal>
 
-    <DeleteModal Item="Font" ModalClose='(bool success) => CloseModal("deleteModal", success)' OnConfirm="DeleteFonts" />
+    <DeleteModal Item="Font" ModalClose='(bool success) => CloseModal("deleteFontModal", success)' OnConfirm="DeleteFonts" />
 }
 
 

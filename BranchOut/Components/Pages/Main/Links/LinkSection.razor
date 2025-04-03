@@ -43,7 +43,7 @@
     </ModalFieldsTemplate>
 </UpsertModal>
 
-<DeleteModal Item="Link" ModalClose='(bool success) => CloseModal("deleteModal", success)' OnConfirm="() => DeleteLink()" />
+<DeleteModal Item="Link" ModalClose='(bool success) => CloseModal("deleteLinkModal", success)' OnConfirm="() => DeleteLink()" />
 
 @if (UserLinks == null || UserLinks.Count == 0)
 {
@@ -132,7 +132,7 @@ else
     private async Task CallDeleteLinkModal(int Id)
     {
         SelectedLink = Id;
-        OpenModal("deleteModal");
+        OpenModal("deleteLinkModal");
     }
 
     private void OpenModal(string modalId, int? linkId = null)
@@ -205,6 +205,6 @@ else
             UserLinks.Remove(link);
         }
         await LinksState.UpdateLinkOrderAsync(UserLinks, _linkRepository);
-        await CloseModal("deleteModal", true);
+        await CloseModal("deleteLinkModal", true);
     }
 }

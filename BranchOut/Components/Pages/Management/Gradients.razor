@@ -21,7 +21,7 @@ else
                             <i class="bi bi-folder-plus"></i>
                             Add New
                         </button>
-                        <button class="btn btn-outline-danger mt-2 mt-2 px-4 rounded-pill" disabled="@(!isAnyGradientSelected)" @onclick='() => OpenModal("deleteModal")'>
+                        <button class="btn btn-outline-danger mt-2 mt-2 px-4 rounded-pill" disabled="@(!isAnyGradientSelected)" @onclick='() => OpenModal("deleteGradientModal")'>
                             <i class="bi bi-trash-fill"></i>
                             Delete
                         </button>
@@ -62,7 +62,7 @@ else
         </div>
     </div>
 
-    <UpsertModal Item="Gradient" ModalClose='(bool success) => CloseModal("upsertModal", success)' Id="Gradient.Id">
+    <UpsertModal Item="Gradient" ModalClose='(bool success) => CloseModal("upsertGradientModal", success)' Id="Gradient.Id">
         <ModalFieldsTemplate>
             <EditForm Model="@Gradient" FormName="formGradientUpsert" OnValidSubmit="() => UpsertGradient(Gradient.Id)">
                 <div class="modal-body">
@@ -95,7 +95,7 @@ else
         </ModalFieldsTemplate>
     </UpsertModal>
 
-    <DeleteModal Item="Gradient" ModalClose='(bool success) => CloseModal("deleteModal", success)' OnConfirm="DeleteGradients" />
+    <DeleteModal Item="Gradient" ModalClose='(bool success) => CloseModal("deleteGradientModal", success)' OnConfirm="DeleteGradients" />
 }
 
 
