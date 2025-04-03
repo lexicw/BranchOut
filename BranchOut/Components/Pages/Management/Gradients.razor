@@ -17,11 +17,11 @@ else
                 <h3 class="pt-2 fs-4 fw-bold">Gradients</h3>
                 <div class="row">
                     <div class="col-7">
-                        <button class="btn btn-outline-primary mt-2" @onclick='AddGradient'>
+                        <button class="btn btn-outline-primary mt-2 px-4 rounded-pill" @onclick='AddGradient'>
                             <i class="bi bi-folder-plus"></i>
                             Add New
                         </button>
-                        <button class="btn btn-outline-danger mt-2" disabled="@(!isAnyGradientSelected)" @onclick='() => OpenModal("deleteModal")'>
+                        <button class="btn btn-outline-danger mt-2 mt-2 px-4 rounded-pill" disabled="@(!isAnyGradientSelected)" @onclick='() => OpenModal("deleteModal")'>
                             <i class="bi bi-trash-fill"></i>
                             Delete
                         </button>
@@ -55,7 +55,7 @@ else
                 <PropertyColumn Property="@(p => p.CssClass)" />
 
                 <TemplateColumn Context="gradient">
-                    <button class="btn btn-light" @onclick="() => EditGradient(gradient.Id)">Edit</button> &nbsp;
+                    <button class="btn btn-light mt-2 px-4 rounded-pill" @onclick="() => EditGradient(gradient.Id)">Edit</button> &nbsp;
                 </TemplateColumn>
             </QuickGrid>
             <Paginator State="pagination" />

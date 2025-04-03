@@ -466,10 +466,19 @@ input[type="search"]::-webkit-search-cancel-button {
         background-color: #4f39f6 !important;
     }
 
-.form-control:focus {
-    border-color: #00a6f4;
-    box-shadow: 0 0 0 .1rem rgba(0, 166, 244, 1);
+.form-control {
+    position: relative;
+    background-clip: padding-box;
+    transition: all 0.3s ease;
+    border: 2px solid #e2ebf6;
 }
+
+    .form-control:focus {
+        background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #00a6f4 0%, #4f39f6 35%, #00d5be 70%, #00a6f4 100%) border-box;
+        border: 2px solid transparent;
+        outline: none;
+        box-shadow: 0 0 0 0.2rem hsla(198, 100%, 48%, .25);
+    }
 
 
 @keyframes gradient-flash-bg {
