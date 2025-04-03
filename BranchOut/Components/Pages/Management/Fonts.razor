@@ -21,7 +21,7 @@ else
                 <h3 class="pt-2 fs-4 fw-bold">Fonts</h3>
                 <div class="row">
                     <div class="col-7">
-                        <button class="btn btn-outline-primary mt-2" @onclick='AddFont'>
+                        <button class="btn btn-outline-primary mt-2" @onclick='CallAddFontModal'>
                             <i class="bi bi-folder-plus"></i>
                             Add New
                         </button>
@@ -57,7 +57,7 @@ else
                 <PropertyColumn Property="@(p => p.CssClass)" />
 
                 <TemplateColumn Context="font">
-                    <button class="btn btn-light" @onclick="() => EditFont(font.Id)">Edit</button> &nbsp;
+                    <button class="btn btn-light" @onclick="() => CallEditFontModal(font.Id)">Edit</button> &nbsp;
                 </TemplateColumn>
             </QuickGrid>
             <Paginator State="pagination" />
@@ -134,13 +134,13 @@ else
         isAnyFontSelected = false;
     }
 
-    private async Task AddFont()
+    private async Task CallAddFontModal()
     {
         Font = new Font();
         OpenModal("upsertModal");
     }
 
-    private async Task EditFont(int Id)
+    private async Task CallEditFontModal(int Id)
     {
         if (Id > 0)
         {

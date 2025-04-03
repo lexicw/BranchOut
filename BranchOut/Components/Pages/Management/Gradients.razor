@@ -17,7 +17,7 @@ else
                 <h3 class="pt-2 fs-4 fw-bold">Gradients</h3>
                 <div class="row">
                     <div class="col-7">
-                        <button class="btn btn-outline-primary mt-2" @onclick='AddGradient'>
+                        <button class="btn btn-outline-primary mt-2" @onclick='CallAddGradientModal'>
                             <i class="bi bi-folder-plus"></i>
                             Add New
                         </button>
@@ -55,7 +55,7 @@ else
                 <PropertyColumn Property="@(p => p.CssClass)" />
 
                 <TemplateColumn Context="gradient">
-                    <button class="btn btn-light" @onclick="() => EditGradient(gradient.Id)">Edit</button> &nbsp;
+                    <button class="btn btn-light" @onclick="() => CallEditGradientModal(gradient.Id)">Edit</button> &nbsp;
                 </TemplateColumn>
             </QuickGrid>
             <Paginator State="pagination" />
@@ -150,13 +150,13 @@ else
         isAnyGradientSelected = false;
     }
 
-    private async Task AddGradient()
+    private async Task CallAddGradientModal()
     {
         Gradient = new Gradient();
         OpenModal("upsertModal");
     }
 
-    private async Task EditGradient(int Id)
+    private async Task CallEditGradientModal(int Id)
     {
         if (Id > 0)
         {
@@ -194,6 +194,6 @@ else
         var newValue = e.Value?.ToString() ?? "";
 
         Gradient.Value = newValue;
-        Gradient.CssClass = string.IsNullOrEmpty(newValue) ? "" : $"gradient-{newValue.ToLower()}";
+        Gradient.CssClass = string.IsNullOrEmpty(newValue) ? "" : $"gradient-{newValue.ToLower().Replace(" ", "-")}";
     }
 }

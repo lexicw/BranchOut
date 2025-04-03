@@ -31,7 +31,7 @@ namespace BranchOut.Data
                 new Gradient { Id = 6, Value = "Lime", CssClass = "gradient-lime" },
                 new Gradient { Id = 7, Value = "Ocean", CssClass = "gradient-ocean" },
                 new Gradient { Id = 8, Value = "Fire", CssClass = "gradient-fire" },
-                new Gradient { Id = 9, Value = "Solar", CssClass = "gradient-space" }
+                new Gradient { Id = 9, Value = "Solar", CssClass = "gradient-solar" }
             );
 
             modelBuilder.Entity<Font>().HasData(
