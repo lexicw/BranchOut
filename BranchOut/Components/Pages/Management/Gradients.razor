@@ -194,6 +194,6 @@ else
         var newValue = e.Value?.ToString() ?? "";
 
         Gradient.Value = newValue;
-        Gradient.CssClass = string.IsNullOrEmpty(newValue) ? "" : $"gradient-{newValue.ToLower()}";
+        Gradient.CssClass = string.IsNullOrEmpty(newValue) ? "" : $"gradient-{newValue.ToLower().Replace(" ", "-")}";
     }
 }
