@@ -14,30 +14,22 @@ namespace BranchOut.Repository
             _context = context;
         }
 
-        public async Task<List<SocialMedia>> GetAllAsync()
-        {
-            return await _context.SocialMedia
-                .Include(s => s.Platform)
-                .ToListAsync();
-        }
-
-        public async Task<SocialMedia?> GetByIdAsync(int id)
-        {
-            return await _context.SocialMedia
-                .Include(s => s.Platform)
-                .FirstOrDefaultAsync(s => s.Id == id);
-        }
-
-        public async Task<List<SocialMedia>> GetByUserIdAsync(string userId)
+        public async Task<List<SocialMedia>> GetAllAsync(string userId)
         {
             return await _context.SocialMedia
                 .Where(s => s.UserId == userId)
-                .Include(s => s.Platform)
                 .ToListAsync();
         }
 
-        public async Task AddAsync(SocialMedia socialMedia)
+        public async Task<SocialMedia?> GetAsync(int id)
         {
+            return await _context.SocialMedia
+                .FirstOrDefaultAsync(s => s.Id == id);
+        }
+
+        public async Task CreateAsync(SocialMedia socialMedia, string userId)
+        {
+            socialMedia.UserId = userId;
             _context.SocialMedia.Add(socialMedia);
             await _context.SaveChangesAsync();
         }
@@ -58,5 +50,6 @@ namespace BranchOut.Repository
             }
         }
     }
+
 
 }

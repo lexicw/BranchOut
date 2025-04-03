@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BranchOut.Data.Models
@@ -10,6 +11,8 @@ namespace BranchOut.Data.Models
         public int ProfileId { get; set; }
         [ForeignKey("ProfileId")]
         public SocialMediaPlatform Platform { get; set; }
+        [Required(ErrorMessage = "The URL is required")]
+        [Url(ErrorMessage = "Please enter a valid URL")]
         public string URL { get; set; }
     }
 

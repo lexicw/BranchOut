@@ -23,6 +23,7 @@ builder.Services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ProfileState>();
 builder.Services.AddScoped<LinksState>();
+builder.Services.AddScoped<SocialMediaState>();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
