@@ -164,7 +164,7 @@ else
     private async Task CallAddGradientModal()
     {
         Gradient = new Gradient();
-        OpenModal("upsertModal");
+        OpenModal("upsertGradientModal");
     }
 
     private async Task CallEditGradientModal(int Id)
@@ -172,7 +172,7 @@ else
         if (Id > 0)
         {
             Gradient = await _gradientRepository.GetByIdAsync(Id);
-            OpenModal("upsertModal");
+            OpenModal("upsertGradientModal");
         }
     }
 
@@ -187,7 +187,7 @@ else
         {
             await _gradientRepository.UpdateAsync(Gradient);
         }
-        await CloseModal("upsertModal", true);
+        await CloseModal("upsertGradientModal", true);
     }
 
     private void OpenModal(string modalId)

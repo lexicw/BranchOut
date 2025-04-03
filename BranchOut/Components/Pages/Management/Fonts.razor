@@ -64,7 +64,7 @@ else
         </div>
     </div>
 
-    <UpsertModal Item="Font" ModalClose='(bool success) => CloseModal("upsertModal", success)' Id="Font.Id">
+    <UpsertModal Item="Font" ModalClose='(bool success) => CloseModal("upsertFontModal", success)' Id="Font.Id">
         <ModalFieldsTemplate>
             <EditForm Model="@Font" FormName="formFontUpsert" OnValidSubmit="() => UpsertFont(Font.Id)">
                 <div class="modal-body">
@@ -154,7 +154,7 @@ else
     private async Task CallAddFontModal()
     {
         Font = new Font();
-        OpenModal("upsertModal");
+        OpenModal("upsertFontModal");
     }
 
     private async Task CallEditFontModal(int Id)
@@ -162,7 +162,7 @@ else
         if (Id > 0)
         {
             Font = await _fontRepository.GetByIdAsync(Id);
-            OpenModal("upsertModal");
+            OpenModal("upsertFontModal");
         }
     }
 
@@ -177,7 +177,7 @@ else
         {
             await _fontRepository.UpdateAsync(Font);
         }
-        await CloseModal("upsertModal", true);
+        await CloseModal("upsertFontModal", true);
     }
 
     private void OpenModal(string modalId)

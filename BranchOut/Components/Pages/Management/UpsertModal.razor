@@ -1,8 +1,8 @@
-﻿<div class="modal fade" id="upsertModal" tabindex="-1" aria-labelledby="upsertModalLabel" aria-hidden="true">
+﻿<div class="modal fade" id="upsert@(ItemType)Modal" tabindex="-1" aria-labelledby="upsert@(ItemType)ModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="upsertModalLabel">@(Id == 0 ? "Add New" : "Edit") @ItemType</h1>
+                <h1 class="modal-title fs-5" id="upsert@(ItemType)ModalLabel">@(Id == 0 ? "Add New" : "Edit") @ItemType</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             @ModalFieldsTemplate
