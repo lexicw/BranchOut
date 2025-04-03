@@ -44,53 +44,62 @@ else
                     <ChildContent>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" checked="@context.IsSelected"
-                            @onchange="(e => SetFontSelected(context, ((ChangeEventArgs)e).Value is bool b && b))" />
+                                   @onchange="(e => SetFontSelected(context, ((ChangeEventArgs)e).Value is bool b && b))" />
                         </div>
                     </ChildContent>
                 </TemplateColumn>
 
                 <PropertyColumn Property="@(p => p.Id)" />
                 <TemplateColumn Title="Preview" Context="font" Class="text-start">
-                    <div class="@(font.CssClass) py-2 ps-1" style="font-size: 1.5rem;">Aa</div>
+                    <div class="fs-3 p-2 font-@font.Name.ToLower()">Aa</div>
                 </TemplateColumn>
                 <PropertyColumn Property="@(p => p.Name)" Sortable="true" />
                 <PropertyColumn Property="@(p => p.CssClass)" />
 
                 <TemplateColumn Context="font">
-                    <button class="btn btn-light px-4 rounded-pill" @onclick="() => CallEditFontModal(font.Id)">Edit</button> &nbsp;
+                    <button class="btn btn-light mt-2 px-4 rounded-pill" @onclick="() => CallEditFontModal(font.Id)">Edit</button> &nbsp;
                 </TemplateColumn>
             </QuickGrid>
             <Paginator State="pagination" />
         </div>
     </div>
 
-    <UpsertModal Item="Font" ModalClose='(bool success) => CloseModal("upsertModal", success)' OnConfirm="UpsertFont" Id="Font.Id">
+    <UpsertModal Item="Font" ModalClose='(bool success) => CloseModal("upsertModal", success)' Id="Font.Id">
         <ModalFieldsTemplate>
-            <div class="modal-fields">
-                <DataAnnotationsValidator />
+            <EditForm Model="@Font" FormName="formFontUpsert" OnValidSubmit="() => UpsertFont(Font.Id)">
+                <div class="modal-body">
+                    <DataAnnotationsValidator />
+                    <label>Name:</label>
+                    <FieldComponent Label="Name">
+                        <ValidationControl>
+                            <ValidationMessage For="() => Font.Name" class="text-danger" />
+                        </ValidationControl>
+                        <Control>
+                            <InputText @bind-Value="Font.Name" @oninput="OnNameChanged" class="form-control" />
+                        </Control>
+                    </FieldComponent>
 
-                <label>Name:</label>
-                <FieldComponent Label="Name">
-                    <ValidationControl>
-                        <ValidationMessage For="() => Font.Name" class="text-danger" />
-                    </ValidationControl>
-                    <Control>
-                        <InputText @bind-Value="Font.Name" @oninput="OnNameChanged" class="form-control" />
-                    </Control>
-                </FieldComponent>
+                    <label class="mt-3">CSS Class:</label>
+                    <FieldComponent Label="CssClass">
+                        <Control>
+                            <InputText @bind-Value="Font.CssClass" class="form-control" readonly />
+                        </Control>
+                    </FieldComponent>
+                </div>
 
-                <label class="mt-3">CSS Class:</label>
-                <FieldComponent Label="CSS Class">
-                    <Control>
-                        <InputText @bind-Value="Font.CssClass" class="form-control" readonly />
-                    </Control>
-                </FieldComponent>
-            </div>
+                <div class="modal-footer flex-nowrap p-0 mt-3">
+                    <button type="submit" class="btn btn-lg btn-link text-decoration-none col-6 py-3 m-0 rounded-0 border-end link-primary fw-bold">
+                        <span class="fs-6">@(Id == 0 ? "Add" : "Edit") Font</span>
+                    </button>
+                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 link-dark fw-bold" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </EditForm>
         </ModalFieldsTemplate>
     </UpsertModal>
 
     <DeleteModal Item="Font" ModalClose='(bool success) => CloseModal("deleteModal", success)' OnConfirm="DeleteFonts" />
 }
+
 
 @code {
     private IQueryable<Font>? fonts;
@@ -100,7 +109,15 @@ else
     private bool isAnyFontSelected = false;
     private bool isAllSelected = false;
 
+    private int Id => Font.Id;
+
     PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+
+    private string CssClass
+    {
+        get => Font.CssClass;
+        set => Font.CssClass = value;
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -149,7 +166,7 @@ else
         }
     }
 
-    private async Task UpsertFont()
+    private async Task UpsertFont(int Id)
     {
         if (Font.Id == 0)
         {
@@ -160,6 +177,7 @@ else
         {
             await _fontRepository.UpdateAsync(Font);
         }
+        await CloseModal("upsertModal", true);
     }
 
     private void OpenModal(string modalId)
@@ -174,8 +192,8 @@ else
 
     private void OnNameChanged(ChangeEventArgs e)
     {
-        var newName = e.Value?.ToString() ?? "";
-        Font.Name = newName;
-        Font.CssClass = string.IsNullOrWhiteSpace(newName) ? "" : $"font-{newName.ToLower().Replace(" ", "-")}";
+        var newValue = e.Value?.ToString() ?? "";
+        Font.Name = newValue;
+        Font.CssClass = string.IsNullOrEmpty(newValue) ? "" : $"font-{newValue.ToLower().Replace(" ", "-")}";
     }
 }

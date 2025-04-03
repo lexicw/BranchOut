@@ -5,18 +5,7 @@
                 <h1 class="modal-title fs-5" id="upsertModalLabel">@(Id == 0 ? "Add New" : "Edit") @ItemType</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <EditForm Model="@link" FormName="formUpsert">
-                <div class="modal-body">
-                    @ModalFieldsTemplate
-                </div>
-
-                <div class="modal-footer flex-nowrap p-0 mt-3">
-                    <button @onclick="UpsertItem" class="btn btn-lg btn-link text-decoration-none col-6 py-3 m-0 rounded-0 border-end link-primary fw-bold">
-                        <span class="fs-6">@(Id == 0 ? "Add" : "Edit") @ItemType</span>
-                    </button>
-                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 link-dark fw-bold" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </EditForm>
+            @ModalFieldsTemplate
         </div>
     </div>
 </div>
@@ -25,9 +14,6 @@
 @code {
     [Parameter]
     public EventCallback<bool> ModalClose { get; set; }
-
-    [Parameter]
-    public EventCallback OnConfirm { get; set; }
 
     [Parameter]
     public RenderFragment? ModalFieldsTemplate { get; set; }
@@ -40,15 +26,4 @@
 
     private string ItemType => Item.ToString();
 
-    private Link link = new();
-
-    private async Task UpsertItem()
-    {
-        if (OnConfirm.HasDelegate)
-        {
-            await OnConfirm.InvokeAsync();
-        }
-
-        await ModalClose.InvokeAsync(true);
-    }
 }

@@ -40,7 +40,7 @@ else
                     <ChildContent>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" checked="@context.IsSelected"
-                            @onchange="(e => SetGradientSelected(context, ((ChangeEventArgs)e).Value is bool b && b))" />
+                                   @onchange="(e => SetGradientSelected(context, ((ChangeEventArgs)e).Value is bool b && b))" />
 
                         </div>
                     </ChildContent>
@@ -62,27 +62,36 @@ else
         </div>
     </div>
 
-    <UpsertModal Item="Gradient" ModalClose='(bool success) => CloseModal("upsertModal", success)' OnConfirm="UpsertGradient" Id="Gradient.Id">
+    <UpsertModal Item="Gradient" ModalClose='(bool success) => CloseModal("upsertModal", success)' Id="Gradient.Id">
         <ModalFieldsTemplate>
-            <div class="modal-fields">
-                <DataAnnotationsValidator />
-                <label>Value:</label>
-                <FieldComponent Label="Value">
-                    <ValidationControl>
-                        <ValidationMessage For="() => Gradient.Value" class="text-danger" />
-                    </ValidationControl>
-                    <Control>
-                        <InputText @bind-Value="Gradient.Value" @oninput="OnValueChanged" class="form-control" />
-                    </Control>
-                </FieldComponent>
+            <EditForm Model="@Gradient" FormName="formGradientUpsert" OnValidSubmit="() => UpsertGradient(Gradient.Id)">
+                <div class="modal-body">
+                    <DataAnnotationsValidator />
+                    <label>Value:</label>
+                    <FieldComponent Label="Value">
+                        <ValidationControl>
+                            <ValidationMessage For="() => Gradient.Value" class="text-danger" />
+                        </ValidationControl>
+                        <Control>
+                            <InputText @bind-Value="Gradient.Value" @oninput="OnValueChanged" class="form-control" />
+                        </Control>
+                    </FieldComponent>
 
-                <label class="mt-3">CSS Class:</label>
-                <FieldComponent Label="Value">
-                    <Control>
-                        <InputText @bind-Value="Gradient.CssClass" class="form-control" readonly />
-                    </Control>
-                </FieldComponent>
-            </div>
+                    <label class="mt-3">CSS Class:</label>
+                    <FieldComponent Label="Value">
+                        <Control>
+                            <InputText @bind-Value="Gradient.CssClass" class="form-control" readonly />
+                        </Control>
+                    </FieldComponent>
+                </div>
+
+                <div class="modal-footer flex-nowrap p-0 mt-3">
+                    <button type="submit" class="btn btn-lg btn-link text-decoration-none col-6 py-3 m-0 rounded-0 border-end link-primary fw-bold">
+                        <span class="fs-6">@(Id == 0 ? "Add" : "Edit") Gradient</span>
+                    </button>
+                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 link-dark fw-bold" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </EditForm>
         </ModalFieldsTemplate>
     </UpsertModal>
 
@@ -97,6 +106,8 @@ else
     private bool IsProcessing { get; set; } = true;
     private bool isAnyGradientSelected = false;
     private bool isAllSelected = false;
+
+    private int Id => Gradient.Id;
 
     PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
 
@@ -165,7 +176,7 @@ else
         }
     }
 
-    private async Task UpsertGradient()
+    private async Task UpsertGradient(int Id)
     {
         if (Gradient.Id == 0)
         {
@@ -176,6 +187,7 @@ else
         {
             await _gradientRepository.UpdateAsync(Gradient);
         }
+        await CloseModal("upsertModal", true);
     }
 
     private void OpenModal(string modalId)
