@@ -6,7 +6,7 @@
             <div class="col-6">
                 <h1 class="fs-4 m-0">Your Links</h1>
             </div>
-            <div class="col-6 text-end"><button class="btn btn-primary mt-3" @onclick='() => OpenModal("addLinkModal")'>Add Link</button></div>
+    <div class="col-6 text-end"><button class="btn btn-primary mt-3 px-4 rounded-pill" @onclick='() => OpenModal("addLinkModal")'>Add Link</button></div>
         </div>
 
         <AddLinkModal ModalClose='(bool success) => CloseModal("addLinkModal", success)' />

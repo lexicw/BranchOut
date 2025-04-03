@@ -21,11 +21,11 @@ else
                 <h3 class="pt-2 fs-4 fw-bold">Fonts</h3>
                 <div class="row">
                     <div class="col-7">
-                        <button class="btn btn-outline-primary mt-2" @onclick='CallAddFontModal'>
+                        <button class="btn btn-outline-primary mt-2 px-4 rounded-pill" @onclick='AddFont'>
                             <i class="bi bi-folder-plus"></i>
                             Add New
                         </button>
-                        <button class="btn btn-outline-danger mt-2" disabled="@(!isAnyFontSelected)" @onclick='() => OpenModal("deleteModal")'>
+                        <button class="btn btn-outline-danger mt-2 px-4 rounded-pill" disabled="@(!isAnyFontSelected)" @onclick='() => OpenModal("deleteModal")'>
                             <i class="bi bi-trash-fill"></i>
                             Delete
                         </button>
@@ -57,7 +57,7 @@ else
                 <PropertyColumn Property="@(p => p.CssClass)" />
 
                 <TemplateColumn Context="font">
-                    <button class="btn btn-light" @onclick="() => CallEditFontModal(font.Id)">Edit</button> &nbsp;
+                    <button class="btn btn-light px-4 rounded-pill" @onclick="() => EditFont(font.Id)">Edit</button> &nbsp;
                 </TemplateColumn>
             </QuickGrid>
             <Paginator State="pagination" />
