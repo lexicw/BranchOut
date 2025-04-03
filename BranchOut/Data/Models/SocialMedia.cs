@@ -10,6 +10,7 @@ namespace BranchOut.Data.Models
         public string UserId { get; set; }
         public int ProfileId { get; set; }
         [ForeignKey("ProfileId")]
+        public Profile Profile { get; set; }
         public SocialMediaPlatform Platform { get; set; }
         [Required(ErrorMessage = "The URL is required")]
         [Url(ErrorMessage = "Please enter a valid URL")]
