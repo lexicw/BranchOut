@@ -8,6 +8,11 @@ body {
     padding-right: 0px !important;
 }
 
+    body.modal-open {
+        overflow: unset !important;
+    }
+
+
 .nav-link {
     border-radius: 10px;
 }
@@ -439,7 +444,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .gradient-text {
     background: linear-gradient(135deg, #00a6f4 0%, #4f39f6 35%, #00d5be 70%, #00a6f4 100%);
-    background-size: 25%;
+    background-size: 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -511,4 +516,12 @@ input[type="search"]::-webkit-search-cancel-button {
     .bg-grad {
         background-image: radial-gradient(circle at 30% 30%, rgba(0, 166, 244, 0.3) 25vw, transparent 50vw), radial-gradient(circle at 70% 30%, rgba(79, 57, 246, 0.3) 25vw, transparent 50vw), radial-gradient(circle at 50% 90%, rgba(0, 213, 190, 0.3) 25vw, transparent 50vw);
     }
+}
+
+.text-blue {
+    color: #00a6f4;
+}
+
+.text-tiny {
+    font-size: 12px;
 }
