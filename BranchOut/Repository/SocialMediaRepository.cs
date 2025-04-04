@@ -7,46 +7,50 @@ namespace BranchOut.Repository
 {
     public class SocialMediaRepository : ISocialMediaRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
 
-        public SocialMediaRepository(ApplicationDbContext context)
+        public SocialMediaRepository(ApplicationDbContext db)
         {
-            _context = context;
+            _db = db;
         }
 
         public async Task<List<SocialMedia>> GetAllAsync(string userId)
         {
-            return await _context.SocialMedia
+            return await _db.SocialMedia
                 .Where(s => s.UserId == userId)
                 .ToListAsync();
         }
 
         public async Task<SocialMedia?> GetAsync(int id)
         {
-            return await _context.SocialMedia
+            return await _db.SocialMedia
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task CreateAsync(SocialMedia socialMedia, string userId)
         {
+            var profile = await _db.Profile.FirstOrDefaultAsync(p => p.UserID == userId);
+            socialMedia.ProfileId = profile.Id;
             socialMedia.UserId = userId;
-            _context.SocialMedia.Add(socialMedia);
-            await _context.SaveChangesAsync();
+            socialMedia.DateAdded = DateTime.Now;
+
+            _db.SocialMedia.Add(socialMedia);
+            await _db.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(SocialMedia socialMedia)
         {
-            _context.SocialMedia.Update(socialMedia);
-            await _context.SaveChangesAsync();
+            _db.SocialMedia.Update(socialMedia);
+            await _db.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var socialMedia = await _context.SocialMedia.FindAsync(id);
+            var socialMedia = await _db.SocialMedia.FindAsync(id);
             if (socialMedia != null)
             {
-                _context.SocialMedia.Remove(socialMedia);
-                await _context.SaveChangesAsync();
+                _db.SocialMedia.Remove(socialMedia);
+                await _db.SaveChangesAsync();
             }
         }
     }

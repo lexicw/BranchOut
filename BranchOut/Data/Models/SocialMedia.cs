@@ -15,6 +15,7 @@ namespace BranchOut.Data.Models
         [Required(ErrorMessage = "The URL is required")]
         [Url(ErrorMessage = "Please enter a valid URL")]
         public string URL { get; set; }
+        public DateTime DateAdded { get; set; }
     }
 
     public enum SocialMediaPlatform

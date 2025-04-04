@@ -12,7 +12,7 @@
     <div class="mt-5 col-12 col-lg-9 mx-auto">
         <h1 class="fs-4">Profile</h1>
         <div class="shadow-sm rounded-3 bg-white w-100 p-5">
-            <h2 class="fs-6">Image:</h2>
+            <h2 class="fs-5">Image:</h2>
             <div class="position-relative mx-auto" style="width:150px;height:150px;">
                 <div class="position-absolute" style="right:0;bottom:0;">
                     <button class="btn btn-primary">
@@ -22,7 +22,7 @@
                 <ProfileImage Width="150px" Height="150px" Username="@User.UserName" FontSize="50" ImagePath="" />
             </div>
             <div class="mt-5">
-                <div class="fs-6">Message:</div>
+                <div class="fs-5">Message:</div>
                 <div class="mx-auto">
                     <textarea class="form-control" id="txtMessage" style="height: 100px"
                               @onchange="UpdateProfile">@profile.Message</textarea>
