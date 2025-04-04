@@ -451,25 +451,35 @@ input[type="search"]::-webkit-search-cancel-button {
     color: transparent;
 }
 
-    .nav-link:hover,
-    .nav-link:focus {
+.nav-link:hover,
+.nav-link:focus {
+    animation: color-cycle 2s linear infinite;
+}
+
+@keyframes color-cycle {
+    0% {
+        color: #00bba7;
+    }
+
+    33% {
         color: #4f39f6;
     }
 
+    66% {
+        color: #00a6f4;
+    }
+
+    100% {
+        color: #00bba7;
+    }
+}
+
+
 
     .nav-link.active:hover {
-        /*color: #fff !important;
-        background: linear-gradient( 90deg, #00bba7 0%, #4f39f6 33%, #00a6f4 66%, #00bba7 100% );
-        background-size: 300% 100%;
-        background-position: 0% 50%;
-        animation: gradient-flash-bg 3s linear infinite;
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        text-decoration: none;
-        background-clip: unset;
-        -webkit-text-fill-color: #FFF;*/
         background-color: #4f39f6 !important;
     }
+
 
 .form-control {
     position: relative;
@@ -486,15 +496,6 @@ input[type="search"]::-webkit-search-cancel-button {
     }
 
 
-@keyframes gradient-flash-bg {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    100% {
-        background-position: 300% 50%;
-    }
-}
 
 
 .gradient-border {
