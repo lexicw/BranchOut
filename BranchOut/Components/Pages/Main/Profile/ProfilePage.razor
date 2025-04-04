@@ -52,6 +52,7 @@
 
             <div class="row">
                 <div class="mx-auto @LayoutClass">
+                    <div>
                     @foreach (var link in UserLinks.OrderBy(x => x.Sort))
                     {
                         if (link.Visible == true)
@@ -62,6 +63,16 @@
                         }
 
                     }
+                    </div>
+                    <div class="text-center mt-3">
+                        @foreach (var social in UserSocials)
+                        {
+                            if (social is not null)
+                            {
+                                <a href="@social.URL" target="_blank" class="btn btn-link px-2 py-0 text-decoration-none fs-3 text-color" type="button">@GetPlatformIcon(social.Platform)</a>
+                            }
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,6 +96,9 @@ else
 
     [CascadingParameter(Name = "Links")]
     public List<Link> UserLinks { get; set; }
+
+    [CascadingParameter(Name = "Socials")]
+    public List<SocialMedia> UserSocials { get; set; }
 
     [Parameter] public bool PhoneMode { get; set; } = false;
 
@@ -126,6 +140,24 @@ else
 
             StateHasChanged();
         }
+    }
+
+    private MarkupString GetPlatformIcon(SocialMediaPlatform platform)
+    {
+        var iconClass = platform switch
+        {
+            SocialMediaPlatform.Facebook => "bi bi-facebook",
+            SocialMediaPlatform.Github => "bi bi-github",
+            SocialMediaPlatform.Instagram => "bi bi-instagram",
+            SocialMediaPlatform.LinkedIn => "bi bi-linkedin",
+            SocialMediaPlatform.Threads => "bi bi-threads",
+            SocialMediaPlatform.TikTok => "bi bi-tiktok",
+            SocialMediaPlatform.Twitter => "bi bi-twitter",
+            SocialMediaPlatform.YouTube => "bi bi-youtube",
+            _ => "bi bi-question-circle"
+        };
+
+        return new MarkupString($"<i class='{iconClass}'></i>");
     }
 
     public void Dispose()

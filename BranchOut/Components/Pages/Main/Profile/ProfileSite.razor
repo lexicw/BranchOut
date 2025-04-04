@@ -4,32 +4,46 @@
 
 @inject IProfileRepository _profileRepository
 @inject ILinkRepository _linkRepository
+@inject ISocialMediaRepository _socialMediaRepository
 @inject UserService _userService
 
-<CascadingValue Name="User" Value="@AppUser">
+<CascadingValue Name="User" Value="@User">
     <CascadingValue Name="Profile" Value="@profile">
         <CascadingValue Name="Links" Value="@UserLinks">
-            <ProfilePage />
+            <CascadingValue Name="Socials" Value="@UserSocials">
+                @if (IsProcessing)
+                {
+                    <Spinner />
+                }
+                else
+                {
+                    <ProfilePage />
+                }
+            </CascadingValue>
         </CascadingValue>
     </CascadingValue>
 </CascadingValue>
 
 @code {
+    private bool IsProcessing { get; set; } = true;
     [Parameter]
     public string username { get; set; }
 
-    public ApplicationUser AppUser { get; set; } = new ApplicationUser();
+    public ApplicationUser User { get; set; } = new ApplicationUser();
     public Profile profile { get; set; } = new Profile();
     private List<Link> UserLinks { get; set; } = new();
+    private List<SocialMedia> UserSocials { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
-        AppUser = await _userService.GetUserByUsernameAsync(username);
+        User = await _userService.GetUserByUsernameAsync(username);
 
-        if (AppUser is not null)
+        if (User is not null)
         {
-            profile = await _profileRepository.GetAsync(AppUser.Id);
-            UserLinks = await _linkRepository.GetAllAsync(AppUser.Id);
+            profile = await _profileRepository.GetAsync(User.Id);
+            UserLinks = await _linkRepository.GetAllAsync(User.Id);
+            UserSocials = await _socialMediaRepository.GetAllAsync(User.Id);
+            IsProcessing = false;
         }
     }
 }
