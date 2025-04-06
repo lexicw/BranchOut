@@ -6,14 +6,18 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
-<nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 border-bottom">
-    <div class="col-md-3 mb-2 mb-md-0">
+<nav class="d-flex flex-wrap align-items-center justify-content-between py-1 border-bottom">
+    <div class="mb-2 mb-md-0">
         <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none px-4">
             <img src="/Images/branchout-logo.svg" class="img-fluid" style="width:75px;" />
         </a>
     </div>
 
-    <div class="col-12 col-lg-auto">
+    <button class="d-block d-lg-none border-0 bg-transparent">
+        <i class="bi bi-list fs-1"></i>
+    </button>
+
+    <div class="col-auto d-none d-lg-block">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <AuthorizeView>
@@ -44,13 +48,13 @@
         </div>
     </div>
 
-    <div class="col-md-2 text-end">
+    <div class="col-auto text-end d-none d-lg-block">
         <AuthorizeView>
             <Authorized>
                 <ul class="nav my-3 justify-content-end">
                     <li class="nav-item me-4 d-inline">
                         <div class="dropdown">
-                            <button class="border-0 bg-transparent me-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="border-0 bg-transparent pe-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-lock fs-4"></i>
                             </button>
 

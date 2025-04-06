@@ -51,6 +51,7 @@ body {
     border: 8px solid #000;
     border-radius: 20px;
     overflow: hidden;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 
 .phone-screen {
@@ -91,37 +92,23 @@ body {
     border-radius: 100px;
 }
 
-.radio-cards {
-    display: grid;
-    grid-gap: 1em;
-    margin: 0 auto;
-    max-width: 60em;
-    padding: 0;
-}
-
-@media (min-width: 42em) {
-    .radio-cards {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
 
 .radio-card {
     background-color: #fff;
     border-radius: 8px;
     position: relative;
     transition: all 0.3s;
+    padding: 10px;
 }
 
-    .radio-card:hover {
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    }
+
 
 .radio {
     font-size: inherit;
     margin: 0;
     position: absolute;
-    right: calc(1em + 2px);
-    top: calc(1em + 2px);
+    right: calc(1em + 10px);
+    top: calc(1em + 10px);
     appearance: none;
     background: #fff;
     border: 2px solid #e2ebf6;
@@ -148,8 +135,8 @@ body {
     }
 
     .radio:checked {
-        background: #00a6f4;
-        border-color: #00a6f4;
+        background: linear-gradient(135deg, #00a6f4 0%, #4f39f6 35%, #00d5be 70%, #00a6f4 100%) border-box;
+        border-color: transparent;
     }
 
 .radio-card:hover .radio {
@@ -157,7 +144,7 @@ body {
 }
 
     .radio-card:hover .radio:checked {
-        border-color: #00a6f4;
+        border-color: transparent;
     }
 
 .radio-card-body {
@@ -177,7 +164,9 @@ body {
 }
 
 .radio:checked ~ .radio-card-body {
-    border: 2px solid #00a6f4;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box, 
+    linear-gradient(135deg, #00a6f4 0%, #4f39f6 35%, #00d5be 70%, #00a6f4 100%) border-box;
 }
 
 
@@ -510,12 +499,18 @@ input[type="search"]::-webkit-search-cancel-button {
     background-color: white;
     background-image: radial-gradient(circle at 20% 30%, rgba(0, 166, 244, 0.2) 150px, transparent 300px), radial-gradient(circle at 80% 40%, rgba(79, 57, 246, 0.2) 200px, transparent 400px), radial-gradient(circle at 50% 80%, rgba(0, 213, 190, 0.2) 180px, transparent 360px);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: auto;
+    background-position: center;
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 800px) {
     .bg-grad {
-        background-image: radial-gradient(circle at 30% 30%, rgba(0, 166, 244, 0.3) 25vw, transparent 50vw), radial-gradient(circle at 70% 30%, rgba(79, 57, 246, 0.3) 25vw, transparent 50vw), radial-gradient(circle at 50% 90%, rgba(0, 213, 190, 0.3) 25vw, transparent 50vw);
+        background-color: white;
+        background-image: radial-gradient(circle at 20% 30%, rgba(0, 166, 244, 0.2) 75px, transparent 150px), radial-gradient(circle at 80% 40%, rgba(79, 57, 246, 0.2) 100px, transparent 200px), radial-gradient(circle at 50% 80%, rgba(0, 213, 190, 0.2) 90px, transparent 180px);
+        background-repeat: no-repeat;
+        background-size: auto;
+        background-position: center;
     }
 }
 
@@ -525,4 +520,19 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .text-tiny {
     font-size: 12px;
+}
+
+
+.modal-content {
+    border-radius: 0.9rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+
+.shadow-subtle {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.section-shadow {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }

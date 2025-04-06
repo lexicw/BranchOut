@@ -59,7 +59,7 @@
 
 <DeleteModal Item="Social" ModalClose='(bool success) => CloseModal("deleteSocialModal", success)' OnConfirm="() => DeleteSocial()" />
 
-<div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
+<div class="section-shadow rounded-3 bg-white w-100 p-5 mb-5">
     @if (UserSocials == null || UserSocials.Count == 0)
     {
         <div class="text-center mt-3">You currently have no social media links.</div>
@@ -71,9 +71,9 @@
             <div class="row g-3">
                 @foreach (var social in UserSocials)
                 {
-                    <div class="col-4">
+                    <div class="col-12 col-md-6 col-xxl-4">
                         <div class="card">
-                            <div class="card-body d-flex justify-content-center align-items-center">
+                            <div class="card-body d-flex justify-content-center align-items-center shadow-subtle">
                                 <div>
                                     <div class="display-3 text-center gradient-text">@GetPlatformIcon(social.Platform)</div>
                                     <div class="text-center fw-bold">@social.Platform</div>
@@ -81,14 +81,11 @@
                                         @social.URL
                                     </div>
                                 </div>
-                                @*                             <div class="fs-5">
-                        <button class="border-0 bg-transparent" @onclick='() => CallEditSocialModal(social.Id)'>
-                        <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <button class="border-0 bg-transparent" @onclick='() => CallDeleteSocialModal(social.Id)'>
-                        <i class="bi bi-trash-fill"></i>
-                        </button>
-                        </div> *@
+                            </div>
+                            <div class="fs-5 position-absolute" style="top:10px;right:10px;">
+                                <button class="border-0 bg-transparent" @onclick='() => CallDeleteSocialModal(social.Id)'>
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
                             </div>
                         </div>
                     </div>

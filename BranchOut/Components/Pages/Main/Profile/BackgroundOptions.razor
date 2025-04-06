@@ -1,5 +1,5 @@
 ﻿<h1 class="fs-4 mt-5">Background</h1>
-<div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
+<div class="section-shadow rounded-3 bg-white w-100 p-5 mb-5">
     <h2 class="fs-5">Color:</h2>
     <ColorSelector InColor="@BackgroundColor" ReturnedColor="@(color => BackgroundColor = color)"></ColorSelector>
 
@@ -7,7 +7,7 @@
     @if (Gradients != null)
     {
         <InputRadioGroup @bind-Value="Gradient">
-            <div class="radio-cards">
+            <div class="radio-cards row">
                 @foreach (var gradient in Gradients)
                 {
                     <RadioCard Type="Gradient" Value="@gradient.Value"></RadioCard>

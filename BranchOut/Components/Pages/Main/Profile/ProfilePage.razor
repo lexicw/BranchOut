@@ -3,6 +3,7 @@
 @inject IProfileRepository _profileRepository
 @inject ProfileState ProfileState
 @inject LinksState LinksState
+@inject SocialMediaState SocialMediaState
 
 <style>
     .bg-color {
@@ -114,6 +115,7 @@ else
     {
         ProfileState.OnChange += StateHasChanged;
         LinksState.OnChange += StateHasChanged;
+        SocialMediaState.OnChange += StateHasChanged;
 
     }
 
@@ -164,5 +166,6 @@ else
     {
         ProfileState.OnChange -= StateHasChanged;
         LinksState.OnChange -= StateHasChanged;
+        SocialMediaState.OnChange -= StateHasChanged;
     }
 }

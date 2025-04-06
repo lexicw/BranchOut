@@ -1,5 +1,5 @@
 ﻿<h2 class="fs-4 mt-5">Text</h2>
-<div class="shadow-sm rounded-3 bg-white w-100 p-5 mb-5">
+<div class="section-shadow rounded-3 bg-white w-100 p-5 mb-5">
     <h2 class="fs-5">Color:</h2>
     <ColorSelector InColor="@TextColor" ReturnedColor="@(color => TextColor = color)"></ColorSelector>
 
@@ -7,7 +7,7 @@
     @if (Fonts != null)
     {
         <InputRadioGroup @bind-Value="Font">
-            <div class="radio-cards">
+            <div class="radio-cards row">
                 @foreach (var font in Fonts)
                 {
                     <RadioCard Type="Font" Value="@font.Name" FontSize="fs-1"></RadioCard>
