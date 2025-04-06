@@ -154,15 +154,17 @@
 
             await _socialMediaRepository.CreateAsync(Social, userId);
             UserSocials.Add(Social);
+            UserSocials = await _socialMediaRepository.GetAllAsync(userId);
+
             await SocialMediaState.UpdateStateAsync(UserSocials, _socialMediaRepository);
             Social = new SocialMedia();
         }
         else
         {
             await _socialMediaRepository.UpdateAsync(Social);
+            await SocialMediaState.UpdateStateAsync(UserSocials, _socialMediaRepository);
         }
 
-        await SocialMediaState.UpdateStateAsync(UserSocials, _socialMediaRepository);
         await CloseModal("upsertSocialModal", true);
     }
 
