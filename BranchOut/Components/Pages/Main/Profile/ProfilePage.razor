@@ -1,6 +1,7 @@
 ﻿@inject UserManager<ApplicationUser> UserManager
 @inject NavigationManager NavigationManager
 @inject IProfileRepository _profileRepository
+@inject ISocialMediaRepository _socialMediaRepository
 @inject ProfileState ProfileState
 @inject LinksState LinksState
 @inject SocialMediaState SocialMediaState
@@ -66,7 +67,7 @@
                     }
                     </div>
                     <div class="text-center mt-3">
-                        @foreach (var social in UserSocials)
+                        @foreach (var social in SocialMediaState.SocialsList)
                         {
                             if (social is not null)
                             {
@@ -111,12 +112,13 @@ else
 
     private bool UserExists { get; set; } = true;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         ProfileState.OnChange += StateHasChanged;
         LinksState.OnChange += StateHasChanged;
         SocialMediaState.OnChange += StateHasChanged;
 
+        await SocialMediaState.InitializeAsync(User.Id, _socialMediaRepository);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

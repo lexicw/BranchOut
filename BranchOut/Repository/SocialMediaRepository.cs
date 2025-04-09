@@ -2,6 +2,7 @@
 using BranchOut.Data;
 using Microsoft.EntityFrameworkCore;
 using BranchOut.Repository.Interfaces;
+using BranchOut.Components.Pages.Main.Links;
 
 namespace BranchOut.Repository
 {
@@ -52,6 +53,16 @@ namespace BranchOut.Repository
                 _db.SocialMedia.Remove(socialMedia);
                 await _db.SaveChangesAsync();
             }
+        }
+
+        public async Task UpdateListAsync(IEnumerable<SocialMedia> socialMediaList)
+        {
+            foreach (var social in socialMediaList)
+            {
+                _db.SocialMedia.Update(social);
+            }
+
+            await _db.SaveChangesAsync();
         }
     }
 

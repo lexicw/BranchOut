@@ -1,5 +1,6 @@
 ﻿using BranchOut.Data.Models;
 using BranchOut.Repository.Interfaces;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BranchOut.Services
 {
@@ -19,8 +20,14 @@ namespace BranchOut.Services
 
         public async Task UpdateStateAsync(List<SocialMedia> updatedList, ISocialMediaRepository repository)
         {
-            // You could optionally call repository-level batch update here if you had one
+            await repository.UpdateListAsync(updatedList);
             SocialsList = updatedList;
+            NotifyStateChanged();
+        }
+
+        public async Task InitializeAsync(string userId, ISocialMediaRepository repository)
+        {
+            SocialsList = await repository.GetAllAsync(userId);
             NotifyStateChanged();
         }
 
