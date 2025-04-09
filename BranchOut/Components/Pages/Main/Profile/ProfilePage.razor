@@ -1,7 +1,6 @@
 ﻿@inject UserManager<ApplicationUser> UserManager
 @inject NavigationManager NavigationManager
 @inject IProfileRepository _profileRepository
-@inject ISocialMediaRepository _socialMediaRepository
 @inject ProfileState ProfileState
 @inject LinksState LinksState
 @inject SocialMediaState SocialMediaState
@@ -118,7 +117,10 @@ else
         LinksState.OnChange += StateHasChanged;
         SocialMediaState.OnChange += StateHasChanged;
 
-        await SocialMediaState.InitializeAsync(User.Id, _socialMediaRepository);
+        if (UserSocials != null && UserSocials.Any())
+        {
+            SocialMediaState.SocialsList = UserSocials;
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

@@ -7,7 +7,7 @@ namespace BranchOut.Services
     public class SocialMediaState
     {
         public SocialMedia CurrentSocial { get; private set; } = new();
-        public List<SocialMedia> SocialsList { get; private set; } = new();
+        public List<SocialMedia> SocialsList { get; set; } = new List<SocialMedia>();
 
         public event Action? OnChange;
 
