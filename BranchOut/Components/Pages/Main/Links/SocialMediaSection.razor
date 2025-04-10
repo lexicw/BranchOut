@@ -29,7 +29,7 @@
                                 class="btn @(Social.Platform == platform ? "btn-primary" : "btn-outline-primary") fs-4 rounded-pill"
                                 @onclick="() => SelectPlatform(platform)"
                                 title="@platform.ToString()">
-                                    @GetPlatformIcon(platform)
+                                    <i class='bi bi-@platform.ToString().ToLower()'></i>
                                 </button>
                             }
                         </div>
@@ -75,7 +75,7 @@
                         <div class="card">
                             <div class="card-body d-flex justify-content-center align-items-center shadow-subtle">
                                 <div>
-                                    <div class="display-3 text-center icon-gradient">@GetPlatformIcon(social.Platform)</div>
+                                    <div class="display-3 text-center icon-gradient"><i class='bi bi-@social.Platform.ToString().ToLower()'></i></div>
                                     <div class="text-center fw-bold">@social.Platform</div>
                                     <div class="text-tiny">
                                         @social.URL
@@ -191,21 +191,4 @@
         Social.Platform = platform;
     }
 
-    private MarkupString GetPlatformIcon(SocialMediaPlatform platform)
-    {
-        var iconClass = platform switch
-        {
-            SocialMediaPlatform.Facebook => "bi bi-facebook",
-            SocialMediaPlatform.Github => "bi bi-github",
-            SocialMediaPlatform.Instagram => "bi bi-instagram",
-            SocialMediaPlatform.LinkedIn => "bi bi-linkedin",
-            SocialMediaPlatform.Threads => "bi bi-threads",
-            SocialMediaPlatform.TikTok => "bi bi-tiktok",
-            SocialMediaPlatform.Twitter => "bi bi-twitter",
-            SocialMediaPlatform.YouTube => "bi bi-youtube",
-            _ => "bi bi-question-circle"
-        };
-
-        return new MarkupString($"<i class='{iconClass}'></i>");
-    }
 }
