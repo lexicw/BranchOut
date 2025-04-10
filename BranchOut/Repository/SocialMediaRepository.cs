@@ -55,15 +55,6 @@ namespace BranchOut.Repository
             }
         }
 
-        public async Task UpdateListAsync(IEnumerable<SocialMedia> socialMediaList)
-        {
-            foreach (var social in socialMediaList)
-            {
-                _db.SocialMedia.Update(social);
-            }
-
-            await _db.SaveChangesAsync();
-        }
     }
 
 

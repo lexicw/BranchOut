@@ -20,14 +20,7 @@ namespace BranchOut.Services
 
         public async Task UpdateStateAsync(List<SocialMedia> updatedList, ISocialMediaRepository repository)
         {
-            await repository.UpdateListAsync(updatedList);
             SocialsList = updatedList;
-            NotifyStateChanged();
-        }
-
-        public async Task InitializeAsync(string userId, ISocialMediaRepository repository)
-        {
-            SocialsList = await repository.GetAllAsync(userId);
             NotifyStateChanged();
         }
 

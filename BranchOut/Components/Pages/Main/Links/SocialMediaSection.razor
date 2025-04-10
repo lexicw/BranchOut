@@ -26,9 +26,9 @@
                             @foreach (var platform in Enum.GetValues<SocialMediaPlatform>())
                             {
                                 <button type="button"
-                                        class="btn @(Social.Platform == platform ? "btn-primary" : "btn-outline-primary") fs-4 rounded-pill"
-                                        @onclick="() => SelectPlatform(platform)"
-                                        title="@platform.ToString()">
+                                class="btn @(Social.Platform == platform ? "btn-primary" : "btn-outline-primary") fs-4 rounded-pill"
+                                @onclick="() => SelectPlatform(platform)"
+                                title="@platform.ToString()">
                                     @GetPlatformIcon(platform)
                                 </button>
                             }
@@ -104,6 +104,11 @@
 
     private SocialMedia Social = new();
     private int SelectedSocialId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadUserSocials();
+    }
 
     private async Task CallAddSocialModal()
     {

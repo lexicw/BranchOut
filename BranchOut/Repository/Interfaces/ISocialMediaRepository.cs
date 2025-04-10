@@ -9,7 +9,6 @@ namespace BranchOut.Repository.Interfaces
         Task CreateAsync(SocialMedia socialMedia, string userId);
         Task UpdateAsync(SocialMedia socialMedia);
         Task DeleteAsync(int id);
-        Task UpdateListAsync(IEnumerable<SocialMedia> socialMediaList);
     }
 
 }
