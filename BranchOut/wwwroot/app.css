@@ -15,12 +15,30 @@ body {
 
 .nav-link {
     border-radius: 10px;
+    color: #6c757d;
 }
 
-.nav-link.active {
-    background-color: #00a6f4 !important;
-    text-decoration: none !important;
-    color: #FFF !important;
+    .nav-link.active {
+        text-decoration: none !important;
+    }
+
+
+.home-link.active {
+    background-color: #e6fbf9;
+    color: #009c8a !important;
+    transition: all 0.3s ease;
+}
+
+.links-link.active {
+    background-color: #e6f4fd;
+    color: #00a6f4 !important;
+    transition: all 0.3s ease;
+}
+
+.profile-link.active {
+    background-color: #f1f0fe;
+    color: #4f39f6 !important;
+    transition: all 0.3s ease;
 }
 
 .bd-placeholder-img {
@@ -481,11 +499,6 @@ input[type="search"]::-webkit-search-cancel-button {
     }
 }
 
-
-
-    .nav-link.active:hover {
-        background-color: #4f39f6 !important;
-    }
 
 
 .form-control {
