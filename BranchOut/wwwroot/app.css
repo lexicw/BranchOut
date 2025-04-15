@@ -27,18 +27,21 @@ body {
     background-color: #e6fbf9;
     color: #009c8a !important;
     transition: all 0.3s ease;
+    outline: 1px solid #009c8a;
 }
 
 .links-link.active {
     background-color: #e6f4fd;
     color: #00a6f4 !important;
     transition: all 0.3s ease;
+    outline: 1px solid #00a6f4;
 }
 
 .profile-link.active {
     background-color: #f1f0fe;
     color: #4f39f6 !important;
     transition: all 0.3s ease;
+    outline: 1px solid #4f39f6;
 }
 
 .bd-placeholder-img {
