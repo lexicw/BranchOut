@@ -156,7 +156,7 @@ body {
     }
 
     .radio:checked {
-        background: linear-gradient(135deg, #00a6f4 0%, #4f39f6 35%, #00d5be 70%, #00a6f4 100%) border-box;
+        background-color: #00a6f4;
         border-color: transparent;
     }
 
@@ -185,9 +185,7 @@ body {
 }
 
 .radio:checked ~ .radio-card-body {
-    border: 2px solid transparent;
-    background: linear-gradient(white, white) padding-box, 
-    linear-gradient(135deg, #00a6f4 0%, #4f39f6 35%, #00d5be 70%, #00a6f4 100%) border-box;
+    border: 2px solid #00a6f4;
 }
 
 
